@@ -13,6 +13,8 @@ favor of a pipeline using DVC to script extraction and integration tools
 implemented in Rust that is more efficient (integration times have dropped from
 8 hours to less than 3) and requires significantly less disk space.[^bftag]
 
+The latest version of these tools is **3.0** (see [history](history.md)).
+
 [^bftag]: The original tools are available on the `before-fusion` tag in the Git repository.
 
 If you use these scripts in any published research, cite [our paper][paper] ([PDF][]):
