@@ -453,7 +453,7 @@ dependencies = [
 
 [[package]]
 name = "bookdata"
-version = "3.0.0-dev"
+version = "3.0.0"
 dependencies = [
  "anyhow",
  "arrow",

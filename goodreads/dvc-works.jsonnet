@@ -174,4 +174,15 @@ local bd = import '../bookdata.libsonnet';
       'gr-work-all-actions.parquet',
     ],
   },
+
+  'work-actions-15-15core': {
+    cmd: bd.cmd('kcore --user-k 15 --item-k 15 -o gr-work-actions-15-15core.parquet gr-work-actions.parquet'),
+    deps: [
+      'gr-work-actions.parquet',
+      '../src/cli/kcore.rs',
+    ],
+    outs: [
+      'gr-work-actions-15-15core.parquet',
+    ],
+  },
 }

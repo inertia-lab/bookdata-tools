@@ -807,3 +807,20 @@ stages:
       hash: md5
       md5: d6467d88b13f9ea16d98082f7c558353
       size: 14188783
+  work-actions-15-15core:
+    cmd: cargo run --release -- kcore --user-k 15 --item-k 15 -o gr-work-actions-15-15core.parquet
+      gr-work-actions.parquet
+    deps:
+    - path: ../src/cli/kcore.rs
+      hash: md5
+      md5: 58dcccc90931b780ae4e2be73050b98a
+      size: 5178
+    - path: gr-work-actions.parquet
+      hash: md5
+      md5: d32c29f8f377894f8ddb672581e65db1
+      size: 1485141703
+    outs:
+    - path: gr-work-actions-15-15core.parquet
+      hash: md5
+      md5: 809fd7bc7ea91c2298414ea253a55223
+      size: 1438903898
