@@ -59,7 +59,7 @@ stages:
       - goodreads/gr-reviews
       - goodreads/gr-work-info
       - goodreads/gr-work-actions
-      - goodreads/gr-work-actions-15-15core
+      - goodreads/gr-work-actions-15core
       - goodreads/gr-work-actions-2015-100-10core
       - goodreads/gr-work-actions-5core
       - goodreads/gr-work-all-actions

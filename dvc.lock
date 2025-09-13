@@ -1277,3 +1277,15 @@ stages:
       hash: md5
       md5: f76f9f382d3d0c4ad8bd63efc1120e50
       size: 621
+  schema@goodreads/gr-work-actions-15core:
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions-15core.json goodreads/gr-work-actions-15core.parquet
+    deps:
+    - path: goodreads/gr-work-actions-15core.parquet
+      hash: md5
+      md5: 809fd7bc7ea91c2298414ea253a55223
+      size: 1438903898
+    outs:
+    - path: goodreads/gr-work-actions-15core.json
+      hash: md5
+      md5: f76f9f382d3d0c4ad8bd63efc1120e50
+      size: 621
