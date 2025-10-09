@@ -30,6 +30,7 @@ impl Command for ExtractGraph {
         let mut graph = load_graph(path)?;
 
         if let Some(c) = &self.cluster {
+            info!("filtering graph for cluster {}", c);
             graph.retain_nodes(|g, n| {
                 let book = g.node_weight(n).unwrap();
                 book.cluster == *c
