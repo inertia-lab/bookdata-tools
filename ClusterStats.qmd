@@ -10,7 +10,6 @@ This notebook provides statistics on the results of our book clustering.
 
 ```{python}
 import pandas as pd
-import polars as pl
 import plotnine as pn
 import matplotlib.pyplot as plt
 import numpy as np
@@ -42,7 +41,6 @@ src_counts = (clusters > 0).sum().to_frame('count')
 src_counts.index.name = 'source'
 src_counts
 ```
-
 
 ```{python}
 src_counts['count'].plot.barh()
