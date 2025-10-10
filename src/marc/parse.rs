@@ -232,7 +232,7 @@ fn read_record<B: BufRead>(rdr: &mut Reader<B>) -> Result<MARCRecord> {
                 }
             }
             Event::Text(e) => {
-                let t = e.unescape()?;
+                let t = e.xml_content()?;
                 content.add_slice(t);
             }
             Event::Eof => break,
