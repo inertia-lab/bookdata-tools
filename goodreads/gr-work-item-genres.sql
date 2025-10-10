@@ -6,4 +6,4 @@ COPY (
     FROM ids JOIN bgs USING (book_id)
     GROUP BY item_id, genre_id
 )
-TO 'gr-work-item-genres.parquet' (COMPRSSION ZSTD);
+TO 'gr-work-item-genres.parquet' (COMPRESSION ZSTD);

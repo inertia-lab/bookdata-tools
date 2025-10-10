@@ -19,4 +19,4 @@ COPY (
     SELECT item_id, work_id, book_id, title
     FROM works LEFT JOIN work_info USING (work_id)
 )
-TO 'gr-work-item-titles.parquet' (COMPRSSION ZSTD);
+TO 'gr-work-item-titles.parquet' (COMPRESSION ZSTD);
