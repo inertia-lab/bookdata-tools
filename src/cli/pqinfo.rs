@@ -1,15 +1,14 @@
 //! Extract basic information from a Parquet file.
 use std::fmt::Debug;
 use std::fs::File;
-use std::io::{stdout, Read, Seek, Write};
+use std::io::{stdout, Write};
 use std::mem::drop;
 
-use polars_arrow::datatypes::Field;
-use serde::Serialize;
-
+use arrow::datatypes::Field;
 use friendly::{bytes, scalar};
-use polars_parquet::read::schema::parquet_to_arrow_schema;
-use polars_parquet::read::*;
+use parquet::arrow::parquet_to_arrow_schema;
+use parquet::file::reader::{FileReader, SerializedFileReader};
+use serde::Serialize;
 
 use crate::prelude::*;
 
@@ -19,10 +18,6 @@ use super::Command;
 #[derive(Args, Debug)]
 #[command(name = "collect-isbns")]
 pub struct PQInfo {
-    /// Check the length by decoding the file.
-    #[arg(long = "check-length")]
-    check_length: bool,
-
     /// Path to the output JSON file.
     #[arg(short = 'o', long = "output")]
     out_file: Option<PathBuf>,
@@ -34,7 +29,7 @@ pub struct PQInfo {
 
 #[derive(Debug, Serialize)]
 struct InfoStruct {
-    row_count: usize,
+    row_count: i64,
     file_size: u64,
     fields: Vec<FieldStruct>,
 }
@@ -49,56 +44,39 @@ struct FieldStruct {
 impl From<&Field> for FieldStruct {
     fn from(f: &Field) -> Self {
         FieldStruct {
-            name: f.name.clone(),
-            data_type: format!("{:?}", f.data_type),
-            nullable: f.is_nullable,
+            name: f.name().clone(),
+            data_type: format!("{:?}", f.data_type()),
+            nullable: f.is_nullable(),
         }
     }
-}
-
-fn check_length<R: Read + Seek>(reader: &mut FileReader<R>, expected: usize) -> Result<()> {
-    let mut len = 0;
-    for chunk in reader {
-        let chunk = chunk?;
-        let clen = chunk.len();
-        let arrays = chunk.into_arrays();
-        let types = arrays.iter().map(|a| a.data_type()).collect::<Vec<_>>();
-        debug!("chunk length: {}", clen);
-        debug!("chunk types: {:?}", types);
-        len += clen;
-    }
-
-    if len != expected {
-        warn!("expected {} rows but decoded {}", expected, len);
-    }
-
-    Ok(())
 }
 
 impl Command for PQInfo {
     fn exec(&self) -> Result<()> {
         info!("reading {:?}", self.source_file);
 
-        let mut pqf = File::open(&self.source_file)?;
+        let pqf = File::open(&self.source_file)?;
         let fmeta = pqf.metadata()?;
         info!("file size: {}", bytes(fmeta.len()));
 
-        let meta = read_metadata(&mut pqf)?;
+        let file = SerializedFileReader::new(pqf)?;
+        let meta = file.metadata();
 
-        info!("row count: {}", scalar(meta.num_rows));
-        info!("row groups: {}", meta.row_groups.len());
-        let rc2: usize = meta.row_groups.iter().map(|rg| rg.num_rows()).sum();
-        if rc2 != meta.num_rows {
-            warn!("row group total {} != file total {}", rc2, meta.num_rows);
+        let n_rows = meta.file_metadata().num_rows();
+        info!("row count: {}", scalar(n_rows));
+        info!("row groups: {}", meta.row_groups().len());
+        let rc2: i64 = meta.row_groups().iter().map(|rg| rg.num_rows()).sum();
+        if rc2 != n_rows {
+            warn!("row group total {} != file total {}", rc2, n_rows);
         }
 
         info!("decoding schema");
-        let schema = meta.schema();
-        let fields = parquet_to_arrow_schema(schema.fields());
+        let schema = meta.file_metadata().schema_descr();
+        let schema = parquet_to_arrow_schema(schema, meta.file_metadata().key_value_metadata())?;
 
         let out = stdout();
         let mut ol = out.lock();
-        for field in &fields {
+        for field in &schema.fields {
             writeln!(&mut ol, "{:?}", field)?;
         }
         drop(ol);
@@ -106,19 +84,13 @@ impl Command for PQInfo {
         if let Some(ref file) = self.out_file {
             let mut out = File::create(file)?;
             let info = InfoStruct {
-                row_count: meta.num_rows,
+                row_count: n_rows,
                 file_size: fmeta.len() as u64,
-                fields: fields.iter().map(|f| f.into()).collect(),
+                fields: schema.fields.iter().map(|f| f.as_ref().into()).collect(),
             };
 
             serde_json::to_writer_pretty(&mut out, &info)?;
             out.write(b"\n")?;
-        }
-
-        if self.check_length {
-            let schema = infer_schema(&meta)?;
-            let mut reader = FileReader::new(pqf, meta.row_groups, schema, None, None, None);
-            check_length(&mut reader, meta.num_rows)?;
         }
 
         Ok(())
