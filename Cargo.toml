@@ -17,8 +17,8 @@ paste = "^1.0"
 
 clap = { version = "^4", features = ["derive"] }
 enum_dispatch = "^0.3.7"
-happylog = { version = "^0.3.0-b3", features = ["clap"] }
-indicatif = "^0.17.0"
+happylog = { version = "^0.3.0-b8", features = ["clap"] }
+indicatif = "^0.18.0"
 log = { version = "^0.4.8", features = ["std"] }
 
 lazy_static = "^1"
