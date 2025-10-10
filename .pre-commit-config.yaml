@@ -13,6 +13,7 @@ repos:
         exclude: \.(json|ipynb)$
       - id: mixed-line-ending
       - id: trailing-whitespace
+        exclude: dvc\.lock$
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
     rev: v0.11.0
