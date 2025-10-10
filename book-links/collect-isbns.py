@@ -71,7 +71,7 @@ def main(opts: ParsedOptions):
         )
 
 
-def scan_source(db: duckdb.DuckDBPyConnection, name: str, path: str, cols: list[str]) -> str:
+def scan_source(db: duckdb.DuckDBPyConnection, name: str, path: str, cols: list[str]):
     _log.info("loading %s", name, path=path)
     for col in cols:
         _log.info("counting column %s of %s", col, name)
