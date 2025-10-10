@@ -31,7 +31,7 @@ c-compiler = "*"
 cxx-compiler = "*"
 cmake = "*"
 aria2 = ">=1.37.0,<2"
-lenskit = "~=2025.3.0a3"
+lenskit = "~=2025.3"
 # force PyTorch to CPU-only
 pytorch-cpu = "*"
 
