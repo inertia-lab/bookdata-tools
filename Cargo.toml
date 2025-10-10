@@ -39,7 +39,7 @@ rayon = "^1.5"
 relative-path = "~1.9"
 thiserror = "^1.0"
 
-flate2 = { version = "^1.0.6", features = ["zlib-ng"] }
+flate2 = { version = "^1.0.6", features = ["zlib-rs"], default-features = false }
 md-5 = "^0.10"
 zip = { version = "^0.6.0", default-features = false, features = ["deflate"] }
 zstd = { version = "^0.13", features = ["zstdmt"] }
@@ -73,7 +73,8 @@ polars-core = "~0.37"
 polars-parquet = "~0.37"
 
 # we use snmalloc, since allocate and free across threads is common
-snmalloc-rs = { version = "^0.3.8", features = ["build_cc", "lto"] }
+# snmalloc-rs = { version = "^0.3.8", features = ["build_cc", "lto"] }
+mimalloc = "^0.1.48"
 
 # we don't have a lot of tests, but we do have a few
 [dev-dependencies]
