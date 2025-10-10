@@ -8,7 +8,6 @@ pub mod amazon;
 pub mod bx;
 pub mod cluster;
 pub mod cluster_books;
-pub mod collect_isbns;
 pub mod extract_graph;
 pub mod filter_marc;
 pub mod goodreads;
@@ -69,7 +68,6 @@ pub enum RootCommand {
     ClusterBooks(cluster_books::ClusterBooks),
     IndexNames(index_names::IndexNames),
     ExtractGraph(extract_graph::ExtractGraph),
-    CollectISBNS(collect_isbns::CollectISBNs),
     LinkISBNIds(link_isbns::LinkISBNIds),
     /// Commands for processing Amazon data.
     Amazon(AmazonCommandWrapper),
