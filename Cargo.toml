@@ -36,7 +36,7 @@ fallible-iterator = "^0.3.0"
 hashbrown = "^0.16"
 os_pipe = "^1.0"
 rayon = "^1.5"
-relative-path = "~1.9"
+relative-path = "^2.0"
 thiserror = "^2.0"
 
 flate2 = { version = "^1.0.6", features = ["zlib-rs"], default-features = false }
