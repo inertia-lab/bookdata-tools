@@ -3,7 +3,7 @@
 Run one or more DuckDB scripts (with options) to produce a database file.
 
 Usage:
-    duckscript [-v] [-D VSPEC]... [--remove] DB SCRIPT...
+    duckscript [-v] [-D VSPEC]... [--remove] [-d DB] SCRIPT...
 
 Options:
     -v, --verbose
@@ -12,7 +12,7 @@ Options:
         Define a variable according to VSPEC (NAME=VALUE).
     --remove
         Remove the database file if it exists prior to run.
-    DB
+    -d DB, --database=DB
         The path to the DuckDB database to operate on.
     SCRIPT
         Path to a database script to run on DB.
@@ -36,13 +36,15 @@ def main(options: ParsedOptions):
         log_cfg.set_verbose(True)
     log_cfg.apply()
 
-    path = Path(options["DB"])
-    if path.exists() and options["--remove"]:
-        logger.info("removing database %s", path)
-        path.unlink()
+    db_path = options["--database"]
+    if db_path:
+        db_path = Path(db_path)
+    if db_path and db_path.exists() and options["--remove"]:
+        logger.info("removing database %s", db_path)
+        db_path.unlink()
 
-    logger.info("opening database %s", path)
-    with connect(path) as db:
+    logger.info("opening database %s", db_path)
+    with connect(db_path or ":memory:") as db:
         for var in options["--define"]:
             name, value = var.split("=", 1)
             logger.debug("setting %s=%s", name, value)

@@ -682,7 +682,7 @@ stages:
       md5: 7291e00a014f21ad8e0e30b4dd270bbc
       size: 12582866
   work-all-actions:
-    cmd: python gr-work-all-actions.py
+    cmd: python ../scripts/duckscript.py gr-work-all-actions.sql
     deps:
     - path: gr-book-ids.parquet
       hash: md5
@@ -692,15 +692,15 @@ stages:
       hash: md5
       md5: 6240470ddee327bbb13b00f296c16c6b
       size: 3766175599
-    - path: gr-work-all-actions.py
+    - path: gr-work-all-actions.sql
       hash: md5
-      md5: c4395dfa81c7d47f3b89a63adbf9547b
-      size: 682
+      md5: a7a938ed4a404f399274cbeba75e44d8
+      size: 354
     outs:
     - path: gr-work-all-actions.parquet
       hash: md5
-      md5: 60e26df90c09eb94117e98a2d0298ca5
-      size: 3356741337
+      md5: f398fbbd6e3e614e64b57aeb0310acf0
+      size: 4329785534
   work-author:
     cmd: python gr-work-item-authors.py
     deps:

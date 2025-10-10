@@ -164,11 +164,11 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-all-actions': {
-    cmd: 'python gr-work-all-actions.py',
+    cmd: 'python ../scripts/duckscript.py gr-work-all-actions.sql',
     deps: [
       'gr-interactions.parquet',
       'gr-book-ids.parquet',
-      'gr-work-all-actions.py',
+      'gr-work-all-actions.sql',
     ],
     outs: [
       'gr-work-all-actions.parquet',
