@@ -23,14 +23,13 @@ mod prelude;
 mod tsv;
 mod util;
 
-// use mimalloc::MiMalloc;
-
-// #[global_allocator]
-// static GLOBAL: MiMalloc = MiMalloc;
-
-use snmalloc_rs::SnMalloc;
+use mimalloc::MiMalloc;
 #[global_allocator]
-static GLOBAL: SnMalloc = SnMalloc;
+static GLOBAL: MiMalloc = MiMalloc;
+
+// use snmalloc_rs::SnMalloc;
+// #[global_allocator]
+// static GLOBAL: SnMalloc = SnMalloc;
 
 use anyhow::Result;
 use clap::Parser;
