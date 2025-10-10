@@ -39,7 +39,7 @@ impl LengthRead for File {
     }
 }
 
-impl<'a> LengthRead for ZipFile<'a> {
+impl<'a, R: Read> LengthRead for ZipFile<'a, R> {
     fn input_size(&self) -> io::Result<u64> {
         Ok(self.size())
     }
