@@ -76,10 +76,10 @@ stages:
       - book-links/cluster-ol-first-authors.parquet
     wdir: ..
   collect-isbns:
-    cmd: cargo run --release -- collect-isbns -o all-isbns.parquet
+    cmd: python collect-isbns.py -o all-isbns.parquet
     deps:
       - ../config.yaml
-      - ../src/cli/collect_isbns.rs
+      - collect-isbns.py
       - ../loc-mds/book-isbns.parquet
       - ../openlibrary/edition-isbns.parquet
       - ../goodreads/gr-book-ids.parquet

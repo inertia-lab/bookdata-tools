@@ -57,7 +57,7 @@ stages:
       md5: a725e49b5c2a2745d93e9b24a25c6834
       size: 978900
   schema@openlibrary/edition-works:
-    cmd: cargo run --release -- pq-info -o openlibrary/edition-works.json
+    cmd: cargo run --release -- pq-info -o openlibrary/edition-works.json 
       openlibrary/edition-works.parquet
     deps:
     - path: openlibrary/edition-works.parquet
@@ -70,7 +70,7 @@ stages:
       md5: 349fb2bb21ae3b55c56882a699735f23
       size: 251
   schema@loc-mds/book-isbns:
-    cmd: cargo run --release -- pq-info -o loc-mds/book-isbns.json
+    cmd: cargo run --release -- pq-info -o loc-mds/book-isbns.json 
       loc-mds/book-isbns.parquet
     deps:
     - path: loc-mds/book-isbns.parquet
@@ -83,7 +83,7 @@ stages:
       md5: 51672a315ccfd718a995d50dbd3cb13c
       size: 340
   schema@loc-mds/book-fields:
-    cmd: cargo run --release -- pq-info -o loc-mds/book-fields.json
+    cmd: cargo run --release -- pq-info -o loc-mds/book-fields.json 
       loc-mds/book-fields.parquet
     deps:
     - path: loc-mds/book-fields.parquet
@@ -96,8 +96,8 @@ stages:
       md5: 3399c4bfa229006d1b9fa7f800955e60
       size: 699
   schema@openlibrary/author-ids-after-works:
-    cmd: cargo run --release -- pq-info -o
-      openlibrary/author-ids-after-works.json
+    cmd: cargo run --release -- pq-info -o 
+      openlibrary/author-ids-after-works.json 
       openlibrary/author-ids-after-works.parquet
     deps:
     - path: openlibrary/author-ids-after-works.parquet
@@ -110,7 +110,7 @@ stages:
       md5: cdddc597c08cfb9e69572e792369574b
       size: 238
   schema@loc-mds/book-isbn-ids:
-    cmd: cargo run --release -- pq-info -o loc-mds/book-isbn-ids.json
+    cmd: cargo run --release -- pq-info -o loc-mds/book-isbn-ids.json 
       loc-mds/book-isbn-ids.parquet
     deps:
     - path: loc-mds/book-isbn-ids.parquet
@@ -123,7 +123,7 @@ stages:
       md5: 76d8bea8d7f0487c10a7b8c8137ec69c
       size: 250
   schema@openlibrary/work-authors:
-    cmd: cargo run --release -- pq-info -o openlibrary/work-authors.json
+    cmd: cargo run --release -- pq-info -o openlibrary/work-authors.json 
       openlibrary/work-authors.parquet
     deps:
     - path: openlibrary/work-authors.parquet
@@ -136,7 +136,7 @@ stages:
       md5: 4ba666d1f7315c76116f68f1c3d932fd
       size: 334
   schema@openlibrary/work-subjects:
-    cmd: cargo run --release -- pq-info -o openlibrary/work-subjects.json
+    cmd: cargo run --release -- pq-info -o openlibrary/work-subjects.json 
       openlibrary/work-subjects.parquet
     deps:
     - path: openlibrary/work-subjects.parquet
@@ -149,7 +149,7 @@ stages:
       md5: fb174da2c2767ef58d6777e398d06624
       size: 344
   schema@openlibrary/edition-subjects:
-    cmd: cargo run --release -- pq-info -o openlibrary/edition-subjects.json
+    cmd: cargo run --release -- pq-info -o openlibrary/edition-subjects.json 
       openlibrary/edition-subjects.parquet
     deps:
     - path: openlibrary/edition-subjects.parquet
@@ -162,7 +162,7 @@ stages:
       md5: b79636ad38d8958c882093f5eea6a70e
       size: 344
   schema@openlibrary/all-authors:
-    cmd: cargo run --release -- pq-info -o openlibrary/all-authors.json
+    cmd: cargo run --release -- pq-info -o openlibrary/all-authors.json 
       openlibrary/all-authors.parquet
     deps:
     - path: openlibrary/all-authors.parquet
@@ -175,7 +175,7 @@ stages:
       md5: 417027e0903ff254dfded15213223d2d
       size: 238
   schema@openlibrary/edition-authors:
-    cmd: cargo run --release -- pq-info -o openlibrary/edition-authors.json
+    cmd: cargo run --release -- pq-info -o openlibrary/edition-authors.json 
       openlibrary/edition-authors.parquet
     deps:
     - path: openlibrary/edition-authors.parquet
@@ -188,7 +188,7 @@ stages:
       md5: a0352db27c09573f0bc0b77d139494ce
       size: 339
   schema@openlibrary/authors:
-    cmd: cargo run --release -- pq-info -o openlibrary/authors.json
+    cmd: cargo run --release -- pq-info -o openlibrary/authors.json 
       openlibrary/authors.parquet
     deps:
     - path: openlibrary/authors.parquet
@@ -201,7 +201,7 @@ stages:
       md5: c271f8a6faf61302e8abfffc50daef67
       size: 338
   schema@loc-mds/book-ids:
-    cmd: cargo run --release -- pq-info -o loc-mds/book-ids.json
+    cmd: cargo run --release -- pq-info -o loc-mds/book-ids.json 
       loc-mds/book-ids.parquet
     deps:
     - path: loc-mds/book-ids.parquet
@@ -214,7 +214,7 @@ stages:
       md5: 7301caca8a9562795b12c873e28be57a
       size: 616
   schema@openlibrary/author-names:
-    cmd: cargo run --release -- pq-info -o openlibrary/author-names.json
+    cmd: cargo run --release -- pq-info -o openlibrary/author-names.json 
       openlibrary/author-names.parquet
     deps:
     - path: openlibrary/author-names.parquet
@@ -227,7 +227,7 @@ stages:
       md5: 1020c22d1f9443bab91a34d1aaa4dae9
       size: 338
   schema@openlibrary/edition-isbns:
-    cmd: cargo run --release -- pq-info -o openlibrary/edition-isbns.json
+    cmd: cargo run --release -- pq-info -o openlibrary/edition-isbns.json 
       openlibrary/edition-isbns.parquet
     deps:
     - path: openlibrary/edition-isbns.parquet
@@ -240,7 +240,7 @@ stages:
       md5: 95a1b7f4e07d7f3334107703797c38f6
       size: 254
   schema@openlibrary/edition-isbn-ids:
-    cmd: cargo run --release -- pq-info -o openlibrary/edition-isbn-ids.json
+    cmd: cargo run --release -- pq-info -o openlibrary/edition-isbn-ids.json 
       openlibrary/edition-isbn-ids.parquet
     deps:
     - path: openlibrary/edition-isbn-ids.parquet
@@ -253,7 +253,7 @@ stages:
       md5: 389414b3e4b8efaa34c5a3a1cce9c789
       size: 253
   schema@openlibrary/works:
-    cmd: cargo run --release -- pq-info -o openlibrary/works.json
+    cmd: cargo run --release -- pq-info -o openlibrary/works.json 
       openlibrary/works.parquet
     deps:
     - path: openlibrary/works.parquet
@@ -266,7 +266,7 @@ stages:
       md5: 51036146001c06637942703011b7919d
       size: 339
   schema@openlibrary/all-works:
-    cmd: cargo run --release -- pq-info -o openlibrary/all-works.json
+    cmd: cargo run --release -- pq-info -o openlibrary/all-works.json 
       openlibrary/all-works.parquet
     deps:
     - path: openlibrary/all-works.parquet
@@ -279,7 +279,7 @@ stages:
       md5: f3d576ac02c0d04611cda42b73c452ba
       size: 239
   schema@loc-mds/name-fields:
-    cmd: cargo run --release -- pq-info -o loc-mds/name-fields.json
+    cmd: cargo run --release -- pq-info -o loc-mds/name-fields.json 
       loc-mds/name-fields.parquet
     deps:
     - path: loc-mds/name-fields.parquet
@@ -292,7 +292,7 @@ stages:
       md5: 7665e39b10ab5e9f2e470278fe39b900
       size: 699
   schema@openlibrary/editions:
-    cmd: cargo run --release -- pq-info -o openlibrary/editions.json
+    cmd: cargo run --release -- pq-info -o openlibrary/editions.json 
       openlibrary/editions.parquet
     deps:
     - path: openlibrary/editions.parquet
@@ -305,7 +305,7 @@ stages:
       md5: b92263d3a6861ff8a5ef931b44e8b33d
       size: 340
   schema@loc-mds/book-authors:
-    cmd: cargo run --release -- pq-info -o loc-mds/book-authors.json
+    cmd: cargo run --release -- pq-info -o loc-mds/book-authors.json 
       loc-mds/book-authors.parquet
     deps:
     - path: loc-mds/book-authors.parquet
@@ -318,7 +318,7 @@ stages:
       md5: 13435dc61e000b35ad1c50351aabdc8f
       size: 258
   schema@openlibrary/work-clusters:
-    cmd: cargo run --release -- pq-info -o openlibrary/work-clusters.json
+    cmd: cargo run --release -- pq-info -o openlibrary/work-clusters.json 
       openlibrary/work-clusters.parquet
     deps:
     - path: openlibrary/work-clusters.parquet
@@ -331,7 +331,7 @@ stages:
       md5: e56a377938edcc94f6b2e3d8636129a4
       size: 252
   schema@bx/bx-cluster-actions:
-    cmd: cargo run --release -- pq-info -o bx/bx-cluster-actions.json
+    cmd: cargo run --release -- pq-info -o bx/bx-cluster-actions.json 
       bx/bx-cluster-actions.parquet
     deps:
     - path: bx/bx-cluster-actions.parquet
@@ -344,7 +344,7 @@ stages:
       md5: 468a06bd8647ca3651ec40e953a817aa
       size: 331
   schema@bx/bx-cluster-ratings:
-    cmd: cargo run --release -- pq-info -o bx/bx-cluster-ratings.json
+    cmd: cargo run --release -- pq-info -o bx/bx-cluster-ratings.json 
       bx/bx-cluster-ratings.parquet
     deps:
     - path: bx/bx-cluster-ratings.parquet
@@ -357,7 +357,7 @@ stages:
       md5: 2c8d63e1e2441003c4ec4a2e0bda7e5a
       size: 420
   schema@viaf/author-genders:
-    cmd: cargo run --release -- pq-info -o viaf/author-genders.json
+    cmd: cargo run --release -- pq-info -o viaf/author-genders.json 
       viaf/author-genders.parquet
     deps:
     - path: viaf/author-genders.parquet
@@ -382,7 +382,7 @@ stages:
       md5: c8f64a01d7adb5d76a23624281d33f1d
       size: 701
   schema@viaf/author-name-index:
-    cmd: cargo run --release -- pq-info -o viaf/author-name-index.json
+    cmd: cargo run --release -- pq-info -o viaf/author-name-index.json 
       viaf/author-name-index.parquet
     deps:
     - path: viaf/author-name-index.parquet
@@ -395,7 +395,7 @@ stages:
       md5: 75e49262c95874b3cb4f95a1e6301854
       size: 253
   schema@az2018/az-cluster-ratings:
-    cmd: cargo run --release -- pq-info -o az2018/az-cluster-ratings.json
+    cmd: cargo run --release -- pq-info -o az2018/az-cluster-ratings.json 
       az2018/az-cluster-ratings.parquet
     deps:
     - path: az2018/az-cluster-ratings.parquet
@@ -408,7 +408,7 @@ stages:
       md5: 09820526601d96229f4df2721f61e07b
       size: 709
   schema@az2014/az-cluster-ratings-5core:
-    cmd: cargo run --release -- pq-info -o az2014/az-cluster-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o az2014/az-cluster-ratings-5core.json 
       az2014/az-cluster-ratings-5core.parquet
     deps:
     - path: az2014/az-cluster-ratings-5core.parquet
@@ -421,7 +421,7 @@ stages:
       md5: 2188cc357b20d9b04250c9daa49a74e3
       size: 707
   schema@az2014/ratings:
-    cmd: cargo run --release -- pq-info -o az2014/ratings.json
+    cmd: cargo run --release -- pq-info -o az2014/ratings.json 
       az2014/ratings.parquet
     deps:
     - path: az2014/ratings.parquet
@@ -434,7 +434,7 @@ stages:
       md5: 412ee903c778e126484aa03fb8b70506
       size: 436
   schema@az2018/az-cluster-ratings-5core:
-    cmd: cargo run --release -- pq-info -o az2018/az-cluster-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o az2018/az-cluster-ratings-5core.json 
       az2018/az-cluster-ratings-5core.parquet
     deps:
     - path: az2018/az-cluster-ratings-5core.parquet
@@ -447,7 +447,7 @@ stages:
       md5: 8d53865395d2220a087e5627c058ca84
       size: 709
   schema@az2014/az-cluster-ratings:
-    cmd: cargo run --release -- pq-info -o az2014/az-cluster-ratings.json
+    cmd: cargo run --release -- pq-info -o az2014/az-cluster-ratings.json 
       az2014/az-cluster-ratings.parquet
     deps:
     - path: az2014/az-cluster-ratings.parquet
@@ -460,7 +460,7 @@ stages:
       md5: 9acde0f42e4143024f4aea88325f5228
       size: 709
   schema@az2018/ratings:
-    cmd: cargo run --release -- pq-info -o az2018/ratings.json
+    cmd: cargo run --release -- pq-info -o az2018/ratings.json 
       az2018/ratings.parquet
     deps:
     - path: az2018/ratings.parquet
@@ -473,7 +473,7 @@ stages:
       md5: f4ac6d9618257f4fed1073db39536d2f
       size: 436
   schema@goodreads/gr-book-link:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-link.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-link.json 
       goodreads/gr-book-link.parquet
     deps:
     - path: goodreads/gr-book-link.parquet
@@ -486,7 +486,7 @@ stages:
       md5: f7acc7f56d21418d2271f3a270989636
       size: 339
   schema@goodreads/gr-author-info:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-author-info.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-author-info.json 
       goodreads/gr-author-info.parquet
     deps:
     - path: goodreads/gr-author-info.parquet
@@ -499,7 +499,7 @@ stages:
       md5: d4ac66677f1204a61613be7271773e61
       size: 251
   schema@goodreads/gr-genres:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-genres.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-genres.json 
       goodreads/gr-genres.parquet
     deps:
     - path: goodreads/gr-genres.parquet
@@ -512,7 +512,7 @@ stages:
       md5: 2dc638f1aacc43d3addd2b50b095b422
       size: 241
   schema@goodreads/gr-book-authors:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-authors.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-authors.json 
       goodreads/gr-book-authors.parquet
     deps:
     - path: goodreads/gr-book-authors.parquet
@@ -525,7 +525,7 @@ stages:
       md5: 6ae2b09d7ba04603be9d25cfc7c2048a
       size: 433
   schema@goodreads/book-isbn-ids:
-    cmd: cargo run --release -- pq-info -o goodreads/book-isbn-ids.json
+    cmd: cargo run --release -- pq-info -o goodreads/book-isbn-ids.json 
       goodreads/book-isbn-ids.parquet
     deps:
     - path: goodreads/book-isbn-ids.parquet
@@ -538,7 +538,7 @@ stages:
       md5: 18ef87e22e116ca2deaa7dec40cc7ad0
       size: 250
   schema@goodreads/gr-book-info:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-info.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-info.json 
       goodreads/gr-book-info.parquet
     deps:
     - path: goodreads/gr-book-info.parquet
@@ -551,7 +551,7 @@ stages:
       md5: a1ddad2e83c92fe7758f4856e4f6cc4b
       size: 433
   schema@goodreads/gr-book-series:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-series.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-series.json 
       goodreads/gr-book-series.parquet
     deps:
     - path: goodreads/gr-book-series.parquet
@@ -564,7 +564,7 @@ stages:
       md5: 599cbddfed38cbe6a74958b3a178fb3c
       size: 251
   schema@goodreads/gr-book-ids:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-ids.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-ids.json 
       goodreads/gr-book-ids.parquet
     deps:
     - path: goodreads/gr-book-ids.parquet
@@ -577,7 +577,7 @@ stages:
       md5: da3140dc493461dfd6343dd8c4f620e3
       size: 613
   schema@goodreads/gr-work-info:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-info.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-info.json 
       goodreads/gr-work-info.parquet
     deps:
     - path: goodreads/gr-work-info.parquet
@@ -590,7 +590,7 @@ stages:
       md5: ec2490e683a00191b927165b1642c711
       size: 432
   schema@goodreads/gr-book-genres:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-genres.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-genres.json 
       goodreads/gr-book-genres.parquet
     deps:
     - path: goodreads/gr-book-genres.parquet
@@ -603,7 +603,7 @@ stages:
       md5: eea67114b9c707fbec98c3fb20da6ddd
       size: 339
   schema@goodreads/gr-work-gender:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-gender.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-gender.json 
       goodreads/gr-work-gender.parquet
     deps:
     - path: goodreads/gr-work-gender.parquet
@@ -616,8 +616,8 @@ stages:
       md5: 61954e3ac960321b87ea8b60fd00bd97
       size: 517
   schema@goodreads/gr-cluster-ratings-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/gr-cluster-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/gr-cluster-ratings-5core.json 
       goodreads/gr-cluster-ratings-5core.parquet
     deps:
     - path: goodreads/gr-cluster-ratings-5core.parquet
@@ -630,8 +630,8 @@ stages:
       md5: 84be3348d48654dd7f3b4c7d0d6be3f7
       size: 709
   schema@book-links/cluster-ol-first-authors:
-    cmd: cargo run --release -- pq-info -o
-      book-links/cluster-ol-first-authors.json
+    cmd: cargo run --release -- pq-info -o 
+      book-links/cluster-ol-first-authors.json 
       book-links/cluster-ol-first-authors.parquet
     deps:
     - path: book-links/cluster-ol-first-authors.parquet
@@ -644,7 +644,7 @@ stages:
       md5: 21c4474a4b57f11dba14e0f1b8efe34c
       size: 260
   schema@book-links/isbn-clusters:
-    cmd: cargo run --release -- pq-info -o book-links/isbn-clusters.json
+    cmd: cargo run --release -- pq-info -o book-links/isbn-clusters.json 
       book-links/isbn-clusters.parquet
     deps:
     - path: book-links/isbn-clusters.parquet
@@ -657,7 +657,7 @@ stages:
       md5: d1e0e8606dcc9ed559536286c008c96d
       size: 343
   schema@book-links/cluster-genders:
-    cmd: cargo run --release -- pq-info -o book-links/cluster-genders.json
+    cmd: cargo run --release -- pq-info -o book-links/cluster-genders.json 
       book-links/cluster-genders.parquet
     deps:
     - path: book-links/cluster-genders.parquet
@@ -670,8 +670,8 @@ stages:
       md5: 939d53c576819c0b2964a0e982cce124
       size: 255
   schema@goodreads/gr-cluster-actions-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/gr-cluster-actions-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/gr-cluster-actions-5core.json 
       goodreads/gr-cluster-actions-5core.parquet
     deps:
     - path: goodreads/gr-cluster-actions-5core.parquet
@@ -684,7 +684,7 @@ stages:
       md5: 2c5caab73ce95601ed08e238c4a18b9e
       size: 621
   schema@book-links/cluster-graph-edges:
-    cmd: cargo run --release -- pq-info -o book-links/cluster-graph-edges.json
+    cmd: cargo run --release -- pq-info -o book-links/cluster-graph-edges.json 
       book-links/cluster-graph-edges.parquet
     deps:
     - path: book-links/cluster-graph-edges.parquet
@@ -697,20 +697,20 @@ stages:
       md5: 98f33fabba6887459cbf3a5050a4f19e
       size: 245
   schema@book-links/all-isbns:
-    cmd: cargo run --release -- pq-info -o book-links/all-isbns.json
+    cmd: cargo run --release -- pq-info -o book-links/all-isbns.json 
       book-links/all-isbns.parquet
     deps:
     - path: book-links/all-isbns.parquet
       hash: md5
-      md5: 0a0a07de5b7af9e522796043977ffa05
-      size: 446802717
+      md5: 34e4cebbbdc3ec9745808b397ae98330
+      size: 280215236
     outs:
     - path: book-links/all-isbns.json
       hash: md5
-      md5: 62a5947d862b8acdedac3795e72906b8
-      size: 680
+      md5: 85b366132649d5656a3a4736293ad31b
+      size: 672
   schema@goodreads/gr-work-ratings:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-ratings.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-ratings.json 
       goodreads/gr-work-ratings.parquet
     deps:
     - path: goodreads/gr-work-ratings.parquet
@@ -723,7 +723,7 @@ stages:
       md5: b7b2ff7a522710ecd6e3a98e3265ba28
       size: 710
   schema@goodreads/gr-work-actions:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions.json 
       goodreads/gr-work-actions.parquet
     deps:
     - path: goodreads/gr-work-actions.parquet
@@ -736,8 +736,8 @@ stages:
       md5: d8d789f6680dfcfcd8e25006ee28fdf0
       size: 621
   schema@book-links/cluster-loc-first-authors:
-    cmd: cargo run --release -- pq-info -o
-      book-links/cluster-loc-first-authors.json
+    cmd: cargo run --release -- pq-info -o 
+      book-links/cluster-loc-first-authors.json 
       book-links/cluster-loc-first-authors.parquet
     deps:
     - path: book-links/cluster-loc-first-authors.parquet
@@ -750,7 +750,7 @@ stages:
       md5: a21e3e8eb6d0502dc4dbe2484410bb84
       size: 258
   schema@goodreads/gr-work-ratings-5core:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-ratings-5core.json 
       goodreads/gr-work-ratings-5core.parquet
     deps:
     - path: goodreads/gr-work-ratings-5core.parquet
@@ -776,7 +776,7 @@ stages:
       md5: b8c34bbcce802f6c35eddaebf5c49aba
       size: 260
   schema@book-links/cluster-hashes:
-    cmd: cargo run --release -- pq-info -o book-links/cluster-hashes.json
+    cmd: cargo run --release -- pq-info -o book-links/cluster-hashes.json 
       book-links/cluster-hashes.parquet
     deps:
     - path: book-links/cluster-hashes.parquet
@@ -789,7 +789,7 @@ stages:
       md5: 40f984855dad840da8e68a1d08ea0841
       size: 350
   schema@goodreads/gr-cluster-actions:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-cluster-actions.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-cluster-actions.json 
       goodreads/gr-cluster-actions.parquet
     deps:
     - path: goodreads/gr-cluster-actions.parquet
@@ -802,7 +802,7 @@ stages:
       md5: a48e00333e9f97ddfa0a5650d0eb31eb
       size: 621
   schema@goodreads/gr-interactions:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-interactions.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-interactions.json 
       goodreads/gr-interactions.parquet
     deps:
     - path: goodreads/gr-interactions.parquet
@@ -815,7 +815,7 @@ stages:
       md5: d97a213453e23d2eb229b23bc2a382ba
       size: 991
   schema@book-links/cluster-stats:
-    cmd: cargo run --release -- pq-info -o book-links/cluster-stats.json
+    cmd: cargo run --release -- pq-info -o book-links/cluster-stats.json 
       book-links/cluster-stats.parquet
     deps:
     - path: book-links/cluster-stats.parquet
@@ -828,7 +828,7 @@ stages:
       md5: dee83aea346c9b328d0dcefbbc6b1934
       size: 817
   schema@goodreads/gr-cluster-ratings:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-cluster-ratings.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-cluster-ratings.json 
       goodreads/gr-cluster-ratings.parquet
     deps:
     - path: goodreads/gr-cluster-ratings.parquet
@@ -841,7 +841,7 @@ stages:
       md5: e975e836bcf78e1657cd53a57620cecd
       size: 709
   schema@goodreads/gr-work-actions-5core:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions-5core.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions-5core.json 
       goodreads/gr-work-actions-5core.parquet
     deps:
     - path: goodreads/gr-work-actions-5core.parquet
@@ -854,7 +854,7 @@ stages:
       md5: 9abac60a18f7f7cf766fcf7ce6dd4429
       size: 621
   schema@book-links/cluster-graph-nodes:
-    cmd: cargo run --release -- pq-info -o book-links/cluster-graph-nodes.json
+    cmd: cargo run --release -- pq-info -o book-links/cluster-graph-nodes.json 
       book-links/cluster-graph-nodes.parquet
     deps:
     - path: book-links/cluster-graph-nodes.parquet
@@ -901,8 +901,8 @@ stages:
       md5: 24e38921e15a54f36c156ad261c459fe
       size: 351447
   schema@goodreads/simple/gr-cluster-actions:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/simple/gr-cluster-actions.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/simple/gr-cluster-actions.json 
       goodreads/simple/gr-cluster-actions.parquet
     deps:
     - path: goodreads/simple/gr-cluster-actions.parquet
@@ -915,8 +915,8 @@ stages:
       md5: a0e7496c0310bc790c8c8b524784f955
       size: 431
   schema@goodreads/simple/gr-cluster-actions-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/simple/gr-cluster-actions-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/simple/gr-cluster-actions-5core.json 
       goodreads/simple/gr-cluster-actions-5core.parquet
     deps:
     - path: goodreads/simple/gr-cluster-actions-5core.parquet
@@ -929,8 +929,8 @@ stages:
       md5: 0b6a4da63ae1cacc0e68c013b8ae186e
       size: 431
   schema@goodreads/simple/gr-cluster-ratings:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/simple/gr-cluster-ratings.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/simple/gr-cluster-ratings.json 
       goodreads/simple/gr-cluster-ratings.parquet
     deps:
     - path: goodreads/simple/gr-cluster-ratings.parquet
@@ -943,8 +943,8 @@ stages:
       md5: e639f4ac98713c9e89fa361bc887305c
       size: 424
   schema@goodreads/simple/gr-cluster-ratings-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/simple/gr-cluster-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/simple/gr-cluster-ratings-5core.json 
       goodreads/simple/gr-cluster-ratings-5core.parquet
     deps:
     - path: goodreads/simple/gr-cluster-ratings-5core.parquet
@@ -983,8 +983,8 @@ stages:
       md5: 59614dda091b91072f76907b324d65c1
       size: 431
   schema@goodreads/simple/gr-work-actions-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/simple/gr-work-actions-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/simple/gr-work-actions-5core.json 
       goodreads/simple/gr-work-actions-5core.parquet
     deps:
     - path: goodreads/simple/gr-work-actions-5core.parquet
@@ -1010,8 +1010,8 @@ stages:
       md5: 651368688db89c6352f05d6470f00e87
       size: 425
   schema@goodreads/simple/gr-work-ratings-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/simple/gr-work-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/simple/gr-work-ratings-5core.json 
       goodreads/simple/gr-work-ratings-5core.parquet
     deps:
     - path: goodreads/simple/gr-work-ratings-5core.parquet
@@ -1024,8 +1024,8 @@ stages:
       md5: eb10aed28b62386c584e2b1a1f3923a2
       size: 425
   schema@goodreads/full/gr-cluster-actions:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-cluster-actions.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-cluster-actions.json 
       goodreads/full/gr-cluster-actions.parquet
     deps:
     - path: goodreads/full/gr-cluster-actions.parquet
@@ -1038,8 +1038,8 @@ stages:
       md5: 824fdc2b7b91914759eeb0d9f891bcc7
       size: 614
   schema@goodreads/full/gr-cluster-actions-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-cluster-actions-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-cluster-actions-5core.json 
       goodreads/full/gr-cluster-actions-5core.parquet
     deps:
     - path: goodreads/full/gr-cluster-actions-5core.parquet
@@ -1052,8 +1052,8 @@ stages:
       md5: 74ae3b729313130696dc8236a58ee7b0
       size: 614
   schema@goodreads/full/gr-cluster-ratings:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-cluster-ratings.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-cluster-ratings.json 
       goodreads/full/gr-cluster-ratings.parquet
     deps:
     - path: goodreads/full/gr-cluster-ratings.parquet
@@ -1066,8 +1066,8 @@ stages:
       md5: cb461509ca0a542cac1d40344f9a1520
       size: 703
   schema@goodreads/full/gr-cluster-ratings-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-cluster-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-cluster-ratings-5core.json 
       goodreads/full/gr-cluster-ratings-5core.parquet
     deps:
     - path: goodreads/full/gr-cluster-ratings-5core.parquet
@@ -1080,7 +1080,7 @@ stages:
       md5: 73de078b3025687d636b97bf2dd862e4
       size: 703
   schema@goodreads/full/gr-interactions:
-    cmd: cargo run --release -- pq-info -o goodreads/full/gr-interactions.json
+    cmd: cargo run --release -- pq-info -o goodreads/full/gr-interactions.json 
       goodreads/full/gr-interactions.parquet
     deps:
     - path: goodreads/full/gr-interactions.parquet
@@ -1093,7 +1093,7 @@ stages:
       md5: 45e27b309e3e956c627a673e833cc132
       size: 983
   schema@goodreads/full/gr-users:
-    cmd: cargo run --release -- pq-info -o goodreads/full/gr-users.json
+    cmd: cargo run --release -- pq-info -o goodreads/full/gr-users.json 
       goodreads/full/gr-users.parquet
     deps:
     - path: goodreads/full/gr-users.parquet
@@ -1106,7 +1106,7 @@ stages:
       md5: ea7cec70c8cdeb1b53ed3df5dfb61e5b
       size: 244
   schema@goodreads/full/gr-work-actions:
-    cmd: cargo run --release -- pq-info -o goodreads/full/gr-work-actions.json
+    cmd: cargo run --release -- pq-info -o goodreads/full/gr-work-actions.json 
       goodreads/full/gr-work-actions.parquet
     deps:
     - path: goodreads/full/gr-work-actions.parquet
@@ -1119,8 +1119,8 @@ stages:
       md5: 8070a718c12128a58cd39ec6aadd87c7
       size: 614
   schema@goodreads/full/gr-work-actions-2015-100-10core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-work-actions-2015-100-10core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-work-actions-2015-100-10core.json 
       goodreads/full/gr-work-actions-2015-100-10core.parquet
     deps:
     - path: goodreads/full/gr-work-actions-2015-100-10core.parquet
@@ -1133,8 +1133,8 @@ stages:
       md5: ac7141b9f62a77b48243a61bc3080559
       size: 612
   schema@goodreads/full/gr-work-actions-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-work-actions-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-work-actions-5core.json 
       goodreads/full/gr-work-actions-5core.parquet
     deps:
     - path: goodreads/full/gr-work-actions-5core.parquet
@@ -1147,7 +1147,7 @@ stages:
       md5: 2dba9e149acbb8fd4fa494a2ea215307
       size: 614
   schema@goodreads/full/gr-work-ratings:
-    cmd: cargo run --release -- pq-info -o goodreads/full/gr-work-ratings.json
+    cmd: cargo run --release -- pq-info -o goodreads/full/gr-work-ratings.json 
       goodreads/full/gr-work-ratings.parquet
     deps:
     - path: goodreads/full/gr-work-ratings.parquet
@@ -1160,8 +1160,8 @@ stages:
       md5: 8f92f76307c37eff87c6c26b9d322dd2
       size: 704
   schema@goodreads/full/gr-work-ratings-2015-100-10core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-work-ratings-2015-100-10core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-work-ratings-2015-100-10core.json 
       goodreads/full/gr-work-ratings-2015-100-10core.parquet
     deps:
     - path: goodreads/full/gr-work-ratings-2015-100-10core.parquet
@@ -1174,8 +1174,8 @@ stages:
       md5: 40cbaedfa6ade39d28bb23a2a886ed87
       size: 698
   schema@goodreads/full/gr-work-ratings-5core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/full/gr-work-ratings-5core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/full/gr-work-ratings-5core.json 
       goodreads/full/gr-work-ratings-5core.parquet
     deps:
     - path: goodreads/full/gr-work-ratings-5core.parquet
@@ -1188,7 +1188,7 @@ stages:
       md5: bf4ab4afc5977d306126d2adeb41755c
       size: 704
   schema@az2018/reviews:
-    cmd: cargo run --release -- pq-info -o az2018/reviews.json
+    cmd: cargo run --release -- pq-info -o az2018/reviews.json 
       az2018/reviews.parquet
     deps:
     - path: az2018/reviews.parquet
@@ -1201,7 +1201,7 @@ stages:
       md5: 464476d2122583b16c81a9cb136d5db9
       size: 622
   schema@goodreads/full/gr-reviews:
-    cmd: cargo run --release -- pq-info -o goodreads/full/gr-reviews.json
+    cmd: cargo run --release -- pq-info -o goodreads/full/gr-reviews.json 
       goodreads/full/gr-reviews.parquet
     deps:
     - path: goodreads/full/gr-reviews.parquet
@@ -1214,8 +1214,8 @@ stages:
       md5: 6ec37b21cf8d856d965159f3b1630c8d
       size: 1054
   schema@goodreads/gr-work-actions-2015-100-10core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/gr-work-actions-2015-100-10core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/gr-work-actions-2015-100-10core.json 
       goodreads/gr-work-actions-2015-100-10core.parquet
     deps:
     - path: goodreads/gr-work-actions-2015-100-10core.parquet
@@ -1228,8 +1228,8 @@ stages:
       md5: 2d1599a3ddef7e22268b70cffe9bc2f3
       size: 618
   schema@goodreads/gr-work-ratings-2015-100-10core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/gr-work-ratings-2015-100-10core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/gr-work-ratings-2015-100-10core.json 
       goodreads/gr-work-ratings-2015-100-10core.parquet
     deps:
     - path: goodreads/gr-work-ratings-2015-100-10core.parquet
@@ -1242,7 +1242,7 @@ stages:
       md5: 6457f1d0c49d55252bc03a6cbb42d9d7
       size: 705
   schema@goodreads/gr-users:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-users.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-users.json 
       goodreads/gr-users.parquet
     deps:
     - path: goodreads/gr-users.parquet
@@ -1255,7 +1255,7 @@ stages:
       md5: a64d738399ae0e21419e180582df5aef
       size: 250
   schema@goodreads/gr-reviews:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-reviews.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-reviews.json 
       goodreads/gr-reviews.parquet
     deps:
     - path: goodreads/gr-reviews.parquet
@@ -1268,7 +1268,7 @@ stages:
       md5: b667e6b377976f043f6bdfcb10ae9b62
       size: 1159
   schema@goodreads/gr-work-item-titles:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-titles.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-titles.json 
       goodreads/gr-work-item-titles.parquet
     deps:
     - path: goodreads/gr-work-item-titles.parquet
@@ -1281,7 +1281,7 @@ stages:
       md5: c3d42ea91180e83e7dbb5a110912c473
       size: 423
   schema@goodreads/gr-work-item-genres:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-genres.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-genres.json 
       goodreads/gr-work-item-genres.parquet
     deps:
     - path: goodreads/gr-work-item-genres.parquet
@@ -1294,7 +1294,7 @@ stages:
       md5: 4dc6f806954ecf7e08c769bdaa21d68b
       size: 336
   schema@goodreads/gr-book-gender:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-book-gender.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-book-gender.json 
       goodreads/gr-book-gender.parquet
     deps:
     - path: goodreads/gr-book-gender.parquet
@@ -1307,7 +1307,7 @@ stages:
       md5: c13c32905c35e16289f87430903cdd25
       size: 518
   schema@goodreads/gr-work-item-gender:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-gender.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-gender.json 
       goodreads/gr-work-item-gender.parquet
     deps:
     - path: goodreads/gr-work-item-gender.parquet
@@ -1320,7 +1320,7 @@ stages:
       md5: ef470be45754e4d7c6bd72872b529543
       size: 250
   schema@goodreads/gr-work-all-actions:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-all-actions.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-all-actions.json 
       goodreads/gr-work-all-actions.parquet
     deps:
     - path: goodreads/gr-work-all-actions.parquet
@@ -1333,7 +1333,7 @@ stages:
       md5: c312e464d77284346e6c3d7e06c5ebb0
       size: 793
   schema@goodreads/gr-work-item-authors:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-authors.json
+    cmd: cargo run --release -- pq-info -o goodreads/gr-work-item-authors.json 
       goodreads/gr-work-item-authors.parquet
     deps:
     - path: goodreads/gr-work-item-authors.parquet
@@ -1346,8 +1346,8 @@ stages:
       md5: 7ec83fb6892b557351aa70bd5ade8c5b
       size: 347
   schema@goodreads/gr-work-item-first-authors:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/gr-work-item-first-authors.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/gr-work-item-first-authors.json 
       goodreads/gr-work-item-first-authors.parquet
     deps:
     - path: goodreads/gr-work-item-first-authors.parquet
@@ -1360,8 +1360,8 @@ stages:
       md5: 861cba981cde50e34f15c6f452423a61
       size: 347
   schema@goodreads/gr-work-actions-15-15core:
-    cmd: cargo run --release -- pq-info -o
-      goodreads/gr-work-actions-15-15core.json
+    cmd: cargo run --release -- pq-info -o 
+      goodreads/gr-work-actions-15-15core.json 
       goodreads/gr-work-actions-15-15core.parquet
     deps:
     - path: goodreads/gr-work-actions-15-15core.parquet

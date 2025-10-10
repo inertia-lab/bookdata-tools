@@ -2,10 +2,10 @@ local bd = import '../bookdata.libsonnet';
 
 bd.pipeline({
   'collect-isbns': {
-    cmd: bd.cmd('collect-isbns -o all-isbns.parquet'),
+    cmd: 'python collect-isbns.py -o all-isbns.parquet',
     deps: std.prune([
       '../config.yaml',
-      '../src/cli/collect_isbns.rs',
+      'collect-isbns.py',
       '../loc-mds/book-isbns.parquet',
       '../openlibrary/edition-isbns.parquet',
       bd.maybe(bd.config.goodreads.enabled, '../goodreads/gr-book-ids.parquet'),
