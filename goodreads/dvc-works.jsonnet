@@ -53,9 +53,9 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-ratings-5core': {
-    cmd: bd.cmd('kcore -o gr-work-ratings-5core.parquet gr-work-ratings.parquet'),
+    cmd: 'python ../scripts/kcore.py -o gr-work-ratings-5core.parquet gr-work-ratings.parquet',
     deps: [
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
       'gr-work-ratings.parquet',
     ],
     outs: [
@@ -64,9 +64,9 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-actions-5core': {
-    cmd: bd.cmd('kcore -o gr-work-actions-5core.parquet gr-work-actions.parquet'),
+    cmd: 'python ../scripts/kcore.py -o gr-work-actions-5core.parquet gr-work-actions.parquet',
     deps: [
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
       'gr-work-actions.parquet',
     ],
     outs: [
@@ -75,10 +75,10 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-ratings-2015-100-10core': {
-    cmd: bd.cmd('kcore --user-k 10 --item-k 100 --year 2015 -o gr-work-ratings-2015-100-10core.parquet gr-work-ratings.parquet'),
+    cmd: 'python ../scripts/kcore.py --user-k 10 --item-k 100 --year 2015 -o gr-work-ratings-2015-100-10core.parquet gr-work-ratings.parquet',
     deps: [
       'gr-work-ratings.parquet',
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
     ],
     outs: [
       'gr-work-ratings-2015-100-10core.parquet',
@@ -86,10 +86,10 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-actions-2015-100-10core': {
-    cmd: bd.cmd('kcore --user-k 10 --item-k 100 --year 2015 -o gr-work-actions-2015-100-10core.parquet gr-work-actions.parquet'),
+    cmd: 'python ../scripts/kcore.py --user-k 10 --item-k 100 --year 2015 -o gr-work-actions-2015-100-10core.parquet gr-work-actions.parquet',
     deps: [
       'gr-work-actions.parquet',
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
     ],
     outs: [
       'gr-work-actions-2015-100-10core.parquet',
@@ -176,10 +176,10 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-actions-15core': {
-    cmd: bd.cmd('kcore --user-k 15 --item-k 15 -o gr-work-actions-15core.parquet gr-work-actions.parquet'),
+    cmd: 'python ../scripts/kcore.py --user-k 15 --item-k 15 -o gr-work-actions-15core.parquet gr-work-actions.parquet',
     deps: [
       'gr-work-actions.parquet',
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
     ],
     outs: [
       'gr-work-actions-15core.parquet',

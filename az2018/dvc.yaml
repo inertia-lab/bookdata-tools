@@ -9,10 +9,10 @@ stages:
       - az2018/az-cluster-ratings.parquet
     wdir: ..
   cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet
+    cmd: python ../scripts/kcore.py -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet
     deps:
       - az-cluster-ratings.parquet
-      - ../src/cli/kcore.rs
+      - ../scripts/kcore.py
     outs:
       - az-cluster-ratings-5core.parquet
   scan-reviews:

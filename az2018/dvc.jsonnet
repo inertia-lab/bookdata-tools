@@ -40,10 +40,10 @@ bd.pipeline(source_stages[bd.config.az2018.source] {
   },
 
   'cluster-ratings-5core': {
-    cmd: bd.cmd('kcore -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet'),
+    cmd: 'python ../scripts/kcore.py -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet',
     deps: [
       'az-cluster-ratings.parquet',
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
     ],
     outs: ['az-cluster-ratings-5core.parquet'],
   },
