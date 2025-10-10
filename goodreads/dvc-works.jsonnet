@@ -2,9 +2,9 @@ local bd = import '../bookdata.libsonnet';
 
 {
   'work-item-titles': {
-    cmd: 'python gr-work-item-titles.py',
+    cmd: 'python ../scripts/duckscript.py gr-work-item-titles.sql',
     deps: [
-      'gr-work-item-titles.py',
+      'gr-work-item-titles.sql',
       'gr-book-ids.parquet',
       'gr-book-info.parquet',
       'gr-work-info.parquet',
@@ -15,9 +15,9 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-item-genres': {
-    cmd: 'python gr-work-item-genres.py',
+    cmd: 'python ../scripts/duckscript.py gr-work-item-genres.sql',
     deps: [
-      'gr-work-item-genres.py',
+      'gr-work-item-genres.sql',
       'gr-book-ids.parquet',
       'gr-book-genres.parquet',
     ],
