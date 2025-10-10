@@ -33,6 +33,7 @@ aria2 = ">=1.37.0,<2"
 lenskit = "~=2025.3"
 # force PyTorch to CPU-only
 pytorch-cpu = "*"
+pyprojroot = ">=0.3.0,<0.4"
 
 # dependencies just for working with the data
 [feature.data.dependencies]
