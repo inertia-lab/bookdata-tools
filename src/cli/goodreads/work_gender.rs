@@ -1,4 +1,7 @@
-use crate::{ids::codes::NS_GR_WORK, prelude::*};
+use crate::{
+    ids::codes::{NS_GR_BOOK, NS_GR_WORK},
+    prelude::*,
+};
 use polars::prelude::*;
 
 pub fn link_work_genders() -> Result<()> {
@@ -18,7 +21,7 @@ pub fn link_work_genders() -> Result<()> {
         col("*"),
         coalesce(&[
             col("work_id") + lit(NS_GR_WORK.base()),
-            col("book_id") + lit(NS_GR_WORK.base()),
+            col("book_id") + lit(NS_GR_BOOK.base()),
         ])
         .alias("item_id"),
     ]);
