@@ -95,8 +95,6 @@ enum AmazonCommand {
 enum BXCommand {
     /// Extract BX from source data and clean.
     Extract(bx::Extract),
-    /// Match BX interactions with clusters.
-    ClusterActions(bx::Cluster),
 }
 
 #[enum_dispatch(Command)]

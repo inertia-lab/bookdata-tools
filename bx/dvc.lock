@@ -1,15 +1,16 @@
 schema: '2.0'
 stages:
   clean-ratings:
-    cmd: cargo run --release -- bx extract ../data/BX-CSV-Dump.zip cleaned-ratings.csv
+    cmd: cargo run --release -- bx extract ../data/BX-CSV-Dump.zip 
+      cleaned-ratings.csv
     deps:
     - path: ../data/BX-CSV-Dump.zip
       md5: 37d647ee9e18ba134ea6d78ee4fe5292
       size: 26085508
     - path: ../src/cli/bx
       hash: md5
-      md5: f9bf3434f91416dcea6b1589deb63f62.dir
-      size: 4541
+      md5: a99203b1d713020aad0f0ff0e3b1e9d5.dir
+      size: 4655
       nfiles: 3
     outs:
     - path: cleaned-ratings.csv
@@ -54,47 +55,46 @@ stages:
       md5: b85f1f166708fd9bc68813a09ecad094
       size: 6246167
   cluster-ratings:
-    cmd: cargo run --release -- bx cluster-actions --ratings -o bx-cluster-ratings.parquet
+    cmd: python ../scripts/duckscript.py bx-cluster-ratings.sql
     deps:
     - path: ../book-links/isbn-clusters.parquet
       hash: md5
-      md5: 857c67a7d5d0e67c2bd46abf56b17dac
-      size: 485821518
-    - path: ../src/cli/bx
+      md5: 1f5420bc184b98238f13e1093fcb41b1
+      size: 506027178
+    - path: bx-cluster-ratings.sql
       hash: md5
-      md5: f9bf3434f91416dcea6b1589deb63f62.dir
-      size: 4541
-      nfiles: 3
+      md5: 0a6f507e2f0039387c3bd56bfb61d292
+      size: 395
     - path: cleaned-ratings.csv
       md5: e2c423d665fb5271def51d358c8c285c
       size: 22627335
     outs:
     - path: bx-cluster-ratings.parquet
       hash: md5
-      md5: ab07160c2744c18415d38f9946c4b9f6
-      size: 2888431
+      md5: 91ddee2258f3f5f0ade6e770c8082538
+      size: 5730654
   cluster-actions:
-    cmd: cargo run --release -- bx cluster-actions --add-actions -o bx-cluster-actions.parquet
+    cmd: python ../scripts/duckscript.py bx-cluster-actions.sql
     deps:
     - path: ../book-links/isbn-clusters.parquet
       hash: md5
-      md5: 857c67a7d5d0e67c2bd46abf56b17dac
-      size: 485821518
-    - path: ../src/cli/bx
+      md5: 1f5420bc184b98238f13e1093fcb41b1
+      size: 506027178
+    - path: bx-cluster-actions.sql
       hash: md5
-      md5: f9bf3434f91416dcea6b1589deb63f62.dir
-      size: 4541
-      nfiles: 3
+      md5: 4e9e3ea08996d8ab88dc4974e961d8c6
+      size: 362
     - path: cleaned-ratings.csv
       md5: e2c423d665fb5271def51d358c8c285c
       size: 22627335
     outs:
     - path: bx-cluster-actions.parquet
       hash: md5
-      md5: 804caa94583e55f42f7e1a24bae47629
-      size: 6705931
+      md5: ee0f2ce23521b57a203560aed6ecfa4f
+      size: 5338124
   schema@bx-cluster-actions:
-    cmd: python ../run.py --rust pq-info -o bx-cluster-actions.json bx-cluster-actions.parquet
+    cmd: python ../run.py --rust pq-info -o bx-cluster-actions.json 
+      bx-cluster-actions.parquet
     deps:
     - path: bx-cluster-actions.parquet
       md5: 1df15b817c96b05f884e6676a1ea3352
@@ -104,7 +104,8 @@ stages:
       md5: ba1be6c11cf2b316b2fcf4c4c5ed8db9
       size: 331
   schema@bx-cluster-ratings:
-    cmd: python ../run.py --rust pq-info -o bx-cluster-ratings.json bx-cluster-ratings.parquet
+    cmd: python ../run.py --rust pq-info -o bx-cluster-ratings.json 
+      bx-cluster-ratings.parquet
     deps:
     - path: bx-cluster-ratings.parquet
       md5: 4da8e35f1f38bae7e97fa8ea10d97d3f

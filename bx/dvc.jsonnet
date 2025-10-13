@@ -12,9 +12,9 @@ bd.pipeline({
     ],
   },
   'cluster-ratings': {
-    cmd: bd.cmd('bx cluster-actions --ratings -o bx-cluster-ratings.parquet'),
+    cmd: 'python ../scripts/duckscript.py bx-cluster-ratings.sql',
     deps: [
-      '../src/cli/bx',
+      'bx-cluster-ratings.sql',
       'cleaned-ratings.csv',
       '../book-links/isbn-clusters.parquet',
     ],
@@ -23,9 +23,9 @@ bd.pipeline({
     ],
   },
   'cluster-actions': {
-    cmd: bd.cmd('bx cluster-actions --add-actions -o bx-cluster-actions.parquet'),
+    cmd: 'python ../scripts/duckscript.py bx-cluster-actions.sql',
     deps: [
-      '../src/cli/bx',
+      'bx-cluster-actions.sql',
       'cleaned-ratings.csv',
       '../book-links/isbn-clusters.parquet',
     ],
