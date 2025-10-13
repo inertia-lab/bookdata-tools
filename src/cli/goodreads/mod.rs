@@ -2,7 +2,6 @@ use crate::prelude::*;
 
 mod cluster;
 mod scan;
-mod work_gender;
 
 /// GoodReads processing commands.
 #[derive(Args, Debug)]
@@ -20,8 +19,6 @@ enum GRCmd {
     },
     /// Cluster GoodReads intearaction data.
     ClusterInteractions(cluster::CICommand),
-    /// Compute GoodReads work genders.
-    WorkGender,
 }
 
 impl Command for Goodreads {
@@ -32,9 +29,6 @@ impl Command for Goodreads {
             }
             GRCmd::ClusterInteractions(opts) => {
                 opts.exec()?;
-            }
-            GRCmd::WorkGender => {
-                work_gender::link_work_genders()?;
             }
         }
 
