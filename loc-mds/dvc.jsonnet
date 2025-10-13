@@ -30,10 +30,10 @@ bd.pipeline({
 
   'book-isbn-ids': {
     wdir: '..',
-    cmd: bd.cmd('link-isbn-ids -R rec_id -o loc-mds/book-isbn-ids.parquet loc-mds/book-isbns.parquet'),
+    cmd: 'python scripts/link-isbns.py -R rec_id -o loc-mds/book-isbn-ids.parquet loc-mds/book-isbns.parquet',
     deps: [
       'loc-mds/book-isbns.parquet',
-      'book-links/all-isbns.parquet',
+      'book-links/isbns.db',
     ],
     outs: [
       'loc-mds/book-isbn-ids.parquet',

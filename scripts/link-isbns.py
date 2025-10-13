@@ -44,7 +44,7 @@ def main(opts: ParsedOptions):
             query = f"""
                 SELECT DISTINCT {rec_field}, isbn_id
                 FROM '{src}' s
-                JOIN isbns.isbns i ON (s.'{isbn_field}' = i.isbn)
+                JOIN isbns.isbns i ON (s.{isbn_field[0]} = i.isbn)
                 ORDER BY {rec_field}
             """
         else:

@@ -43,10 +43,10 @@ bd.pipeline({
   },
   'edition-isbn-ids': {
     wdir: '..',
-    cmd: bd.cmd('link-isbn-ids -R edition -o openlibrary/edition-isbn-ids.parquet openlibrary/edition-isbns.parquet'),
+    cmd: 'python scripts/link-isbns.py -R edition -o openlibrary/edition-isbn-ids.parquet openlibrary/edition-isbns.parquet',
     deps: [
       'openlibrary/edition-isbns.parquet',
-      'book-links/all-isbns.parquet',
+      'book-links/isbns.db',
     ],
     outs: [
       'openlibrary/edition-isbn-ids.parquet',
