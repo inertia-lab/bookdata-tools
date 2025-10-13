@@ -4,7 +4,6 @@
 //! compilation time and disk space in common configurations, with different tools
 //! implemented as subcommands.  Each subcommand implements the [Command] trait, which
 //! exposes the command line arguments and invocation.
-pub mod amazon;
 pub mod bx;
 pub mod cluster;
 pub mod cluster_books;
@@ -65,8 +64,6 @@ pub enum RootCommand {
     ClusterBooks(cluster_books::ClusterBooks),
     IndexNames(index_names::IndexNames),
     ExtractGraph(extract_graph::ExtractGraph),
-    /// Commands for processing Amazon data.
-    Amazon(AmazonCommandWrapper),
     /// Commands for processing OpenLibrary data.
     Openlib(openlib::OpenLib),
     /// Commands for processing BookCrossing data.
@@ -78,16 +75,8 @@ pub enum RootCommand {
     PQInfo(pqinfo::PQInfo),
 }
 
-wrap_subcommands!(AmazonCommand);
 wrap_subcommands!(BXCommand);
 wrap_subcommands!(ClusterCommand);
-
-#[enum_dispatch(Command)]
-#[derive(Subcommand, Debug)]
-enum AmazonCommand {
-    ScanRatings(amazon::ScanRatings),
-    ScanReviews(amazon::ScanReviews),
-}
 
 #[enum_dispatch(Command)]
 #[derive(Subcommand, Debug)]
