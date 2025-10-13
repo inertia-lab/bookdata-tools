@@ -5,7 +5,6 @@
 //! definitions and helper routines that build on this code.  The tools are not
 //! currently usable as a library; you can extend them by adding additional commands
 //! to the [cli] module (`src/cli/` in the source tree).
-mod amazon;
 mod arrow;
 mod cleaning;
 mod cli;
