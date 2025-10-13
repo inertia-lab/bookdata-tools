@@ -2,10 +2,9 @@ local bd = import '../bookdata.libsonnet';
 
 bd.pipeline({
   'scan-ratings': {
-    cmd: bd.cmd('amazon scan-ratings -o ratings.parquet ../data/az2014/ratings_Books.csv'),
+    cmd: 'duckscript az-scan-ratings.sql',
     deps: [
-      '../src/amazon.rs',
-      '../src/cli/amazon/',
+      'az-scan-ratings.sql',
       '../data/az2014/ratings_Books.csv',
     ],
     outs: ['ratings.parquet'],

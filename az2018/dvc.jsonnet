@@ -2,10 +2,9 @@ local bd = import '../bookdata.libsonnet';
 local source_stages = {
   ratings: {
     'scan-ratings': {
-      cmd: bd.cmd('amazon scan-ratings -o ratings.parquet --swap-id-columns ../data/az2018/Books.csv'),
+      cmd: 'duckscript az-scan-ratings.sql',
       deps: [
-        '../src/amazon.rs',
-        '../src/cli/amazon/',
+        'az-scan-ratings.sql',
         '../data/az2018/Books.csv',
       ],
       outs: ['ratings.parquet'],
@@ -13,10 +12,9 @@ local source_stages = {
   },
   reviews: {
     'scan-reviews': {
-      cmd: bd.cmd('amazon scan-reviews --rating-output ratings.parquet --review-output reviews.parquet ../data/az2018/Books.json.gz'),
+      cmd: 'duckscript az-scan-reviews.sql',
       deps: [
-        '../src/amazon.rs',
-        '../src/cli/amazon/',
+        'az-scan-reviews.sql',
         '../data/az2018/Books.json.gz',
       ],
       outs: [
