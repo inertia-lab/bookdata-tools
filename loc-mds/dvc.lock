@@ -14,26 +14,26 @@ stages:
       size: 4095
     - path: ../src/marc
       hash: md5
-      md5: 3641d210003d76bb829c4f9b9c6085a2.dir
-      size: 23134
+      md5: 9100fbb7a104865d91de69fc07a31695.dir
+      size: 23137
       nfiles: 5
     outs:
     - path: book-authors.parquet
       hash: md5
-      md5: 772809fcc0a89e9f21097a81ec714fdc
-      size: 73780178
+      md5: 88cceeb63e4207cc998c3c85ca15dff2
+      size: 66299081
     - path: book-fields.parquet
       hash: md5
-      md5: f7776ca19570f19aa97b1ec1603050f1
-      size: 2660912478
+      md5: 78e15977553361bddd3f02dfc16ec20e
+      size: 3030476564
     - path: book-ids.parquet
       hash: md5
-      md5: e18bb8e9e4de974a324b47894dccbd8a
-      size: 33386492
+      md5: b528ce57899b70a565910992393633a0
+      size: 18794299
     - path: book-isbns.parquet
       hash: md5
-      md5: 41501f52437fff01168e709b5fdfd4c9
-      size: 53538416
+      md5: a8a2cc6c587d66b4b5885f980080c644
+      size: 45450594
   book-authors:
     cmd: python ../run.py --rust fusion book-authors.tcl
     deps:
@@ -96,22 +96,22 @@ stages:
       md5: 71a6ef56b674c032c5a572d478e66762
       size: 1469682
   book-isbn-ids:
-    cmd: python scripts/link-isbns.py -R rec_id -o loc-mds/book-isbn-ids.parquet
-      loc-mds/book-isbns.parquet
+    cmd: cargo run --release -- link-isbn-ids -R rec_id -o 
+      loc-mds/book-isbn-ids.parquet loc-mds/book-isbns.parquet
     deps:
-    - path: book-links/isbns.db
+    - path: book-links/all-isbns.parquet
       hash: md5
-      md5: a8e13056e24057014fd6d4631fce69a2
-      size: 2963025920
+      md5: 34e4cebbbdc3ec9745808b397ae98330
+      size: 280215236
     - path: loc-mds/book-isbns.parquet
       hash: md5
-      md5: 41501f52437fff01168e709b5fdfd4c9
-      size: 53538416
+      md5: a8a2cc6c587d66b4b5885f980080c644
+      size: 45450594
     outs:
     - path: loc-mds/book-isbn-ids.parquet
       hash: md5
-      md5: 13c5b281e571442435aafd6cde8c4106
-      size: 35620770
+      md5: 0673e6924c9a0fe4a5e3bfcf5d315f78
+      size: 38383735
   loc-clusters:
     cmd: python ../run.py --rust fusion loc-clusters.tcl
     deps:

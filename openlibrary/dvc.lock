@@ -1,7 +1,8 @@
 schema: '2.0'
 stages:
   scan-authors:
-    cmd: cargo run --release -- openlib scan-authors ../data/openlib/ol_dump_authors.txt.gz
+    cmd: cargo run --release -- openlib scan-authors 
+      ../data/openlib/ol_dump_authors.txt.gz
     deps:
     - path: ../data/openlib/ol_dump_authors.txt.gz
       hash: md5
@@ -25,7 +26,8 @@ stages:
       md5: e0c699b25a68f096d1022acd949abc98
       size: 225730435
   scan-editions:
-    cmd: cargo run --release -- openlib scan-editions ../data/openlib/ol_dump_editions.txt.gz
+    cmd: cargo run --release -- openlib scan-editions 
+      ../data/openlib/ol_dump_editions.txt.gz
     deps:
     - path: ../data/openlib/ol_dump_editions.txt.gz
       hash: md5
@@ -61,7 +63,8 @@ stages:
       md5: c147c71130e5d4df16d7ae18a976ae95
       size: 1034231692
   scan-works:
-    cmd: cargo run --release -- openlib scan-works ../data/openlib/ol_dump_works.txt.gz
+    cmd: cargo run --release -- openlib scan-works 
+      ../data/openlib/ol_dump_works.txt.gz
     deps:
     - path: ../data/openlib/ol_dump_works.txt.gz
       hash: md5
@@ -89,13 +92,13 @@ stages:
       md5: 0468fc87dfbf51626285aa24e4b77ee0
       size: 880028181
   edition-isbn-ids:
-    cmd: cargo run --release -- link-isbn-ids -R edition -o openlibrary/edition-isbn-ids.parquet
-      openlibrary/edition-isbns.parquet
+    cmd: cargo run --release -- link-isbn-ids -R edition -o 
+      openlibrary/edition-isbn-ids.parquet openlibrary/edition-isbns.parquet
     deps:
     - path: book-links/all-isbns.parquet
       hash: md5
-      md5: 0a0a07de5b7af9e522796043977ffa05
-      size: 446802717
+      md5: 34e4cebbbdc3ec9745808b397ae98330
+      size: 280215236
     - path: openlibrary/edition-isbns.parquet
       hash: md5
       md5: 849038d2fe02ee78adff149ca944eb11
@@ -103,10 +106,11 @@ stages:
     outs:
     - path: openlibrary/edition-isbn-ids.parquet
       hash: md5
-      md5: 6f6da90baeca04523829c7f73f206ad2
-      size: 226887683
+      md5: 58919f8b3a254e18975666fa0af2cb11
+      size: 224543124
   schema@edition-isbn-ids:
-    cmd: python ../run.py --rust pq-info -o edition-isbn-ids.json edition-isbn-ids.parquet
+    cmd: python ../run.py --rust pq-info -o edition-isbn-ids.json 
+      edition-isbn-ids.parquet
     deps:
     - path: edition-isbn-ids.parquet
       md5: 6cf6500ebab273315fa90e2f2031dd3b
@@ -146,7 +150,8 @@ stages:
       md5: 464dc59fc293103fcbf3e9baa3373c1a
       size: 327
   schema@work-authors:
-    cmd: python ../run.py --rust pq-info -o work-authors.json work-authors.parquet
+    cmd: python ../run.py --rust pq-info -o work-authors.json 
+      work-authors.parquet
     deps:
     - path: work-authors.parquet
       md5: e62c8dfb5507c4ec67b3e0f7b940523f
@@ -156,7 +161,8 @@ stages:
       md5: 140a8f1c6dc0ad558bf6ca19e742210f
       size: 331
   schema@author-names:
-    cmd: python ../run.py --rust pq-info -o author-names.json author-names.parquet
+    cmd: python ../run.py --rust pq-info -o author-names.json 
+      author-names.parquet
     deps:
     - path: author-names.parquet
       md5: 76ca0c2e90393598cc71578ffe5493d1
@@ -166,7 +172,8 @@ stages:
       md5: a8b5bf82ca7a88ff7ef58ec4698a0e3a
       size: 331
   schema@edition-authors:
-    cmd: python ../run.py --rust pq-info -o edition-authors.json edition-authors.parquet
+    cmd: python ../run.py --rust pq-info -o edition-authors.json 
+      edition-authors.parquet
     deps:
     - path: edition-authors.parquet
       md5: 231cda3e2643ce16e46942a58aa3b57e
@@ -176,7 +183,8 @@ stages:
       md5: 4ba99be63216163455443c29e8acafe4
       size: 336
   schema@edition-isbns:
-    cmd: python ../run.py --rust pq-info -o edition-isbns.json edition-isbns.parquet
+    cmd: python ../run.py --rust pq-info -o edition-isbns.json 
+      edition-isbns.parquet
     deps:
     - path: edition-isbns.parquet
       md5: 4e25efdddefdaa656de713a99b0ca2d7
@@ -186,7 +194,8 @@ stages:
       md5: 7f750ebd2dcdfebb39eb49c0cf6948a2
       size: 247
   schema@edition-works:
-    cmd: python ../run.py --rust pq-info -o edition-works.json edition-works.parquet
+    cmd: python ../run.py --rust pq-info -o edition-works.json 
+      edition-works.parquet
     deps:
     - path: edition-works.parquet
       md5: 9e7de4af3d400505f77235d8f903f826
@@ -216,7 +225,8 @@ stages:
       md5: a33ba4a8bb933055f43ec0d933cdebec
       size: 325
   schema@work-subjects:
-    cmd: python ../run.py --rust pq-info -o work-subjects.json work-subjects.parquet
+    cmd: python ../run.py --rust pq-info -o work-subjects.json 
+      work-subjects.parquet
     deps:
     - path: work-subjects.parquet
       md5: 273c91a6d0b49f57ae8d10816fb4f5a0
@@ -226,7 +236,8 @@ stages:
       md5: 164a92469b9c94c2d99ff5fa8ab27551
       size: 245
   schema@edition-subjects:
-    cmd: python ../run.py --rust pq-info -o edition-subjects.json edition-subjects.parquet
+    cmd: python ../run.py --rust pq-info -o edition-subjects.json 
+      edition-subjects.parquet
     deps:
     - path: edition-subjects.parquet
       md5: d58f4b70cf2a7ebf8d919aa18113d2e2
@@ -236,8 +247,8 @@ stages:
       md5: 04631619a35917b9dd4a850541190b8d
       size: 245
   work-clusters:
-    cmd: cargo run --release -- cluster extract-books -n work_id -o openlibrary/work-clusters.parquet
-      OL-W
+    cmd: cargo run --release -- cluster extract-books -n work_id -o 
+      openlibrary/work-clusters.parquet OL-W
     deps:
     - path: book-links/cluster-graph-nodes.parquet
       hash: md5
@@ -249,7 +260,8 @@ stages:
       md5: a3008813bfba135fa668a7ccc50c9f2a
       size: 239671031
   schema@work-clusters:
-    cmd: python ../run.py --rust pq-info -o work-clusters.json work-clusters.parquet
+    cmd: python ../run.py --rust pq-info -o work-clusters.json 
+      work-clusters.parquet
     deps:
     - path: work-clusters.parquet
       md5: 82b15db1b6cb8a76cd9526a1770bc8dc
