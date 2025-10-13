@@ -15,7 +15,6 @@ pub mod index_names;
 pub mod openlib;
 pub mod pqinfo;
 pub mod scan_marc;
-pub mod stats;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
@@ -77,7 +76,6 @@ pub enum RootCommand {
     /// Commands for working with clusters.
     Cluster(ClusterCommandWrapper),
     PQInfo(pqinfo::PQInfo),
-    IntegrationStats(stats::IntegrationStats),
 }
 
 wrap_subcommands!(AmazonCommand);
