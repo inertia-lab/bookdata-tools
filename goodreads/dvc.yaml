@@ -160,9 +160,9 @@ stages:
     outs:
       - gr-work-item-first-authors.parquet
   work-gender:
-    cmd: cargo run --release -- goodreads work-gender
+    cmd: python ../scripts/duckscript.py gr-work-item-gender.sql
     deps:
-      - ../src/cli/goodreads
+      - gr-work-item-gender.sql
       - gr-book-link.parquet
       - ../book-links/cluster-genders.parquet
     outs:

@@ -224,30 +224,29 @@ stages:
       md5: d32c29f8f377894f8ddb672581e65db1
       size: 1485141703
   work-gender:
-    cmd: cargo run --release -- goodreads work-gender
+    cmd: python ../scripts/duckscript.py gr-work-item-gender.sql
     deps:
     - path: ../book-links/cluster-genders.parquet
       hash: md5
       md5: 6cf626b33172195a51bfc1b3560b1832
       size: 163010492
-    - path: ../src/cli/goodreads
-      hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
-      nfiles: 4
     - path: gr-book-link.parquet
       hash: md5
       md5: de89a4c55136745ec8e74bd9bfb45356
       size: 19964329
+    - path: gr-work-item-gender.sql
+      hash: md5
+      md5: 18fc9f549f74f9ceae11eb698f1f276a
+      size: 373
     outs:
     - path: gr-book-gender.parquet
       hash: md5
-      md5: 1aa0e12b4871420baf59165dde3d456a
-      size: 47235674
+      md5: 8f5549503af15ea8c6f2f513e0e551a7
+      size: 38299111
     - path: gr-work-item-gender.parquet
       hash: md5
-      md5: 8436ad1250e2f40803a02c2954e4bde0
-      size: 7715354
+      md5: 62da5897046fd1dc80767bfd4ae0fbe5
+      size: 6440401
   schema@gr-work-gender:
     cmd: python ../run.py --rust pq-info -o gr-work-gender.json 
       gr-work-gender.parquet

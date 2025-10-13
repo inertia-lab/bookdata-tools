@@ -151,9 +151,9 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-gender': {
-    cmd: bd.cmd('goodreads work-gender'),
+    cmd: 'python ../scripts/duckscript.py gr-work-item-gender.sql',
     deps: [
-      '../src/cli/goodreads',
+      'gr-work-item-gender.sql',
       'gr-book-link.parquet',
       '../book-links/cluster-genders.parquet',
     ],
