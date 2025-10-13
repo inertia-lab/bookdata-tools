@@ -23,15 +23,17 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from bookdata.codes import register_udfs
-from docopt import ParsedOptions, docopt
+from docopt import docopt
 from duckdb import DuckDBPyConnection, Statement, StatementType, connect, extract_statements
 from lenskit.logging import LoggingConfig, get_logger
+
+from bookdata.codes import register_udfs
 
 logger = get_logger("poprox_recommender.data.duckscript")
 
 
-def main(options: ParsedOptions):
+def main():
+    options = docopt(__doc__ or "")
     log_cfg = LoggingConfig()
     if options["--verbose"]:
         log_cfg.set_verbose(True)
@@ -97,5 +99,4 @@ def _pretty_query(stmt: Statement) -> str:
 
 
 if __name__ == "__main__":
-    args = docopt(__doc__ or "")
-    main(args)
+    main()
