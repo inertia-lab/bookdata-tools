@@ -6,11 +6,11 @@ local works = import 'dvc-works.jsonnet';
 local links = {
   'book-isbn-ids': {
     wdir: '..',
-    cmd: bd.cmd('link-isbn-ids -o goodreads/book-isbn-ids.parquet -R book_id -I isbn10 -I isbn13 -I asin goodreads/gr-book-ids.parquet'),
+    cmd: 'python scripts/link-isbns.py -o goodreads/book-isbn-ids.parquet -R book_id -I isbn10 -I isbn13 -I asin goodreads/gr-book-ids.parquet',
     deps: [
-      'src/cli/goodreads',
+      'scripts/link-isbns.py',
       'goodreads/gr-book-ids.parquet',
-      'book-links/all-isbns.parquet',
+      'book-links/isbns.db',
     ],
     outs: [
       'goodreads/book-isbn-ids.parquet',
