@@ -23,6 +23,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from bookdata.codes import register_udfs
 from docopt import ParsedOptions, docopt
 from duckdb import DuckDBPyConnection, Statement, StatementType, connect, extract_statements
 from lenskit.logging import LoggingConfig, get_logger
@@ -45,6 +46,7 @@ def main(options: ParsedOptions):
 
     logger.info("opening database %s", db_path)
     with connect(db_path or ":memory:") as db:
+        register_udfs(db)
         for var in options["--define"]:
             name, value = var.split("=", 1)
             logger.debug("setting %s=%s", name, value)
