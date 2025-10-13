@@ -3,7 +3,7 @@ COPY (
         make_timestamp_ms(unixReviewTime * 1000) AS timestamp,
         summary,
         reviewText AS text,
-    FROM '../data/az2018/Books.json.gz'
+    FROM read_ndjson('../data/az2018/Books.json.gz', sample_size=100)
 ) TO 'ratings.parquet' (COMPRESSION zstd);
 
 COPY (
