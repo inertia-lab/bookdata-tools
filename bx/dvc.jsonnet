@@ -12,7 +12,7 @@ bd.pipeline({
     ],
   },
   'cluster-ratings': {
-    cmd: 'python ../scripts/duckscript.py bx-cluster-ratings.sql',
+    cmd: 'duckscript bx-cluster-ratings.sql',
     deps: [
       'bx-cluster-ratings.sql',
       'cleaned-ratings.csv',
@@ -23,7 +23,7 @@ bd.pipeline({
     ],
   },
   'cluster-actions': {
-    cmd: 'python ../scripts/duckscript.py bx-cluster-actions.sql',
+    cmd: 'duckscript bx-cluster-actions.sql',
     deps: [
       'bx-cluster-actions.sql',
       'cleaned-ratings.csv',

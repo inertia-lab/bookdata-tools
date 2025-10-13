@@ -2,7 +2,7 @@ local bd = import '../bookdata.libsonnet';
 
 {
   'work-item-titles': {
-    cmd: 'python ../scripts/duckscript.py gr-work-item-titles.sql',
+    cmd: 'duckscript gr-work-item-titles.sql',
     deps: [
       'gr-work-item-titles.sql',
       'gr-book-ids.parquet',
@@ -15,7 +15,7 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-item-genres': {
-    cmd: 'python ../scripts/duckscript.py gr-work-item-genres.sql',
+    cmd: 'duckscript gr-work-item-genres.sql',
     deps: [
       'gr-work-item-genres.sql',
       'gr-book-ids.parquet',
@@ -151,7 +151,7 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-gender': {
-    cmd: 'python ../scripts/duckscript.py gr-work-item-gender.sql',
+    cmd: 'duckscript gr-work-item-gender.sql',
     deps: [
       'gr-work-item-gender.sql',
       'gr-book-link.parquet',
@@ -164,7 +164,7 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-all-actions': {
-    cmd: 'python ../scripts/duckscript.py gr-work-all-actions.sql',
+    cmd: 'duckscript gr-work-all-actions.sql',
     deps: [
       'gr-interactions.parquet',
       'gr-book-ids.parquet',

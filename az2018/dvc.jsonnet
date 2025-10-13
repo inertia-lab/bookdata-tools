@@ -30,7 +30,7 @@ local source_stages = {
 bd.pipeline(source_stages[bd.config.az2018.source] {
   'cluster-ratings': {
     wdir: '..',
-    cmd: bd.cmd('amazon cluster-ratings -o az2018/az-cluster-ratings.parquet az2018/ratings.parquet'),
+    cmd: 'duckscript az-cluster-ratings.sql',
     deps: [
       'src/cli/amazon',
       'az2018/ratings.parquet',

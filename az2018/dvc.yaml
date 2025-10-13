@@ -1,6 +1,6 @@
 stages:
   cluster-ratings:
-    cmd: cargo run --release -- amazon cluster-ratings -o az2018/az-cluster-ratings.parquet az2018/ratings.parquet
+    cmd: duckscript az-cluster-ratings.sql
     deps:
       - src/cli/amazon
       - az2018/ratings.parquet
