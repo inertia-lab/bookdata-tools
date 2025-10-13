@@ -3,9 +3,11 @@
 Collect ISBNs from across the integration.
 
 Usage:
-    collect-isbns.py -o OUT
+    collect-isbns.py [-d DB] -o OUT
 
 Options:
+    -d DB, --database=DB
+        Open database DB [default: isbns.db].
     -o OUT, --output=OUT
         Write output to OUT.
 """
@@ -26,18 +28,18 @@ SOURCES = {
     "GR": ("../goodreads/gr-book-ids.parquet", ["isbn10", "isbn13", "asin"], "goodreads"),
     "BX": ("../bx/cleaned-ratings.csv", ["isbn"], "bx"),
     "AZ14": ("../az2014/ratings.parquet", ["asin"], "az2014"),
-    "AZ118": ("../az2018/ratings.parquet", ["asin"], "az2018"),
+    "AZ18": ("../az2018/ratings.parquet", ["asin"], "az2018"),
 }
 
 
 def main(opts: ParsedOptions):
     basic_logging()
     cfg = yaml.load(CFG_FILE.read_text(), yaml.SafeLoader)
-    with duckdb.connect() as db:
+    with duckdb.connect(opts["--database"]) as db:
         active = []
         db.execute(
             """
-            CREATE TABLE isbn_rec (
+            CREATE TEMPORARY TABLE isbn_rec (
                 isbn VARCHAR NOT NULL,
                 source VARCHAR NOT NULL,
                 nrecs INTEGER NOT NULL
@@ -53,20 +55,40 @@ def main(opts: ParsedOptions):
             scan_source(db, name, path, cols)
             active.append(name)
 
-        query = """
-            WITH isbn_counts AS (
-                PIVOT isbn_rec
-                ON source
-                USING coalesce(sum(nrecs), 0)::int
+        _log.info("creating ISBN ID table")
+        db.execute(
+            """
+            CREATE TABLE isbns AS
+            SELECT row_number() OVER (ORDER BY isbn) AS isbn_id, isbn
+            FROM (SELECT DISTINCT isbn FROM isbn_rec)
+            """
+        )
+        (nrow,) = db.fetchone() or (0,)
+        _log.info("generated IDs for %d ISBNs", nrow)
+
+        _log.info("indexing ISBN table")
+        db.execute("ALTER TABLE isbns ADD PRIMARY KEY (isbn_id)")
+        db.execute("CREATE UNIQUE INDEX isbn_uq ON isbns (isbn)")
+
+        db.execute(
+            """
+            CREATE TABLE isbn_counts AS
+            WITH isbn_rc AS (
+                SELECT isbn_id, source, nrecs
+                FROM isbn_rec
+                JOIN isbns USING (isbn)
             )
-            SELECT CAST(row_number() OVER (ORDER BY isbn) AS INT32) AS isbn_id, *
-            FROM isbn_counts
-        """
+            PIVOT isbn_rc
+            ON source
+            USING COALESCE(SUM(nrecs), 0)::int
+            """
+        )
+
         file = opts["--output"]
         _log.info("writing result to %s", file)
         db.execute(
             f"""
-            COPY ({query}) TO '{file}' (COMPRESSION zstd)
+            COPY isbn_counts TO '{file}' (COMPRESSION zstd)
             """
         )
 

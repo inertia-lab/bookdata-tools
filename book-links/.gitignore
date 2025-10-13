@@ -13,3 +13,4 @@
 /cluster-graph-edges.parquet
 /cluster-graph-nodes.parquet
 /cluster-nogr.parquet
+/isbns.db

@@ -76,7 +76,7 @@ stages:
       - book-links/cluster-ol-first-authors.parquet
     wdir: ..
   collect-isbns:
-    cmd: python collect-isbns.py -o all-isbns.parquet
+    cmd: python collect-isbns.py -d isbns.db -o all-isbns.parquet
     deps:
       - ../config.yaml
       - collect-isbns.py
@@ -86,6 +86,7 @@ stages:
       - ../az2014/ratings.parquet
       - ../az2018/ratings.parquet
     outs:
+      - isbns.db
       - all-isbns.parquet
   gender-stats:
     cmd: cargo run --release -- integration-stats

@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   collect-isbns:
-    cmd: python collect-isbns.py -o all-isbns.parquet
+    cmd: python collect-isbns.py -d isbns.db -o all-isbns.parquet
     deps:
     - path: ../az2014/ratings.parquet
       hash: md5
@@ -29,14 +29,18 @@ stages:
       size: 299551490
     - path: collect-isbns.py
       hash: md5
-      md5: 3342c1bed797dabd8e69b7894697d739
-      size: 2596
+      md5: 516554b034fa559e746fc00aa381dffc
+      size: 3245
       isexec: true
     outs:
     - path: all-isbns.parquet
       hash: md5
-      md5: 34e4cebbbdc3ec9745808b397ae98330
-      size: 280215236
+      md5: e6b40042a4410f597843bcda389859bd
+      size: 192494496
+    - path: isbns.db
+      hash: md5
+      md5: a8e13056e24057014fd6d4631fce69a2
+      size: 2963025920
   cluster:
     cmd: cargo run --release -- cluster-books --save-graph 
       book-links/book-graph.mp.zst

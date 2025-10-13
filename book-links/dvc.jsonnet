@@ -2,7 +2,7 @@ local bd = import '../bookdata.libsonnet';
 
 bd.pipeline({
   'collect-isbns': {
-    cmd: 'python collect-isbns.py -o all-isbns.parquet',
+    cmd: 'python collect-isbns.py -d isbns.db -o all-isbns.parquet',
     deps: std.prune([
       '../config.yaml',
       'collect-isbns.py',
@@ -14,6 +14,7 @@ bd.pipeline({
       bd.maybe(bd.config.az2018.enabled, '../az2018/ratings.parquet'),
     ]),
     outs: [
+      'isbns.db',
       'all-isbns.parquet',
     ],
   },
