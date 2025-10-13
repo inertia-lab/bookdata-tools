@@ -1,7 +1,8 @@
 schema: '2.0'
 stages:
   scan-ratings:
-    cmd: cargo run --release -- amazon scan-ratings -o ratings.parquet ../data/az2014/ratings_Books.csv
+    cmd: cargo run --release -- amazon scan-ratings -o ratings.parquet 
+      ../data/az2014/ratings_Books.csv
     deps:
     - path: ../data/az2014/ratings_Books.csv
       md5: 77b4a5b887e14e16b13e7788bdf70156
@@ -21,8 +22,8 @@ stages:
       md5: 078fd24cb9dfa9022925e4f42191d200
       size: 153972395
   cluster-ratings:
-    cmd: cargo run --release -- amazon cluster-ratings -o az2014/az-cluster-ratings.parquet
-      az2014/ratings.parquet
+    cmd: cargo run --release -- amazon cluster-ratings -o 
+      az2014/az-cluster-ratings.parquet az2014/ratings.parquet
     deps:
     - path: az2014/ratings.parquet
       hash: md5
@@ -30,8 +31,8 @@ stages:
       size: 153972395
     - path: book-links/isbn-clusters.parquet
       hash: md5
-      md5: 1f5420bc184b98238f13e1093fcb41b1
-      size: 506027178
+      md5: 9f7a33fc53459fc0307914c194e06972
+      size: 373089002
     - path: src/cli/amazon
       hash: md5
       md5: 9f38ef337a5585687c8591594263a8c2.dir
@@ -40,8 +41,8 @@ stages:
     outs:
     - path: az2014/az-cluster-ratings.parquet
       hash: md5
-      md5: e570f0506b21042e6ec1d41eaafeea50
-      size: 217169201
+      md5: 22ea6fd3e7e4b0bcc6abfa908fd939b4
+      size: 233728878
   schema@ratings:
     cmd: python ../run.py --rust pq-info -o ratings.json ratings.parquet
     deps:
@@ -53,7 +54,8 @@ stages:
       md5: edd9a83c530d5ba295da71dc77be1041
       size: 427
   schema@az-cluster-ratings:
-    cmd: python ../run.py --rust pq-info -o az-cluster-ratings.json az-cluster-ratings.parquet
+    cmd: python ../run.py --rust pq-info -o az-cluster-ratings.json 
+      az-cluster-ratings.parquet
     deps:
     - path: az-cluster-ratings.parquet
       md5: bcb0ee6021c331bcd76376c70850ceef
@@ -63,18 +65,20 @@ stages:
       md5: 2e04146763e4da1efb00357343d28d38
       size: 702
   cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet
+    cmd: python ../scripts/kcore.py -o az-cluster-ratings-5core.parquet 
+      az-cluster-ratings.parquet
     deps:
-    - path: ../src/cli/kcore.rs
+    - path: ../scripts/kcore.py
       hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
+      md5: 720fc8b1ef0f1c42fe057850bd556880
+      size: 3354
+      isexec: true
     - path: az-cluster-ratings.parquet
       hash: md5
-      md5: e570f0506b21042e6ec1d41eaafeea50
-      size: 217169201
+      md5: 22ea6fd3e7e4b0bcc6abfa908fd939b4
+      size: 233728878
     outs:
     - path: az-cluster-ratings-5core.parquet
       hash: md5
-      md5: 48a2b65f7de674b8635633ddfa6414b9
-      size: 84932748
+      md5: f7d27596aeece00f5a3227478c7f4817
+      size: 65547784
