@@ -12,7 +12,6 @@ pub mod extract_graph;
 pub mod filter_marc;
 pub mod goodreads;
 pub mod index_names;
-pub mod link_isbns;
 pub mod openlib;
 pub mod pqinfo;
 pub mod scan_marc;
@@ -67,7 +66,6 @@ pub enum RootCommand {
     ClusterBooks(cluster_books::ClusterBooks),
     IndexNames(index_names::IndexNames),
     ExtractGraph(extract_graph::ExtractGraph),
-    LinkISBNIds(link_isbns::LinkISBNIds),
     /// Commands for processing Amazon data.
     Amazon(AmazonCommandWrapper),
     /// Commands for processing OpenLibrary data.
