@@ -111,7 +111,7 @@ bd.pipeline({
 
   'gender-stats': {
     wdir: '..',
-    cmd: bd.cmd('integration-stats'),
+    cmd: 'python book-links/integration-stats.py',
     deps: std.prune([
       'src/cli/stats.rs',
       'book-links/cluster-genders.parquet',

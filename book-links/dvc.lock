@@ -270,12 +270,12 @@ stages:
       md5: 6cf626b33172195a51bfc1b3560b1832
       size: 163010492
   gender-stats:
-    cmd: cargo run --release -- integration-stats
+    cmd: python book-links/integration-stats.py
     deps:
     - path: az2014/az-cluster-ratings.parquet
       hash: md5
-      md5: e570f0506b21042e6ec1d41eaafeea50
-      size: 217169201
+      md5: 22ea6fd3e7e4b0bcc6abfa908fd939b4
+      size: 233728878
     - path: az2018/az-cluster-ratings.parquet
       hash: md5
       md5: f051fade383281694e92590526ffe093
@@ -298,8 +298,8 @@ stages:
       size: 772173497
     - path: loc-mds/book-isbn-ids.parquet
       hash: md5
-      md5: 69ba4a1c8666f3eec3f20801c877c0be
-      size: 39838643
+      md5: 0673e6924c9a0fe4a5e3bfcf5d315f78
+      size: 38383735
     - path: src/cli/stats.rs
       hash: md5
       md5: 3c3c19866a07399f7e0e24dcb584e59e
@@ -307,8 +307,8 @@ stages:
     outs:
     - path: book-links/gender-stats.csv
       hash: md5
-      md5: 6cff2d4c5ac25c5e0ceec0c1d266136d
-      size: 966
+      md5: d0e6267bbe2d0d10ec161eeab0ecfb77
+      size: 990
   cluster-hashes:
     cmd: cargo run --release -- cluster hash -o cluster-hashes.parquet 
       isbn-clusters.parquet

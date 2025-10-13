@@ -89,7 +89,7 @@ stages:
       - isbns.db
       - all-isbns.parquet
   gender-stats:
-    cmd: cargo run --release -- integration-stats
+    cmd: python book-links/integration-stats.py
     deps:
       - src/cli/stats.rs
       - book-links/cluster-genders.parquet
