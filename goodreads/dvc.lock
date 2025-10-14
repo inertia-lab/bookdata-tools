@@ -1,7 +1,8 @@
 schema: '2.0'
 stages:
   scan-interactions:
-    cmd: cargo run --release -- goodreads scan interactions ../data/goodreads/goodreads_interactions.json.gz
+    cmd: cargo run --release -- goodreads scan interactions 
+      ../data/goodreads/goodreads_interactions.json.gz
     deps:
     - path: ../data/goodreads/goodreads_interactions.json.gz
       hash: md5
@@ -9,8 +10,8 @@ stages:
       size: 9388113365
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: ../src/goodreads
       hash: md5
@@ -20,22 +21,23 @@ stages:
     outs:
     - path: gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: c589b123fc450e5dc9c464ada0649213
+      size: 3791406851
     - path: gr-users.parquet
       hash: md5
-      md5: 811291a9072adda3c345a518ee4cb898
-      size: 18535987
+      md5: c3f5c674cd8ee359618c55f66f4ee308
+      size: 18522423
   scan-book-info:
-    cmd: cargo run --release -- goodreads scan books ../data/goodreads/goodreads_books.json.gz
+    cmd: cargo run --release -- goodreads scan books 
+      ../data/goodreads/goodreads_books.json.gz
     deps:
     - path: ../data/goodreads/goodreads_books.json.gz
       md5: 01b40c70a00fb6aa321ee478f0fd0d6b
       size: 2043729443
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: ../src/goodreads
       hash: md5
@@ -45,30 +47,31 @@ stages:
     outs:
     - path: gr-book-authors.parquet
       hash: md5
-      md5: 1a8c26d92619d39ff458a3b7ac76c50c
-      size: 23255162
+      md5: cc169b6a4c73b3ddc4bd36f49ed7ee15
+      size: 23794324
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-book-info.parquet
       hash: md5
-      md5: 987fdc0732f3fab09ef3a4eb8387f839
-      size: 11243049
+      md5: 4126b0b185e7c76615d2225a81bee83d
+      size: 11293527
     - path: gr-book-series.parquet
       hash: md5
-      md5: 85fe1f416fbfd72680cbd5037a676d1b
-      size: 5470243
+      md5: 3ba15295771f4ea4f451f87931c57669
+      size: 5627605
   scan-work-info:
-    cmd: cargo run --release -- goodreads scan works ../data/goodreads/goodreads_book_works.json.gz
+    cmd: cargo run --release -- goodreads scan works 
+      ../data/goodreads/goodreads_book_works.json.gz
     deps:
     - path: ../data/goodreads/goodreads_book_works.json.gz
       md5: e80738a88d02d2b0081cd249d9b4f081
       size: 81412944
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: ../src/goodreads
       hash: md5
@@ -78,41 +81,42 @@ stages:
     outs:
     - path: gr-work-info.parquet
       hash: md5
-      md5: 9426a3878067c7e243884cc7b45b78f8
-      size: 19010569
+      md5: c272a85d5b00ac5fa181bdd92bc5e0a1
+      size: 19512819
   book-isbn-ids:
-    cmd: cargo run --release -- link-isbn-ids -o goodreads/book-isbn-ids.parquet -R
-      book_id -I isbn10 -I isbn13 -I asin goodreads/gr-book-ids.parquet
+    cmd: cargo run --release -- link-isbn-ids -o goodreads/book-isbn-ids.parquet
+      -R book_id -I isbn10 -I isbn13 -I asin goodreads/gr-book-ids.parquet
     deps:
     - path: book-links/all-isbns.parquet
       hash: md5
-      md5: 0a0a07de5b7af9e522796043977ffa05
-      size: 446802717
+      md5: e88b86599f9f7af18703a249e5c18ed4
+      size: 444823160
     - path: goodreads/gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     outs:
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
-      md5: bc0e5bf273270ed178a6045be5bafb09
-      size: 16211577
+      md5: de45043d09624cd3de67aa0537ed6405
+      size: 16184103
   cluster-ratings:
-    cmd: cargo run --release -- goodreads cluster-interactions --ratings -o goodreads/gr-cluster-ratings.parquet
+    cmd: cargo run --release -- goodreads cluster-interactions --ratings -o 
+      goodreads/gr-cluster-ratings.parquet
     deps:
     - path: goodreads/gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
     - path: goodreads/gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: c589b123fc450e5dc9c464ada0649213
+      size: 3791406851
     - path: src/cli/goodreads/cluster.rs
       hash: md5
       md5: 12f13ab15a906d6dbb1d84385c55760f
@@ -120,25 +124,26 @@ stages:
     outs:
     - path: goodreads/gr-cluster-ratings.parquet
       hash: md5
-      md5: 0b7d4d05919f5e674a60813ed24424e0
-      size: 772173497
+      md5: 7592f618eabdee43bdfec7833f8d23a7
+      size: 771453947
   book-links:
-    cmd: cargo run --release -- cluster extract-books -o goodreads/gr-book-link.parquet
-      -n book_id --join-file goodreads/gr-book-ids.parquet --join-field work_id GR-B
+    cmd: cargo run --release -- cluster extract-books -o 
+      goodreads/gr-book-link.parquet -n book_id --join-file 
+      goodreads/gr-book-ids.parquet --join-field work_id GR-B
     deps:
     - path: book-links/cluster-graph-nodes.parquet
       hash: md5
-      md5: 9e30b7e857742c3fcdb95fe7e0dc5b01
-      size: 1303216110
+      md5: e712dc3fd6dca7067d601f1d78ba592c
+      size: 1327309085
     - path: goodreads/gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     outs:
     - path: goodreads/gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
   cluster-interactions:
     cmd: python cluster-ratings.py
     deps:
@@ -156,16 +161,17 @@ stages:
       md5: af8b42db6e3b8f0ded896f7cab433530
       size: 327784394
   cluster-actions:
-    cmd: cargo run --release -- goodreads cluster-interactions --add-actions -o goodreads/gr-cluster-actions.parquet
+    cmd: cargo run --release -- goodreads cluster-interactions --add-actions -o 
+      goodreads/gr-cluster-actions.parquet
     deps:
     - path: goodreads/gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
     - path: goodreads/gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: c589b123fc450e5dc9c464ada0649213
+      size: 3791406851
     - path: src/cli/goodreads/cluster.rs
       hash: md5
       md5: 12f13ab15a906d6dbb1d84385c55760f
@@ -173,20 +179,20 @@ stages:
     outs:
     - path: goodreads/gr-cluster-actions.parquet
       hash: md5
-      md5: 5db327b8d6a8f07c64c4c73cf2b8d61c
-      size: 1465741747
+      md5: ae445c06453c1a791a824f7fe42b5c91
+      size: 1464666369
   work-ratings:
-    cmd: cargo run --release -- goodreads cluster-interactions --ratings --native-works
-      -o goodreads/gr-work-ratings.parquet
+    cmd: cargo run --release -- goodreads cluster-interactions --ratings 
+      --native-works -o goodreads/gr-work-ratings.parquet
     deps:
     - path: goodreads/gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
     - path: goodreads/gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: c589b123fc450e5dc9c464ada0649213
+      size: 3791406851
     - path: src/cli/goodreads/cluster.rs
       hash: md5
       md5: 12f13ab15a906d6dbb1d84385c55760f
@@ -194,20 +200,20 @@ stages:
     outs:
     - path: goodreads/gr-work-ratings.parquet
       hash: md5
-      md5: 3a4ae1f872a24830794a3b0c2543f996
-      size: 790840741
+      md5: 6cfce6f8289ea42225099b4d7f7d8716
+      size: 790215255
   work-actions:
-    cmd: cargo run --release -- goodreads cluster-interactions --add-actions --native-works
-      -o goodreads/gr-work-actions.parquet
+    cmd: cargo run --release -- goodreads cluster-interactions --add-actions 
+      --native-works -o goodreads/gr-work-actions.parquet
     deps:
     - path: goodreads/gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
     - path: goodreads/gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: c589b123fc450e5dc9c464ada0649213
+      size: 3791406851
     - path: src/cli/goodreads/cluster.rs
       hash: md5
       md5: 12f13ab15a906d6dbb1d84385c55760f
@@ -215,35 +221,36 @@ stages:
     outs:
     - path: goodreads/gr-work-actions.parquet
       hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
+      md5: a85abe685d6a4a3eb8dd0aea387ead3c
+      size: 1483987001
   work-gender:
     cmd: cargo run --release -- goodreads work-gender
     deps:
     - path: ../book-links/cluster-genders.parquet
       hash: md5
-      md5: 6cf626b33172195a51bfc1b3560b1832
-      size: 163010492
+      md5: 9b9af375b99a5bd43fc94924f9133e9c
+      size: 166156340
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
     outs:
     - path: gr-book-gender.parquet
       hash: md5
-      md5: 1aa0e12b4871420baf59165dde3d456a
-      size: 47235674
+      md5: 0462aea91bbbfb78e04dea28ce10eab7
+      size: 47124873
     - path: gr-work-item-gender.parquet
       hash: md5
-      md5: 8436ad1250e2f40803a02c2954e4bde0
-      size: 7715354
+      md5: 59f237dfb0187cdb36eadcf1f68bba78
+      size: 7714858
   schema@gr-work-gender:
-    cmd: python ../run.py --rust pq-info -o gr-work-gender.json gr-work-gender.parquet
+    cmd: python ../run.py --rust pq-info -o gr-work-gender.json 
+      gr-work-gender.parquet
     deps:
     - path: gr-work-gender.parquet
       md5: 45e9d912b392b0d714f67c126531bbae
@@ -253,7 +260,8 @@ stages:
       md5: 4c896ebcdce4495982076d1150ea9e5a
       size: 423
   schema@gr-work-info:
-    cmd: python ../run.py --rust pq-info -o gr-work-info.json gr-work-info.parquet
+    cmd: python ../run.py --rust pq-info -o gr-work-info.json 
+      gr-work-info.parquet
     deps:
     - path: gr-work-info.parquet
       md5: 79b363824af58bff7fa61e645bbe23b1
@@ -263,7 +271,8 @@ stages:
       md5: 833d0d78ade406bdde4f310c619c7c13
       size: 517
   schema@gr-work-actions:
-    cmd: python ../run.py --rust pq-info -o gr-work-actions.json gr-work-actions.parquet
+    cmd: python ../run.py --rust pq-info -o gr-work-actions.json 
+      gr-work-actions.parquet
     deps:
     - path: gr-work-actions.parquet
       md5: a15faa45f6b956f93a7795b453d946e8
@@ -273,7 +282,8 @@ stages:
       md5: fbd53ff95cd17f34166e93c8b039cb07
       size: 618
   schema@gr-work-ratings:
-    cmd: python ../run.py --rust pq-info -o gr-work-ratings.json gr-work-ratings.parquet
+    cmd: python ../run.py --rust pq-info -o gr-work-ratings.json 
+      gr-work-ratings.parquet
     deps:
     - path: gr-work-ratings.parquet
       md5: 0d9f519acad4d8f1b94dafc54bace4a3
@@ -283,7 +293,8 @@ stages:
       md5: 77c0c065962ddeee0d183dae1ac1e897
       size: 708
   schema@gr-book-info:
-    cmd: python ../run.py --rust pq-info -o gr-book-info.json gr-book-info.parquet
+    cmd: python ../run.py --rust pq-info -o gr-book-info.json 
+      gr-book-info.parquet
     deps:
     - path: gr-book-info.parquet
       md5: a4344a4f10eb8631049a5d2f4cf91e7f
@@ -293,7 +304,8 @@ stages:
       md5: 8cc501ca40ea549e8d27d948b3ff0231
       size: 518
   schema@book-isbn-ids:
-    cmd: python ../run.py --rust pq-info -o book-isbn-ids.json book-isbn-ids.parquet
+    cmd: python ../run.py --rust pq-info -o book-isbn-ids.json 
+      book-isbn-ids.parquet
     deps:
     - path: book-isbn-ids.parquet
       md5: 100ea102d2775993cc40522df7210687
@@ -303,7 +315,8 @@ stages:
       md5: 771436a0047e0443854ba36d95411b20
       size: 249
   schema@gr-interactions:
-    cmd: python ../run.py --rust pq-info -o gr-interactions.json gr-interactions.parquet
+    cmd: python ../run.py --rust pq-info -o gr-interactions.json 
+      gr-interactions.parquet
     deps:
     - path: gr-interactions.parquet
       md5: 9788655b2499eb8150398f8c1558e823
@@ -323,7 +336,8 @@ stages:
       md5: 130b3c6d3d145ee97264041a3637ef7e
       size: 507
   schema@gr-cluster-ratings:
-    cmd: python ../run.py --rust pq-info -o gr-cluster-ratings.json gr-cluster-ratings.parquet
+    cmd: python ../run.py --rust pq-info -o gr-cluster-ratings.json 
+      gr-cluster-ratings.parquet
     deps:
     - path: gr-cluster-ratings.parquet
       md5: 353cd5edc3df644c77fe01da8f26a436
@@ -343,7 +357,8 @@ stages:
       md5: 70a463f659828f45949b5288557788f7
       size: 244
   schema@gr-book-link:
-    cmd: python ../run.py --rust pq-info -o gr-book-link.json gr-book-link.parquet
+    cmd: python ../run.py --rust pq-info -o gr-book-link.json 
+      gr-book-link.parquet
     deps:
     - path: gr-book-link.parquet
       md5: 17c43318b93c22563377f71b2ee45a1e
@@ -353,7 +368,8 @@ stages:
       md5: e6406cbc13eae52d6b605604c709a4af
       size: 338
   schema@gr-cluster-actions:
-    cmd: python ../run.py --rust pq-info -o gr-cluster-actions.json gr-cluster-actions.parquet
+    cmd: python ../run.py --rust pq-info -o gr-cluster-actions.json 
+      gr-cluster-actions.parquet
     deps:
     - path: gr-cluster-actions.parquet
       md5: a93581e4cc78bf216b34358417954393
@@ -363,15 +379,16 @@ stages:
       md5: 6929df3364058a637d1aa4df32ba5567
       size: 617
   scan-book-genres:
-    cmd: cargo run --release -- goodreads scan genres ../data/goodreads/goodreads_book_genres_initial.json.gz
+    cmd: cargo run --release -- goodreads scan genres 
+      ../data/goodreads/goodreads_book_genres_initial.json.gz
     deps:
     - path: ../data/goodreads/goodreads_book_genres_initial.json.gz
       md5: 99ee3d1cadd68818c3dd0ef0d2f10602
       size: 24253992
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: ../src/goodreads
       hash: md5
@@ -381,8 +398,8 @@ stages:
     outs:
     - path: gr-book-genres.parquet
       hash: md5
-      md5: 1addf72c2d47322076527d743e440bbe
-      size: 22825384
+      md5: c21c7d39f8797309aea6d9a4a6a14a3b
+      size: 22798869
     - path: gr-genres.parquet
       hash: md5
       md5: 850e190dabdeacdb91aaa541d709d8c0
@@ -398,7 +415,8 @@ stages:
       md5: 8df384efb85a16440ee09f14a3da1771
       size: 235
   schema@gr-book-series:
-    cmd: python ../run.py --rust pq-info -o gr-book-series.json gr-book-series.parquet
+    cmd: python ../run.py --rust pq-info -o gr-book-series.json 
+      gr-book-series.parquet
     deps:
     - path: gr-book-series.parquet
       md5: 6688b051bf7a7b3ed720a49ba74a528c
@@ -408,7 +426,8 @@ stages:
       md5: 02b8f57e20dbdddb8fc883fc03ef0561
       size: 245
   schema@gr-book-genres:
-    cmd: python ../run.py --rust pq-info -o gr-book-genres.json gr-book-genres.parquet
+    cmd: python ../run.py --rust pq-info -o gr-book-genres.json 
+      gr-book-genres.parquet
     deps:
     - path: gr-book-genres.parquet
       md5: 96e51ae7b7e09f9d752b110306bc8dd1
@@ -418,7 +437,8 @@ stages:
       md5: 0a9f5acaf9bc9c79b6c2792f311f9889
       size: 338
   scan-simple-interactions:
-    cmd: python ../run.py --rust goodreads scan interactions --csv --book-map ../data/goodreads/book_id_map.csv
+    cmd: python ../run.py --rust goodreads scan interactions --csv --book-map 
+      ../data/goodreads/book_id_map.csv 
       ../data/goodreads/goodreads_interactions.csv
     deps:
     - path: ../data/goodreads/book_id_map.csv
@@ -439,7 +459,8 @@ stages:
       md5: e01dd1692896c9ae0a2b18e94b94e5aa
       size: 1456440955
   cluster-simple-ratings:
-    cmd: python ../run.py gr-cluster-interactions.py --ratings --simple -o gr-cluster-simple-ratings.parquet
+    cmd: python ../run.py gr-cluster-interactions.py --ratings --simple -o 
+      gr-cluster-simple-ratings.parquet
     deps:
     - path: gr-book-link.parquet
       md5: a8fbe0288a2682a983fe9550e500ad93
@@ -455,15 +476,16 @@ stages:
       md5: 0675244e9a9ba0d451bbe12dbcb3cbe4
       size: 689950939
   scan-author-info:
-    cmd: cargo run --release -- goodreads scan authors ../data/goodreads/goodreads_book_authors.json.gz
+    cmd: cargo run --release -- goodreads scan authors 
+      ../data/goodreads/goodreads_book_authors.json.gz
     deps:
     - path: ../data/goodreads/goodreads_book_authors.json.gz
       md5: b193c3febd961fb69443b65ba05b83a7
       size: 17877585
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: ../src/goodreads
       hash: md5
@@ -473,10 +495,11 @@ stages:
     outs:
     - path: gr-author-info.parquet
       hash: md5
-      md5: c6adf3469021cc641311a47fb9fe5301
-      size: 10166801
+      md5: dc2d6510bd28259d9d59cd429da7a7de
+      size: 9667938
   schema@gr-author-info:
-    cmd: python ../run.py --rust pq-info -o gr-author-info.json gr-author-info.parquet
+    cmd: python ../run.py --rust pq-info -o gr-author-info.json 
+      gr-author-info.parquet
     deps:
     - path: gr-author-info.parquet
       md5: f91028921cc88b670cdcfddc8f66d23a
@@ -486,71 +509,7 @@ stages:
       md5: d60cc12c1bab7ad51515067d976ff3d1
       size: 245
   work-actions-5core:
-    cmd: cargo run --release -- kcore -o gr-work-actions-5core.parquet gr-work-actions.parquet
-    deps:
-    - path: ../src/cli/kcore.rs
-      hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
-    - path: gr-work-actions.parquet
-      hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
-    outs:
-    - path: gr-work-actions-5core.parquet
-      hash: md5
-      md5: a781c1187ee36e5f95c3315ddec01b75
-      size: 1473323208
-  cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o gr-cluster-ratings-5core.parquet gr-cluster-ratings.parquet
-    deps:
-    - path: ../src/cli/kcore.rs
-      hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
-    - path: gr-cluster-ratings.parquet
-      hash: md5
-      md5: 0b7d4d05919f5e674a60813ed24424e0
-      size: 772173497
-    outs:
-    - path: gr-cluster-ratings-5core.parquet
-      hash: md5
-      md5: 26ce276aba1369db8f39d78ef7ccaf05
-      size: 753852532
-  cluster-actions-5core:
-    cmd: cargo run --release -- kcore -o gr-cluster-actions-5core.parquet gr-cluster-actions.parquet
-    deps:
-    - path: ../src/cli/kcore.rs
-      hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
-    - path: gr-cluster-actions.parquet
-      hash: md5
-      md5: 5db327b8d6a8f07c64c4c73cf2b8d61c
-      size: 1465741747
-    outs:
-    - path: gr-cluster-actions-5core.parquet
-      hash: md5
-      md5: b3ddbaf06b9876d6f8b7e63189bf81ea
-      size: 1454641544
-  work-ratings-5core:
-    cmd: cargo run --release -- kcore -o gr-work-ratings-5core.parquet gr-work-ratings.parquet
-    deps:
-    - path: ../src/cli/kcore.rs
-      hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
-    - path: gr-work-ratings.parquet
-      hash: md5
-      md5: 3a4ae1f872a24830794a3b0c2543f996
-      size: 790840741
-    outs:
-    - path: gr-work-ratings-5core.parquet
-      hash: md5
-      md5: a0a4101122a14d58e37925018f7f60a4
-      size: 772818858
-  work-actions-2015-100-10core:
-    cmd: cargo run --release -- kcore --user-k 10 --item-k 100 --year 2015 -o gr-work-actions-2015-100-10core.parquet
+    cmd: cargo run --release -- kcore -o gr-work-actions-5core.parquet 
       gr-work-actions.parquet
     deps:
     - path: ../src/cli/kcore.rs
@@ -559,15 +518,49 @@ stages:
       size: 5178
     - path: gr-work-actions.parquet
       hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
+      md5: a85abe685d6a4a3eb8dd0aea387ead3c
+      size: 1483987001
     outs:
-    - path: gr-work-actions-2015-100-10core.parquet
+    - path: gr-work-actions-5core.parquet
       hash: md5
-      md5: f2c4db0ed4227cdb10e7e6a3be77ea57
-      size: 79168192
-  work-ratings-2015-100-10core:
-    cmd: cargo run --release -- kcore --user-k 10 --item-k 100 --year 2015 -o gr-work-ratings-2015-100-10core.parquet
+      md5: 62236ebe3997270d3024e277000b6691
+      size: 1472053784
+  cluster-ratings-5core:
+    cmd: cargo run --release -- kcore -o gr-cluster-ratings-5core.parquet 
+      gr-cluster-ratings.parquet
+    deps:
+    - path: ../src/cli/kcore.rs
+      hash: md5
+      md5: 58dcccc90931b780ae4e2be73050b98a
+      size: 5178
+    - path: gr-cluster-ratings.parquet
+      hash: md5
+      md5: 7592f618eabdee43bdfec7833f8d23a7
+      size: 771453947
+    outs:
+    - path: gr-cluster-ratings-5core.parquet
+      hash: md5
+      md5: 491c1be7bbb090b8b0791fdce4809610
+      size: 753221494
+  cluster-actions-5core:
+    cmd: cargo run --release -- kcore -o gr-cluster-actions-5core.parquet 
+      gr-cluster-actions.parquet
+    deps:
+    - path: ../src/cli/kcore.rs
+      hash: md5
+      md5: 58dcccc90931b780ae4e2be73050b98a
+      size: 5178
+    - path: gr-cluster-actions.parquet
+      hash: md5
+      md5: ae445c06453c1a791a824f7fe42b5c91
+      size: 1464666369
+    outs:
+    - path: gr-cluster-actions-5core.parquet
+      hash: md5
+      md5: 7a26c6a2cd420dae66bddce6793d84f3
+      size: 1453601944
+  work-ratings-5core:
+    cmd: cargo run --release -- kcore -o gr-work-ratings-5core.parquet 
       gr-work-ratings.parquet
     deps:
     - path: ../src/cli/kcore.rs
@@ -576,15 +569,50 @@ stages:
       size: 5178
     - path: gr-work-ratings.parquet
       hash: md5
-      md5: 3a4ae1f872a24830794a3b0c2543f996
-      size: 790840741
+      md5: 6cfce6f8289ea42225099b4d7f7d8716
+      size: 790215255
+    outs:
+    - path: gr-work-ratings-5core.parquet
+      hash: md5
+      md5: 70d89758d8f7dc9d0419fcfd7001d2ac
+      size: 772042936
+  work-actions-2015-100-10core:
+    cmd: cargo run --release -- kcore --user-k 10 --item-k 100 --year 2015 -o 
+      gr-work-actions-2015-100-10core.parquet gr-work-actions.parquet
+    deps:
+    - path: ../src/cli/kcore.rs
+      hash: md5
+      md5: 58dcccc90931b780ae4e2be73050b98a
+      size: 5178
+    - path: gr-work-actions.parquet
+      hash: md5
+      md5: a85abe685d6a4a3eb8dd0aea387ead3c
+      size: 1483987001
+    outs:
+    - path: gr-work-actions-2015-100-10core.parquet
+      hash: md5
+      md5: 466c97eef614c39f00298d5eaebbb9a8
+      size: 79092743
+  work-ratings-2015-100-10core:
+    cmd: cargo run --release -- kcore --user-k 10 --item-k 100 --year 2015 -o 
+      gr-work-ratings-2015-100-10core.parquet gr-work-ratings.parquet
+    deps:
+    - path: ../src/cli/kcore.rs
+      hash: md5
+      md5: 58dcccc90931b780ae4e2be73050b98a
+      size: 5178
+    - path: gr-work-ratings.parquet
+      hash: md5
+      md5: 6cfce6f8289ea42225099b4d7f7d8716
+      size: 790215255
     outs:
     - path: gr-work-ratings-2015-100-10core.parquet
       hash: md5
-      md5: 0c4a11c38b33a721f1d5d419b0ab0a85
-      size: 3297269
+      md5: 97b1eaf554bacfdd81966a948d7062de
+      size: 3295783
   scan-reviews:
-    cmd: cargo run --release -- goodreads scan reviews ../data/goodreads/goodreads_reviews_dedup.json.gz
+    cmd: cargo run --release -- goodreads scan reviews 
+      ../data/goodreads/goodreads_reviews_dedup.json.gz
     deps:
     - path: ../data/goodreads/goodreads_reviews_dedup.json.gz
       hash: md5
@@ -592,8 +620,8 @@ stages:
       size: 5343299228
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
+      md5: e6dbbce58e4e4855e31166972dc04af3.dir
+      size: 11204
       nfiles: 4
     - path: ../src/goodreads
       hash: md5
@@ -602,17 +630,17 @@ stages:
       nfiles: 9
     - path: gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: d193776f3ecff0df5ad23f71829724d9
+      size: 19967207
     - path: gr-users.parquet
       hash: md5
-      md5: 811291a9072adda3c345a518ee4cb898
-      size: 18535987
+      md5: c3f5c674cd8ee359618c55f66f4ee308
+      size: 18522423
     outs:
     - path: gr-reviews.parquet
       hash: md5
-      md5: 73a5a255d8f0f76e2b1d792850f9203d
-      size: 4485199432
+      md5: bc00a40bdf908cf7932fc88029f3dc56
+      size: 4483303719
   work-item-info:
     cmd: python gr-work-items.py
     deps:
@@ -642,16 +670,16 @@ stages:
     deps:
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-book-info.parquet
       hash: md5
-      md5: 987fdc0732f3fab09ef3a4eb8387f839
-      size: 11243049
+      md5: 4126b0b185e7c76615d2225a81bee83d
+      size: 11293527
     - path: gr-work-info.parquet
       hash: md5
-      md5: 9426a3878067c7e243884cc7b45b78f8
-      size: 19010569
+      md5: c272a85d5b00ac5fa181bdd92bc5e0a1
+      size: 19512819
     - path: gr-work-item-titles.py
       hash: md5
       md5: 6c3a2a8a74496b03969d517be2214c62
@@ -659,19 +687,19 @@ stages:
     outs:
     - path: gr-work-item-titles.parquet
       hash: md5
-      md5: 1676bf394da17a534d0ee678114c4dac
-      size: 23922157
+      md5: 8fc18353d3e4b1b74cd5d6476e24403f
+      size: 23919850
   work-item-genres:
     cmd: python gr-work-item-genres.py
     deps:
     - path: gr-book-genres.parquet
       hash: md5
-      md5: 1addf72c2d47322076527d743e440bbe
-      size: 22825384
+      md5: c21c7d39f8797309aea6d9a4a6a14a3b
+      size: 22798869
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-work-item-genres.py
       hash: md5
       md5: 30a1aced9d7012043d6ca4dbd7c104f6
@@ -679,19 +707,19 @@ stages:
     outs:
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 7291e00a014f21ad8e0e30b4dd270bbc
-      size: 12582866
+      md5: dad55d294dd9f56b36349b5bea5d7d3d
+      size: 12559840
   work-all-actions:
     cmd: python gr-work-all-actions.py
     deps:
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: c589b123fc450e5dc9c464ada0649213
+      size: 3791406851
     - path: gr-work-all-actions.py
       hash: md5
       md5: c4395dfa81c7d47f3b89a63adbf9547b
@@ -706,16 +734,16 @@ stages:
     deps:
     - path: gr-author-info.parquet
       hash: md5
-      md5: c6adf3469021cc641311a47fb9fe5301
-      size: 10166801
+      md5: dc2d6510bd28259d9d59cd429da7a7de
+      size: 9667938
     - path: gr-book-authors.parquet
       hash: md5
-      md5: 1a8c26d92619d39ff458a3b7ac76c50c
-      size: 23255162
+      md5: cc169b6a4c73b3ddc4bd36f49ed7ee15
+      size: 23794324
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-work-item-authors.py
       hash: md5
       md5: 8b08fbe06a46338b4dce8ea8f2622fb8
@@ -723,8 +751,8 @@ stages:
     outs:
     - path: gr-work-item-authors.parquet
       hash: md5
-      md5: 9ae8ddb2b83a1ea54e9607e44adc50e1
-      size: 34226763
+      md5: af137921cdcefba850010369b18fb03c
+      size: 34133085
   works-5core-dataset:
     cmd: python gr-dataset.py --works --core gr-works-5core-dataset
     deps:
@@ -788,16 +816,16 @@ stages:
     deps:
     - path: gr-author-info.parquet
       hash: md5
-      md5: c6adf3469021cc641311a47fb9fe5301
-      size: 10166801
+      md5: dc2d6510bd28259d9d59cd429da7a7de
+      size: 9667938
     - path: gr-book-authors.parquet
       hash: md5
-      md5: 1a8c26d92619d39ff458a3b7ac76c50c
-      size: 23255162
+      md5: cc169b6a4c73b3ddc4bd36f49ed7ee15
+      size: 23794324
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-work-item-authors.py
       hash: md5
       md5: 8b08fbe06a46338b4dce8ea8f2622fb8
@@ -805,11 +833,11 @@ stages:
     outs:
     - path: gr-work-item-first-authors.parquet
       hash: md5
-      md5: d6467d88b13f9ea16d98082f7c558353
-      size: 14188783
+      md5: e7f1c0f0561cca7d7ca49713d157d1ac
+      size: 14839167
   work-actions-15-15core:
-    cmd: cargo run --release -- kcore --user-k 15 --item-k 15 -o gr-work-actions-15-15core.parquet
-      gr-work-actions.parquet
+    cmd: cargo run --release -- kcore --user-k 15 --item-k 15 -o 
+      gr-work-actions-15-15core.parquet gr-work-actions.parquet
     deps:
     - path: ../src/cli/kcore.rs
       hash: md5
@@ -825,8 +853,8 @@ stages:
       md5: 809fd7bc7ea91c2298414ea253a55223
       size: 1438903898
   work-actions-15core:
-    cmd: cargo run --release -- kcore --user-k 15 --item-k 15 -o gr-work-actions-15core.parquet
-      gr-work-actions.parquet
+    cmd: cargo run --release -- kcore --user-k 15 --item-k 15 -o 
+      gr-work-actions-15core.parquet gr-work-actions.parquet
     deps:
     - path: ../src/cli/kcore.rs
       hash: md5
@@ -834,10 +862,10 @@ stages:
       size: 5178
     - path: gr-work-actions.parquet
       hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
+      md5: a85abe685d6a4a3eb8dd0aea387ead3c
+      size: 1483987001
     outs:
     - path: gr-work-actions-15core.parquet
       hash: md5
-      md5: 809fd7bc7ea91c2298414ea253a55223
-      size: 1438903898
+      md5: 1b8280e107ce34469f68ab06d96a4a2d
+      size: 1439006521
