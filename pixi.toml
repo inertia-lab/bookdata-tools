@@ -1,4 +1,4 @@
-[project]
+[workspace]
 authors = ["Michael Ekstrand <mdekstrand@drexel.edu>"]
 channels = ["https://prefix.dev/lenskit-dev", "conda-forge"]
 description = "Add a short description here"
