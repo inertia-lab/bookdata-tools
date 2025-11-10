@@ -2,7 +2,7 @@ stages:
   cluster-ratings:
     cmd: duckscript az-cluster-ratings.sql
     deps:
-      - src/cli/amazon
+      - az-cluster-ratings.sql
       - az2018/ratings.parquet
       - book-links/isbn-clusters.parquet
     outs:

@@ -30,7 +30,7 @@ bd.pipeline(source_stages[bd.config.az2018.source] {
     wdir: '..',
     cmd: 'duckscript az-cluster-ratings.sql',
     deps: [
-      'src/cli/amazon',
+      'az-cluster-ratings.sql',
       'az2018/ratings.parquet',
       'book-links/isbn-clusters.parquet',
     ],

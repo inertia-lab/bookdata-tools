@@ -14,7 +14,7 @@ bd.pipeline({
     wdir: '..',
     cmd: 'duckscript az-cluster-ratings.sql',
     deps: [
-      'src/cli/amazon',
+      'az-cluster-ratings.sql',
       'az2014/ratings.parquet',
       'book-links/isbn-clusters.parquet',
     ],
