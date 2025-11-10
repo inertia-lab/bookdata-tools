@@ -130,9 +130,9 @@ bd.pipeline({
   },
 
   'cluster-hashes': {
-    cmd: bd.cmd('cluster hash -o cluster-hashes.parquet isbn-clusters.parquet'),
+    cmd: 'duckscript cluster-hashes.sql',
     deps: [
-      '../src/cli/cluster/hash.rs',
+      'cluster-hashes.sql',
       'isbn-clusters.parquet',
     ],
     outs: [

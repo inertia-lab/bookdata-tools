@@ -2,4 +2,3 @@
 pub mod author_gender;
 pub mod authors;
 pub mod books;
-pub mod hash;

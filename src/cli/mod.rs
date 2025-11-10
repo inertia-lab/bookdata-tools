@@ -86,7 +86,6 @@ enum BXCommand {
 #[enum_dispatch(Command)]
 #[derive(Subcommand, Debug)]
 pub enum ClusterCommand {
-    Hash(cluster::hash::HashCmd),
     ExtractBooks(cluster::books::ExtractBooks),
     ExtractAuthors(cluster::authors::ClusterAuthors),
     ExtractAuthorGender(cluster::author_gender::AuthorGender),

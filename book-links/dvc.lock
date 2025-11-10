@@ -310,13 +310,12 @@ stages:
       md5: d0e6267bbe2d0d10ec161eeab0ecfb77
       size: 990
   cluster-hashes:
-    cmd: cargo run --release -- cluster hash -o cluster-hashes.parquet 
-      isbn-clusters.parquet
+    cmd: duckscript cluster-hashes.sql
     deps:
-    - path: ../src/cli/cluster/hash.rs
+    - path: cluster-hashes.sql
       hash: md5
-      md5: 81bda980791a8787e7f9e97061912a84
-      size: 2517
+      md5: a0fa96031419abe0927d1f7fc7195b12
+      size: 200
     - path: isbn-clusters.parquet
       hash: md5
       md5: 1f5420bc184b98238f13e1093fcb41b1
@@ -324,8 +323,8 @@ stages:
     outs:
     - path: cluster-hashes.parquet
       hash: md5
-      md5: aa9f6046d478f9d2368164c2e5bfa6f7
-      size: 505648769
+      md5: ff4652867356e1e87cdb5430276d2d98
+      size: 528995469
   debug-graph:
     cmd: python ./run.py --rust extract-graph --cluster 100004141 -o 
       book-links/debug-graph.gml
