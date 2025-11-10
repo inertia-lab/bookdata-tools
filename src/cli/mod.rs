@@ -8,7 +8,6 @@ pub mod bx;
 pub mod cluster;
 pub mod cluster_books;
 pub mod extract_graph;
-pub mod filter_marc;
 pub mod goodreads;
 pub mod index_names;
 pub mod openlib;
@@ -60,7 +59,6 @@ pub trait Command {
 #[derive(Subcommand, Debug)]
 pub enum RootCommand {
     ScanMARC(scan_marc::ScanMARC),
-    FilterMARC(filter_marc::FilterMARC),
     ClusterBooks(cluster_books::ClusterBooks),
     IndexNames(index_names::IndexNames),
     ExtractGraph(extract_graph::ExtractGraph),
