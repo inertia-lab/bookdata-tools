@@ -13,9 +13,9 @@ bd.pipeline({
     ],
   },
   'author-genders': {
-    cmd: bd.cmd('filter-marc --tag=375 --subfield=a --trim --lower -n gender -o author-genders.parquet viaf.parquet'),
+    cmd: 'duckscript author-genders.sql',
     deps: [
-      '../src/cli/filter_marc.rs',
+      'author-genders.sql',
       'viaf.parquet',
     ],
     outs: [

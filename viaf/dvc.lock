@@ -1,7 +1,8 @@
 schema: '2.0'
 stages:
   scan-authors:
-    cmd: cargo run --release -- scan-marc -L -o viaf.parquet ../data/viaf-clusters-marc21.xml.gz
+    cmd: cargo run --release -- scan-marc -L -o viaf.parquet 
+      ../data/viaf-clusters-marc21.xml.gz
     deps:
     - path: ../data/viaf-clusters-marc21.xml.gz
       hash: md5
@@ -35,13 +36,12 @@ stages:
       md5: 3823edd34fc084a9f8cef5cd8ec43da2
       size: 494355416
   author-genders:
-    cmd: cargo run --release -- filter-marc --tag=375 --subfield=a --trim --lower
-      -n gender -o author-genders.parquet viaf.parquet
+    cmd: duckscript author-genders.sql
     deps:
-    - path: ../src/cli/filter_marc.rs
+    - path: author-genders.sql
       hash: md5
-      md5: 3fc2a87eb5914a3715368081e5c3fb1c
-      size: 5639
+      md5: cdac4515a73f6d34ab540b78611d1e09
+      size: 212
     - path: viaf.parquet
       hash: md5
       md5: 15da0b8c32266ed1582deb9ea4db5630
@@ -49,10 +49,11 @@ stages:
     outs:
     - path: author-genders.parquet
       hash: md5
-      md5: 40210d339b0b8c2501d81b0497c905f1
-      size: 5518646
+      md5: edcaa024c8964be316c5a8589ae20a00
+      size: 113256862
   index-names:
-    cmd: cargo run --release -- index-names --marc-authorities viaf.parquet author-name-index.parquet
+    cmd: cargo run --release -- index-names --marc-authorities viaf.parquet 
+      author-name-index.parquet
     deps:
     - path: ../src/cleaning/names
       md5: c5591171b9fef6a491e33b4b7f52ba2c.dir
@@ -76,7 +77,8 @@ stages:
       md5: b4de067e981ce0f5aa7605972f778ea6
       size: 448912167
   schema@author-name-index:
-    cmd: python ../run.py --rust pq-info -o author-name-index.json author-name-index.parquet
+    cmd: python ../run.py --rust pq-info -o author-name-index.json 
+      author-name-index.parquet
     deps:
     - path: author-name-index.parquet
       md5: 28bdb3cdaf4f193087e566662a880b22
@@ -96,7 +98,8 @@ stages:
       md5: 5cd18bf6344942be879199d5a1f393a7
       size: 695
   schema@author-genders:
-    cmd: python ../run.py --rust pq-info -o author-genders.json author-genders.parquet
+    cmd: python ../run.py --rust pq-info -o author-genders.json 
+      author-genders.parquet
     deps:
     - path: author-genders.parquet
       md5: 505a5a8f30082f297cb79995435a82c3

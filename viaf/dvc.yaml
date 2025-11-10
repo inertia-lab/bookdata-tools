@@ -1,8 +1,8 @@
 stages:
   author-genders:
-    cmd: cargo run --release -- filter-marc --tag=375 --subfield=a --trim --lower -n gender -o author-genders.parquet viaf.parquet
+    cmd: duckscript author-genders.sql
     deps:
-      - ../src/cli/filter_marc.rs
+      - author-genders.sql
       - viaf.parquet
     outs:
       - author-genders.parquet
