@@ -16,10 +16,9 @@ stages:
     outs:
       - az-cluster-ratings-5core.parquet
   scan-reviews:
-    cmd: cargo run --release -- amazon scan-reviews --rating-output ratings.parquet --review-output reviews.parquet ../data/az2018/Books.json.gz
+    cmd: duckscript az-scan-reviews.sql
     deps:
-      - ../src/amazon.rs
-      - ../src/cli/amazon/
+      - az-scan-reviews.sql
       - ../data/az2018/Books.json.gz
     outs:
       - ratings.parquet
