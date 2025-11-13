@@ -17,14 +17,13 @@ stages:
       - goodreads/gr-book-link.parquet
     wdir: ..
   cluster-actions:
-    cmd: cargo run --release -- goodreads cluster-interactions --add-actions -o goodreads/gr-cluster-actions.parquet
+    cmd: duckscript gr-cluster-actions.sql
     deps:
-      - src/cli/goodreads/cluster.rs
-      - goodreads/gr-book-link.parquet
-      - goodreads/gr-interactions.parquet
+      - gr-cluster-actions.sql
+      - gr-book-link.parquet
+      - gr-interactions.parquet
     outs:
-      - goodreads/gr-cluster-actions.parquet
-    wdir: ..
+      - gr-cluster-actions.parquet
   cluster-actions-5core:
     cmd: cargo run --release -- kcore -o gr-cluster-actions-5core.parquet gr-cluster-actions.parquet
     deps:

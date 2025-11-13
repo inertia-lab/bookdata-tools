@@ -2,15 +2,14 @@ local bd = import '../bookdata.libsonnet';
 
 {
   'cluster-actions': {
-    wdir: '..',
-    cmd: bd.cmd('goodreads cluster-interactions --add-actions -o goodreads/gr-cluster-actions.parquet'),
+    cmd: 'duckscript gr-cluster-actions.sql',
     deps: [
-      'src/cli/goodreads/cluster.rs',
-      'goodreads/gr-book-link.parquet',
-      'goodreads/gr-interactions.parquet',
+      'gr-cluster-actions.sql',
+      'gr-book-link.parquet',
+      'gr-interactions.parquet',
     ],
     outs: [
-      'goodreads/gr-cluster-actions.parquet',
+      'gr-cluster-actions.parquet',
     ],
   },
 
