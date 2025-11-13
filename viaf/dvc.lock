@@ -61,8 +61,8 @@ stages:
       nfiles: 5
     - path: ../src/cli/index_names.rs
       hash: md5
-      md5: 9e00450551a63137520d427e251fa7b8
-      size: 4119
+      md5: e667de71b26f1798eeaa16ab6b62f43a
+      size: 4190
     - path: viaf.parquet
       hash: md5
       md5: 15da0b8c32266ed1582deb9ea4db5630
@@ -70,12 +70,12 @@ stages:
     outs:
     - path: author-name-index.csv.gz
       hash: md5
-      md5: 4b63b143286201d1bbf33f2503b0a035
-      size: 869943310
+      md5: c7e5a1126d5abfba643c189c8adc6d27
+      size: 1092709115
     - path: author-name-index.parquet
       hash: md5
-      md5: b4de067e981ce0f5aa7605972f778ea6
-      size: 448912167
+      md5: 44182df743312f313143894e6c8941d8
+      size: 714009649
   schema@author-name-index:
     cmd: python ../run.py --rust pq-info -o author-name-index.json 
       author-name-index.parquet
