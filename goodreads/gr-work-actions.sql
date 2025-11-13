@@ -7,11 +7,11 @@ JOIN 'gr-book-link.parquet' grbl USING (book_id);
 
 COPY (
     SELECT user_id, item_id,
+        ARG_MAX(rating, timestamp) AS rating
         MIN(timestamp) AS first_time,
         MAX(timestamp) AS last_time,
         COUNT(item_id) AS nactions,
-        ARG_MAX(rating, timestamp) AS last_rating
     FROM actions
     GROUP BY user_id, item_id
     ORDER BY first_time
-) TO 'gr-cluster-actions.parquet' (COMPRESSION zstd);
+) TO 'gr-work-actions.parquet' (COMPRESSION zstd);

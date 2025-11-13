@@ -1,5 +1,7 @@
 CREATE VIEW actions AS
-SELECT user_id, cluster AS item_id, updated AS timestamp, rating
+SELECT user_id,
+    COALESCE(gr_work_code(work_id), gr_book_code(book_id)) AS item_id,
+    updated AS timestamp, rating
 FROM 'gr-interactions.parquet' gri
 JOIN 'gr-book-link.parquet' grbl USING (book_id)
 WHERE rating IS NOT NULL;
@@ -13,4 +15,4 @@ COPY (
     FROM actions
     GROUP BY user_id, item_id
     ORDER BY first_time
-) TO 'gr-cluster-ratings.parquet' (COMPRESSION zstd);
+) TO 'gr-work-ratings.parquet' (COMPRESSION zstd);
