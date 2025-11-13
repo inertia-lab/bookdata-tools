@@ -27,28 +27,26 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'work-actions': {
-    wdir: '..',
-    cmd: bd.cmd('goodreads cluster-interactions --add-actions --native-works -o goodreads/gr-work-actions.parquet'),
+    cmd: 'duckscript gr-work-actions.sql',
     deps: [
-      'src/cli/goodreads/cluster.rs',
-      'goodreads/gr-book-link.parquet',
-      'goodreads/gr-interactions.parquet',
+      'gr-work-actions.sql',
+      'gr-book-link.parquet',
+      'gr-interactions.parquet',
     ],
     outs: [
-      'goodreads/gr-work-actions.parquet',
+      'gr-work-actions.parquet',
     ],
   },
 
   'work-ratings': {
-    wdir: '..',
-    cmd: bd.cmd('goodreads cluster-interactions --ratings --native-works -o goodreads/gr-work-ratings.parquet'),
+    cmd: 'duckscript gr-work-ratings.sql',
     deps: [
-      'src/cli/goodreads/cluster.rs',
-      'goodreads/gr-book-link.parquet',
-      'goodreads/gr-interactions.parquet',
+      'gr-work-ratings.sql',
+      'gr-book-link.parquet',
+      'gr-interactions.parquet',
     ],
     outs: [
-      'goodreads/gr-work-ratings.parquet',
+      'gr-work-ratings.parquet',
     ],
   },
 

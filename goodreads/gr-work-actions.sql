@@ -1,0 +1,17 @@
+CREATE VIEW actions AS
+SELECT user_id,
+    COALESCE(gr_work_code(work_id), gr_book_code(book_id)) AS item_id,
+    updated AS timestamp, rating
+FROM 'gr-interactions.parquet' gri
+JOIN 'gr-book-link.parquet' grbl USING (book_id);
+
+COPY (
+    SELECT user_id, item_id,
+        MIN(timestamp) AS first_time,
+        MAX(timestamp) AS last_time,
+        COUNT(item_id) AS nactions,
+        ARG_MAX(rating, timestamp) AS last_rating
+    FROM actions
+    GROUP BY user_id, item_id
+    ORDER BY first_time
+) TO 'gr-cluster-actions.parquet' (COMPRESSION zstd);

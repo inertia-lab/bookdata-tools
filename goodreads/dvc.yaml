@@ -102,14 +102,13 @@ stages:
     outs:
       - gr-work-info.parquet
   work-actions:
-    cmd: cargo run --release -- goodreads cluster-interactions --add-actions --native-works -o goodreads/gr-work-actions.parquet
+    cmd: duckscript gr-work-actions.sql
     deps:
-      - src/cli/goodreads/cluster.rs
-      - goodreads/gr-book-link.parquet
-      - goodreads/gr-interactions.parquet
+      - gr-work-actions.sql
+      - gr-book-link.parquet
+      - gr-interactions.parquet
     outs:
-      - goodreads/gr-work-actions.parquet
-    wdir: ..
+      - gr-work-actions.parquet
   work-actions-15core:
     cmd: python ../scripts/kcore.py --user-k 15 --item-k 15 -o gr-work-actions-15core.parquet gr-work-actions.parquet
     deps:
@@ -184,14 +183,13 @@ stages:
     outs:
       - gr-work-item-titles.parquet
   work-ratings:
-    cmd: cargo run --release -- goodreads cluster-interactions --ratings --native-works -o goodreads/gr-work-ratings.parquet
+    cmd: duckscript gr-work-ratings.sql
     deps:
-      - src/cli/goodreads/cluster.rs
-      - goodreads/gr-book-link.parquet
-      - goodreads/gr-interactions.parquet
+      - gr-work-ratings.sql
+      - gr-book-link.parquet
+      - gr-interactions.parquet
     outs:
-      - goodreads/gr-work-ratings.parquet
-    wdir: ..
+      - gr-work-ratings.parquet
   work-ratings-2015-100-10core:
     cmd: python ../scripts/kcore.py --user-k 10 --item-k 100 --year 2015 -o gr-work-ratings-2015-100-10core.parquet gr-work-ratings.parquet
     deps:
