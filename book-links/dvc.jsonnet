@@ -49,31 +49,29 @@ bd.pipeline({
   },
 
   'cluster-ol-first-authors': {
-    wdir: '..',
-    cmd: bd.cmd('cluster extract-authors -o book-links/cluster-ol-first-authors.parquet --first-author -s openlib'),
+    cmd: 'duckscript cluster-ol-first-authors.sql',
     deps: [
-      'src/cli/cluster',
-      'book-links/isbn-clusters.parquet',
-      'openlibrary/edition-isbn-ids.parquet',
-      'openlibrary/edition-authors.parquet',
-      'openlibrary/author-names.parquet',
+      'cluster-ol-first-authors.sql',
+      'isbn-clusters.parquet',
+      '../openlibrary/edition-isbn-ids.parquet',
+      '../openlibrary/edition-authors.parquet',
+      '../openlibrary/author-names.parquet',
     ],
     outs: [
-      'book-links/cluster-ol-first-authors.parquet',
+      '../book-links/cluster-ol-first-authors.parquet',
     ],
   },
 
   'cluster-loc-first-authors': {
-    wdir: '..',
-    cmd: bd.cmd('cluster extract-authors -o book-links/cluster-loc-first-authors.parquet --first-author -s loc'),
+    cmd: 'duckscript cluster-loc-first-authors.sql',
     deps: [
-      'src/cli/cluster',
-      'book-links/isbn-clusters.parquet',
-      'loc-mds/book-isbn-ids.parquet',
-      'loc-mds/book-authors.parquet',
+      'cluster-loc-first-authors.sql',
+      'isbn-clusters.parquet',
+      '../loc-mds/book-isbn-ids.parquet',
+      '../loc-mds/book-authors.parquet',
     ],
     outs: [
-      'book-links/cluster-loc-first-authors.parquet',
+      '../book-links/cluster-loc-first-authors.parquet',
     ],
   },
 
