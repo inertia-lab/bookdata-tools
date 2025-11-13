@@ -24,18 +24,13 @@ stages:
       - book-links/cluster-graph-edges.parquet
     wdir: ..
   cluster-first-authors:
-    cmd: cargo run --release -- cluster extract-authors -o book-links/cluster-first-authors.parquet --first-author -s openlib -s loc
+    cmd: duckscript cluster-first-authors.sql
     deps:
-      - src/cli/cluster
-      - book-links/isbn-clusters.parquet
-      - openlibrary/edition-isbn-ids.parquet
-      - openlibrary/edition-authors.parquet
-      - openlibrary/author-names.parquet
-      - loc-mds/book-isbn-ids.parquet
-      - loc-mds/book-authors.parquet
+      - cluster-first-authors.sql
+      - cluster-ol-first-authors.parquet
+      - cluster-loc-first-authors.parquet
     outs:
-      - book-links/cluster-first-authors.parquet
-    wdir: ..
+      - cluster-first-authors.parquet
   cluster-genders:
     cmd: cargo run --release -- cluster extract-author-gender -o book-links/cluster-genders.parquet -A book-links/cluster-first-authors.parquet
     deps:

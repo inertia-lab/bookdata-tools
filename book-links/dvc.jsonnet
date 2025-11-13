@@ -76,19 +76,14 @@ bd.pipeline({
   },
 
   'cluster-first-authors': {
-    wdir: '..',
-    cmd: bd.cmd('cluster extract-authors -o book-links/cluster-first-authors.parquet --first-author -s openlib -s loc'),
+    cmd: 'duckscript cluster-first-authors.sql',
     deps: [
-      'src/cli/cluster',
-      'book-links/isbn-clusters.parquet',
-      'openlibrary/edition-isbn-ids.parquet',
-      'openlibrary/edition-authors.parquet',
-      'openlibrary/author-names.parquet',
-      'loc-mds/book-isbn-ids.parquet',
-      'loc-mds/book-authors.parquet',
+      'cluster-first-authors.sql',
+      'cluster-ol-first-authors.parquet',
+      'cluster-loc-first-authors.parquet',
     ],
     outs: [
-      'book-links/cluster-first-authors.parquet',
+      'cluster-first-authors.parquet',
     ],
   },
 
