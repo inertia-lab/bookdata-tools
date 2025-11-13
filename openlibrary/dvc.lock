@@ -92,13 +92,13 @@ stages:
       md5: 0468fc87dfbf51626285aa24e4b77ee0
       size: 880028181
   edition-isbn-ids:
-    cmd: cargo run --release -- link-isbn-ids -R edition -o 
+    cmd: python scripts/link-isbns.py -R edition -o 
       openlibrary/edition-isbn-ids.parquet openlibrary/edition-isbns.parquet
     deps:
-    - path: book-links/all-isbns.parquet
+    - path: book-links/isbns.db
       hash: md5
-      md5: 34e4cebbbdc3ec9745808b397ae98330
-      size: 280215236
+      md5: 04e235fa542a7685b9b67d88851ac94b
+      size: 3240636416
     - path: openlibrary/edition-isbns.parquet
       hash: md5
       md5: 849038d2fe02ee78adff149ca944eb11
@@ -106,8 +106,8 @@ stages:
     outs:
     - path: openlibrary/edition-isbn-ids.parquet
       hash: md5
-      md5: 58919f8b3a254e18975666fa0af2cb11
-      size: 224543124
+      md5: 4ce5029867faf38e46f780ad897c78db
+      size: 219537719
   schema@edition-isbn-ids:
     cmd: python ../run.py --rust pq-info -o edition-isbn-ids.json 
       edition-isbn-ids.parquet

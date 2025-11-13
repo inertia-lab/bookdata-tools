@@ -74,7 +74,7 @@ def main(opts: ParsedOptions):
             """
             CREATE TABLE isbn_counts AS
             WITH isbn_rc AS (
-                SELECT isbn_id, source, nrecs
+                SELECT isbn_id, isbn, source, nrecs
                 FROM isbn_rec
                 JOIN isbns USING (isbn)
             )

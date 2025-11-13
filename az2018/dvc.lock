@@ -1,8 +1,8 @@
 schema: '2.0'
 stages:
   scan-ratings:
-    cmd: cargo run --release -- amazon scan-ratings -o ratings.parquet --swap-id-columns
-      ../data/az2018/Books.csv
+    cmd: cargo run --release -- amazon scan-ratings -o ratings.parquet 
+      --swap-id-columns ../data/az2018/Books.csv
     deps:
     - path: ../data/az2018/Books.csv
       md5: bcdcbbf336eb0d410e7a7894efa904ab
@@ -32,8 +32,8 @@ stages:
       md5: e122a398de9e64654720f792598b7e1e
       size: 427
   cluster-ratings:
-    cmd: cargo run --release -- amazon cluster-ratings -o az2018/az-cluster-ratings.parquet
-      az2018/ratings.parquet
+    cmd: cargo run --release -- amazon cluster-ratings -o 
+      az2018/az-cluster-ratings.parquet az2018/ratings.parquet
     deps:
     - path: az2018/ratings.parquet
       hash: md5
@@ -54,7 +54,8 @@ stages:
       md5: f051fade383281694e92590526ffe093
       size: 476709599
   schema@az-cluster-ratings:
-    cmd: python ../run.py --rust pq-info -o az-cluster-ratings.json az-cluster-ratings.parquet
+    cmd: python ../run.py --rust pq-info -o az-cluster-ratings.json 
+      az-cluster-ratings.parquet
     deps:
     - path: az-cluster-ratings.parquet
       md5: c9ecf365a84cfb2ff36b87ec9c393c35
@@ -64,7 +65,8 @@ stages:
       md5: da713f0303e3384dfb8624edf8924005
       size: 702
   cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet
+    cmd: cargo run --release -- kcore -o az-cluster-ratings-5core.parquet 
+      az-cluster-ratings.parquet
     deps:
     - path: ../src/cli/kcore.rs
       hash: md5
@@ -80,28 +82,22 @@ stages:
       md5: d25a5c0329c86b3742563a3871178b84
       size: 272515751
   scan-reviews:
-    cmd: cargo run --release -- amazon scan-reviews --rating-output ratings.parquet
-      --review-output reviews.parquet ../data/az2018/Books.json.gz
+    cmd: duckscript az-scan-reviews.sql
     deps:
     - path: ../data/az2018/Books.json.gz
       hash: md5
       md5: 38bd00a67dd98902741eebfaf64f08dc
       size: 11813848069
-    - path: ../src/amazon.rs
+    - path: az-scan-reviews.sql
       hash: md5
-      md5: 382ba3ce9fffb30fb04c28313f52551b
-      size: 1393
-    - path: ../src/cli/amazon/
-      hash: md5
-      md5: 9f38ef337a5585687c8591594263a8c2.dir
-      size: 6197
-      nfiles: 4
+      md5: 753c606cd88b54268dcc4c648c630756
+      size: 416
     outs:
     - path: ratings.parquet
       hash: md5
-      md5: 31b6a2596a57be584b19291698c0fca6
-      size: 332222776
+      md5: e6022d7226cef9ad61f33aa8bc261c39
+      size: 9539248274
     - path: reviews.parquet
       hash: md5
-      md5: 39fd39406e0618793f0809f389843e13
-      size: 9394433775
+      md5: b655ab789217305722b33ea86bd670b8
+      size: 587535380

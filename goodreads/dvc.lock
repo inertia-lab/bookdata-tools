@@ -36,9 +36,9 @@ stages:
       size: 2043729443
     - path: ../src/cli/goodreads
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
-      nfiles: 4
+      md5: a975248f890f78046f52a2c2c2c94436.dir
+      size: 9696
+      nfiles: 3
     - path: ../src/goodreads
       hash: md5
       md5: d93398a3b5cb266597f006f7f1354585.dir
@@ -47,20 +47,20 @@ stages:
     outs:
     - path: gr-book-authors.parquet
       hash: md5
-      md5: 1a8c26d92619d39ff458a3b7ac76c50c
-      size: 23255162
+      md5: cc169b6a4c73b3ddc4bd36f49ed7ee15
+      size: 23794324
     - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
     - path: gr-book-info.parquet
       hash: md5
-      md5: 987fdc0732f3fab09ef3a4eb8387f839
-      size: 11243049
+      md5: 4126b0b185e7c76615d2225a81bee83d
+      size: 11293527
     - path: gr-book-series.parquet
       hash: md5
-      md5: 85fe1f416fbfd72680cbd5037a676d1b
-      size: 5470243
+      md5: 3ba15295771f4ea4f451f87931c57669
+      size: 5627605
   scan-work-info:
     cmd: cargo run --release -- goodreads scan works 
       ../data/goodreads/goodreads_book_works.json.gz
@@ -84,27 +84,26 @@ stages:
       md5: 9426a3878067c7e243884cc7b45b78f8
       size: 19010569
   book-isbn-ids:
-    cmd: cargo run --release -- link-isbn-ids -o goodreads/book-isbn-ids.parquet
-      -R book_id -I isbn10 -I isbn13 -I asin goodreads/gr-book-ids.parquet
+    cmd: python scripts/link-isbns.py -o goodreads/book-isbn-ids.parquet -R 
+      book_id -I isbn10 -I isbn13 -I asin goodreads/gr-book-ids.parquet
     deps:
-    - path: book-links/all-isbns.parquet
+    - path: book-links/isbns.db
       hash: md5
-      md5: 34e4cebbbdc3ec9745808b397ae98330
-      size: 280215236
+      md5: 04e235fa542a7685b9b67d88851ac94b
+      size: 3240636416
     - path: goodreads/gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
-    - path: src/cli/goodreads
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
+    - path: scripts/link-isbns.py
       hash: md5
-      md5: ffefc1538cc827ec171e10f995e105da.dir
-      size: 11179
-      nfiles: 4
+      md5: b2566effc7ddae5895cb213146461acb
+      size: 1994
     outs:
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
-      md5: c92a6cdc87c80e662dfe31bfddf027e0
-      size: 16134312
+      md5: 0a914e72cf28c4b16d44128654c6fb0f
+      size: 15563753
   cluster-ratings:
     cmd: cargo run --release -- goodreads cluster-interactions --ratings -o 
       goodreads/gr-cluster-ratings.parquet
