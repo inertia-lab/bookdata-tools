@@ -105,26 +105,25 @@ stages:
       md5: 0a914e72cf28c4b16d44128654c6fb0f
       size: 15563753
   cluster-ratings:
-    cmd: cargo run --release -- goodreads cluster-interactions --ratings -o 
-      goodreads/gr-cluster-ratings.parquet
+    cmd: duckscript gr-cluster-ratings.sql
     deps:
-    - path: goodreads/gr-book-link.parquet
+    - path: gr-book-link.parquet
       hash: md5
       md5: de89a4c55136745ec8e74bd9bfb45356
       size: 19964329
-    - path: goodreads/gr-interactions.parquet
+    - path: gr-cluster-ratings.sql
+      hash: md5
+      md5: 225f3fc5bc55b72d927bbc170083e168
+      size: 517
+    - path: gr-interactions.parquet
       hash: md5
       md5: 6240470ddee327bbb13b00f296c16c6b
       size: 3766175599
-    - path: src/cli/goodreads/cluster.rs
-      hash: md5
-      md5: 12f13ab15a906d6dbb1d84385c55760f
-      size: 6268
     outs:
-    - path: goodreads/gr-cluster-ratings.parquet
+    - path: gr-cluster-ratings.parquet
       hash: md5
-      md5: 0b7d4d05919f5e674a60813ed24424e0
-      size: 772173497
+      md5: 75f5dbbadfad450ff0db33ddbc682a37
+      size: 638943864
   book-links:
     cmd: cargo run --release -- cluster extract-books -o 
       goodreads/gr-book-link.parquet -n book_id --join-file 

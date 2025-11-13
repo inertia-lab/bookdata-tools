@@ -14,15 +14,14 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'cluster-ratings': {
-    wdir: '..',
-    cmd: bd.cmd('goodreads cluster-interactions --ratings -o goodreads/gr-cluster-ratings.parquet'),
+    cmd: 'duckscript gr-cluster-ratings.sql',
     deps: [
-      'src/cli/goodreads/cluster.rs',
-      'goodreads/gr-book-link.parquet',
-      'goodreads/gr-interactions.parquet',
+      'gr-cluster-ratings.sql',
+      'gr-book-link.parquet',
+      'gr-interactions.parquet',
     ],
     outs: [
-      'goodreads/gr-cluster-ratings.parquet',
+      'gr-cluster-ratings.parquet',
     ],
   },
 
