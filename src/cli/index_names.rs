@@ -40,6 +40,7 @@ type NameIndex = HashMap<String, HashSet<u32>>;
 struct IndexEntry {
     rec_id: u32,
     name: String,
+    clean_name: String,
 }
 
 fn scan_authority_names(
@@ -111,6 +112,7 @@ fn write_index(index: NameIndex, path: &Path) -> Result<()> {
             let e = IndexEntry {
                 rec_id,
                 name: name.to_string(),
+                clean_name: clean_name(&name),
             };
             csvout.write_object(e.clone())?;
             writer.write_object(e)?;
