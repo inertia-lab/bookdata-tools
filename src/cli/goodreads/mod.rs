@@ -1,6 +1,5 @@
 use crate::prelude::*;
 
-mod cluster;
 mod scan;
 
 /// GoodReads processing commands.
@@ -17,8 +16,6 @@ enum GRCmd {
         #[command(subcommand)]
         data: scan::GRScan,
     },
-    /// Cluster GoodReads intearaction data.
-    ClusterInteractions(cluster::CICommand),
 }
 
 impl Command for Goodreads {
