@@ -152,21 +152,21 @@ stages:
       size: 66299081
     - path: ../loc-mds/book-isbn-ids.parquet
       hash: md5
-      md5: 0673e6924c9a0fe4a5e3bfcf5d315f78
-      size: 38383735
+      md5: 81e29126957a577f59b22261549f745a
+      size: 35620322
     - path: cluster-loc-first-authors.sql
       hash: md5
       md5: cddf1cf0464d8d0fab6060603df08626
       size: 646
     - path: isbn-clusters.parquet
       hash: md5
-      md5: e9f30fdca8d1f8bc7390a46124fdc5b2
-      size: 512346609
+      md5: f2b472e3e17efee797fa106c6d382d03
+      size: 531184883
     outs:
     - path: ../book-links/cluster-loc-first-authors.parquet
       hash: md5
-      md5: fd8b7533ac552709f598b79318ea33f7
-      size: 69047272
+      md5: 202953854c4b73f127f3ed2f015ee3bd
+      size: 51727556
   cluster-irst-authors:
     cmd: python run.py --rust cluster-authors -o 
       book-links/cluster-first-authors.parquet --first-author -s openlib -s loc
@@ -197,43 +197,25 @@ stages:
       md5: a7f439659cccd809efe4ac2ea276b058
       size: 157637977
   cluster-first-authors:
-    cmd: cargo run --release -- cluster extract-authors -o 
-      book-links/cluster-first-authors.parquet --first-author -s openlib -s loc
+    cmd: duckscript cluster-first-authors.sql
     deps:
-    - path: book-links/isbn-clusters.parquet
+    - path: cluster-first-authors.sql
       hash: md5
-      md5: 1f5420bc184b98238f13e1093fcb41b1
-      size: 506027178
-    - path: loc-mds/book-authors.parquet
+      md5: ce61cf5f04657853da2e362b280af19a
+      size: 336
+    - path: cluster-loc-first-authors.parquet
       hash: md5
-      md5: 772809fcc0a89e9f21097a81ec714fdc
-      size: 73780178
-    - path: loc-mds/book-isbn-ids.parquet
+      md5: 202953854c4b73f127f3ed2f015ee3bd
+      size: 51727556
+    - path: cluster-ol-first-authors.parquet
       hash: md5
-      md5: 69ba4a1c8666f3eec3f20801c877c0be
-      size: 39838643
-    - path: openlibrary/author-names.parquet
-      hash: md5
-      md5: 84514f2a3c00b94d636c40795a18488b
-      size: 226083734
-    - path: openlibrary/edition-authors.parquet
-      hash: md5
-      md5: 6f367eb7f717a515e10a6b6d0ab9c6f3
-      size: 248752621
-    - path: openlibrary/edition-isbn-ids.parquet
-      hash: md5
-      md5: 6f6da90baeca04523829c7f73f206ad2
-      size: 226887683
-    - path: src/cli/cluster
-      hash: md5
-      md5: efb2fd12447426c01d3905b429320cf1.dir
-      size: 17967
-      nfiles: 7
+      md5: 136d0a3465e8a7586768a6f19cf31fd0
+      size: 398873279
     outs:
-    - path: book-links/cluster-first-authors.parquet
+    - path: cluster-first-authors.parquet
       hash: md5
-      md5: 3d7f746a16772709076da4010aa35bd5
-      size: 460950062
+      md5: 304183b4d6978609092f6288b1f9b444
+      size: 447245207
   cluster-genders:
     cmd: cargo run --release -- cluster extract-author-gender -o 
       book-links/cluster-genders.parquet -A 
