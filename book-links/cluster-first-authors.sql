@@ -8,4 +8,4 @@ COPY (
     SELECT cluster, author_name FROM ol_authors
     UNION DISTINCT
     SELECT cluster, author_name FROM loc_authors
-) TO 'cluster-first-authors.parquet' (COMRPESSION zstd);
+) TO 'cluster-first-authors.parquet' (COMPRESSION zstd);
