@@ -6,10 +6,10 @@ use unicode_normalization::*;
 
 /// Normalize Unicode character representations in a string.
 pub fn norm_unicode<'a>(s: &'a str) -> Cow<'a, str> {
-    if is_nfd_quick(s.chars()) == IsNormalized::Yes {
+    if is_nfc_quick(s.chars()) == IsNormalized::Yes {
         s.into()
     } else {
-        String::from_iter(s.nfd()).into()
+        String::from_iter(s.nfc()).into()
     }
 }
 
@@ -31,5 +31,5 @@ fn test_nu_basic() {
 fn test_nu_metal() {
     let text = "metäl";
     let res = norm_unicode(&text);
-    assert_eq!(res.as_ref(), "meta\u{0308}l");
+    assert_eq!(res.as_ref(), "met\u{00e4}l");
 }
