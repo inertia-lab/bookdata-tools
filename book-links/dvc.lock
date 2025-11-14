@@ -362,12 +362,12 @@ stages:
     deps:
     - path: book-graph.db
       hash: md5
-      md5: 556d830ba4b6de25c65a8c68b529873d
-      size: 6964916224
+      md5: a225ed89eacc2d0e16f70a6658f27bdf
+      size: 2287480832
     - path: export-clusters.sql
       hash: md5
-      md5: 77060db0d6948ead1933810cea3e95b8
-      size: 793
+      md5: b666029c4dbe60cde30e8bfe8398351b
+      size: 503
     outs:
     - path: book-graph-edges.parquet
       hash: md5
@@ -375,16 +375,16 @@ stages:
       size: 579728939
     - path: book-graph-nodes.parquet
       hash: md5
-      md5: 4c653391f28509d20d254cb13974092b
-      size: 1556933828
+      md5: 80ab357af3d845de57ebabe6956af79b
+      size: 1238576122
     - path: cluster-stats.parquet
       hash: md5
-      md5: bf094c1e20a9568315010188e0816cce
-      size: 294130478
+      md5: bd973e379982e79ae4a102f83a311664
+      size: 189758949
     - path: isbn-clusters.parquet
       hash: md5
-      md5: 55c7a71097e50b7ab665840e1c2c18ed
-      size: 280184689
+      md5: b3fdfb8fef32e5870100ec2305bfadc5
+      size: 280202331
   cluster-metrics:
     cmd: python cluster-metrics.py
     deps:

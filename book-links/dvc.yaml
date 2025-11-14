@@ -77,7 +77,7 @@ stages:
       - isbns.db
       - all-isbns.parquet
   export-clusters:
-    cmd: duckscript export-clusters.sql
+    cmd: duckscript --read-only -d book-graph.db export-clusters.sql
     deps:
       - export-clusters.sql
       - book-graph.db
