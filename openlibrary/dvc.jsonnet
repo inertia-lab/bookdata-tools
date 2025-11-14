@@ -53,13 +53,12 @@ bd.pipeline({
     ],
   },
   'work-clusters': {
-    wdir: '..',
-    cmd: bd.cmd('cluster extract-books -n work_id -o openlibrary/work-clusters.parquet OL-W'),
+    cmd: 'duckscript work-clusters.sql',
     deps: [
-      'book-links/cluster-graph-nodes.parquet',
+      '../book-links/cluster-graph-nodes.parquet',
     ],
     outs: [
-      'openlibrary/work-clusters.parquet',
+      'work-clusters.parquet',
     ],
   },
 })

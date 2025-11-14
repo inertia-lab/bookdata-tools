@@ -18,14 +18,14 @@ local links = {
   },
 
   'book-links': {
-    wdir: '..',
-    cmd: bd.cmd('cluster extract-books -o goodreads/gr-book-link.parquet -n book_id --join-file goodreads/gr-book-ids.parquet --join-field work_id GR-B'),
+    cmd: 'duckscript gr-book-link.sql',
     deps: [
-      'goodreads/gr-book-ids.parquet',
-      'book-links/cluster-graph-nodes.parquet',
+      'gr-book-link.sql',
+      'gr-book-ids.parquet',
+      '../book-links/cluster-graph-nodes.parquet',
     ],
     outs: [
-      'goodreads/gr-book-link.parquet',
+      'gr-book-link.parquet',
     ],
   },
 };
