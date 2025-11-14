@@ -3494,7 +3494,7 @@ packages:
 - pypi: ./
   name: bookdata
   version: '4.0'
-  sha256: 20a53b7f26f7ec9e357ff59df2d389b674acdeb4a08d4dc20a610c2a516f1490
+  sha256: a3800f7a80c53d777ac9ed1a96f9e573afb9144479bc01352ccaf13d020131f9
   requires_python: ~=3.12
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/noarch/boto3-1.40.18-pyhd8ed1ab_1.conda
