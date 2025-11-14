@@ -11,10 +11,16 @@ Args:
         The database file to create.
 """
 
+import json
+
 import duckdb
+import igraph
+import numpy as np
+import pandas as pd
 from bookdata.codes import register_udfs
 from bookdata.config import BookDataConfig
 from docopt import docopt
+from humanize import metric
 from lenskit.logging import LoggingConfig, get_logger
 
 _log = get_logger("cluster")
@@ -34,19 +40,8 @@ def main():
     with duckdb.connect(db_path) as db:
         register_udfs(db)
         load_graph(db, cfg)
-        _log.info("exporting database tables")
-        db.execute(
-            """
-            COPY bg_nodes
-            TO 'book-links/book-graph-nodes.parquet' (FORMAT parquet, COMPRESSION zstd)
-            """
-        )
-        db.execute(
-            """
-            COPY bg_edges
-            TO 'book-links/book-graph-edges.parquet' (FORMAT parquet, COMPRESSION zstd)
-            """
-        )
+        compute_clusters(db)
+        cluster_metrics(db)
 
 
 def load_graph(db: duckdb.DuckDBPyConnection, cfg: BookDataConfig):
@@ -57,9 +52,11 @@ def load_graph(db: duckdb.DuckDBPyConnection, cfg: BookDataConfig):
         )
         """
     )
+    db.execute("CREATE SEQUENCE node_id_seq START WITH 1")
     db.execute(
         """
         CREATE TABLE bg_nodes (
+            node_id INTEGER NOT NULL DEFAULT nextval('node_id_seq'),
             code INTEGER NOT NULL,
             type node_type NOT NULL,
             label VARCHAR NULL,
@@ -272,83 +269,86 @@ def load_gr_work_edges(db):
 
 
 def compute_clusters(db: duckdb.DuckDBPyConnection):
-    _log.info("preparing cluster operation")
+    _log.info("loading graph nodes")
     db.execute(
         """
-        CREATE TEMPORARY TABLE cluster_work AS
-        SELECT code, code AS cluster, 1 AS size
+        SELECT code
         FROM bg_nodes
+        ORDER BY node_id
         """
     )
-    epoch = 0
-    db.execute("SELECT COUNT(code) FROM cluster_work")
-    (total,) = db.fetchone() or [0]
-    log = _log.bind(nodes=total)
-    remaining = total
-    while remaining > 0:
-        epoch += 1
-        elog = log.bind(epoch=epoch, remaining=remaining)
-        elog.info("beginning cluster iteration")
-        elog.debug("computing updated cluster IDs")
-        db.execute(
-            """
-            CREATE OR REPLACE TEMPORARY TABLE new_clusters AS
-            SELECT w.code AS code,
-                LEAST(w.cluster, MIN(w2.cluster)) AS cluster
-            FROM cluster_work w
-            JOIN bg_neighbors n ON (w.code = n.node)
-            JOIN cluster_work w2 ON (n.nbr = w2.code)
-            GROUP BY w.code, w.cluster
-            """
-        )
-        elog.debug("counting cluster sizes")
-        db.execute(
-            """
-            CREATE OR REPLACE TEMPORARY TABLE cluster_sizes AS
-            SELECT cluster, COUNT(code) AS size
-            FROM new_clusters
-            GROUP BY cluster
-            """
-        )
-        elog.debug("saving finished clusters")
-        db.execute(
-            """
-            UPDATE bg_nodes
-            SET cluster = w.cluster
-            FROM cluster_work w
-            JOIN new_clusters nc USING (code)
-            JOIN cluster_sizes s ON nc.cluster = s.cluster
-            WHERE w.code = bg_nodes.code
-            AND s.size = w.size
-            """
-        )
-        (n,) = db.fetchone() or []
-        elog.info("finalized clusters for %d nodes", n)
-        elog.debug("clearing finished clusters from work")
-        db.execute(
-            """
-            CREATE OR REPLACE TEMPORARY TABLE cluster_work AS
-            SELECT code, cluster, size
-            FROM new_clusters
-            JOIN cluster_sizes USING (cluster)
-            WHERE code NOT IN (
-                SELECT code
-                FROM cluster_work w
-                JOIN cluster_sizes s USING (cluster)
-                WHERE w.size = s.size
-            )
-            """
-        )
-        elog.debug("counting remaining work nodes")
-        db.execute("SELECT COUNT(*) FROM cluster_work")
-        (remaining,) = db.fetchone() or [0]
+    nodes = db.fetch_df()
 
-    log.info("finished clustering after %d epochs", epoch)
-    db.execute("SELECT COUNT(code), COUNT(cluster), COUNT(DISTINCT cluster) FROM bg_nodes")
-    n_total, n_clustered, n_clusters = db.fetchone() or []
-    if n_clustered != n_total:
-        log.warn("missing clusters for %d nodes", n_total - n_clustered)
-    log.info("found %d clusters", n_clusters)
+    _log.info("loading graph edges")
+    db.execute(
+        """
+        SELECT sn.node_id - 1 AS src_id, dn.node_id - 1 AS dst_id
+        FROM bg_edges e
+        JOIN bg_nodes sn ON e.src = sn.code
+        JOIN bg_nodes dn ON e.dst = dn.code
+        """
+    )
+    edges = db.fetch_df()
+
+    _log.info("assembling graph")
+    graph = igraph.Graph.DataFrame(edges, False, nodes)
+    _log.info(
+        "loaded graph with %s nodes and %s edges", metric(len(graph.vs)), metric(len(graph.es))
+    )
+
+    _log.info("computing connected components")
+    cc = graph.connected_components()
+    clusters = pd.DataFrame(
+        {"node_id": np.arange(1, len(graph.vs) + 1, dtype=np.int32), "cluster": cc.membership}
+    )
+    _log.info("computed %s clusters", metric(clusters["cluster"].nunique()))
+    db.execute(
+        """
+        CREATE TABLE node_clusters AS
+        SELECT code, cluster
+        FROM clusters
+        JOIN bg_nodes USING (node_id)
+        ORDER BY code
+        """
+    )
+
+
+def cluster_metrics(db: duckdb.DuckDBPyConnection):
+    db.execute(
+        """
+        CREATE VIEW cluster_stats AS
+        SELECT cluster,
+            COUNT(code) AS n_nodes,
+            COUNT(code) FILTER (type = 'ISBN') AS n_isbns,
+            COUNT(code) FILTER (type = 'LOC') AS n_loc_recs,
+            COUNT(code) FILTER (type = 'OL-E') AS n_ol_editions,
+            COUNT(code) FILTER (type = 'OL-W') AS n_ol_works,
+            COUNT(code) FILTER (type = 'GR-B') AS n_gr_editions,
+            COUNT(code) FILTER (type = 'GR-W') AS n_gr_works,
+        FROM bg_nodes
+        JOIN node_clusters USING (code)
+        GROUP BY cluster
+        """
+    )
+    db.execute(
+        """
+        SELECT SUM(n_nodes), COUNT(*), MAX(n_nodes), MAX(n_isbns)
+        FROM cluster_stats
+        """
+    )
+    nodes, clusters, largest, max_isbns = db.fetchone() or []
+    with open("book-links/cluster-metrics.json", "wt") as jsf:
+        print(
+            json.dumps(
+                {
+                    "nodes": nodes,
+                    "clusters": clusters,
+                    "largest": largest,
+                    "max_isbns": max_isbns,
+                }
+            ),
+            file=jsf,
+        )
 
 
 if __name__ == "__main__":
