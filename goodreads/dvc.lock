@@ -36,9 +36,9 @@ stages:
       size: 2043729443
     - path: ../src/cli/goodreads
       hash: md5
-      md5: a975248f890f78046f52a2c2c2c94436.dir
-      size: 9696
-      nfiles: 3
+      md5: 8d4c32953ec5e669d02fa9319d237b6c.dir
+      size: 3325
+      nfiles: 2
     - path: ../src/goodreads
       hash: md5
       md5: d93398a3b5cb266597f006f7f1354585.dir
