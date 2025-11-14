@@ -11,7 +11,6 @@ pub mod extract_graph;
 pub mod goodreads;
 pub mod index_names;
 pub mod openlib;
-pub mod pqinfo;
 pub mod scan_marc;
 
 use anyhow::Result;
@@ -70,7 +69,6 @@ pub enum RootCommand {
     Goodreads(goodreads::Goodreads),
     /// Commands for working with clusters.
     Cluster(ClusterCommandWrapper),
-    PQInfo(pqinfo::PQInfo),
 }
 
 wrap_subcommands!(BXCommand);
