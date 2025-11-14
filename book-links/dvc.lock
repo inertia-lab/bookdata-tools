@@ -9,8 +9,8 @@ stages:
       size: 257123243
     - path: ../az2018/ratings.parquet
       hash: md5
-      md5: e6022d7226cef9ad61f33aa8bc261c39
-      size: 9539248274
+      md5: ffe4b777dc33e98943e72f799ad14f99
+      size: 9539240045
     - path: ../config.yaml
       hash: md5
       md5: f493fae0ec8fd39b9b109802610be0e6
@@ -35,24 +35,24 @@ stages:
     outs:
     - path: all-isbns.parquet
       hash: md5
-      md5: f93af081ea7e4622a4c9fa5f507a33ec
-      size: 469742020
+      md5: 74aa9453f30ca4a59aded4b1d8a645e0
+      size: 470453623
     - path: isbns.db
       hash: md5
-      md5: 04e235fa542a7685b9b67d88851ac94b
-      size: 3240636416
+      md5: c4f26c586d955d29b941d21a7cc62c56
+      size: 3250335744
   cluster:
     cmd: cargo run --release -- cluster-books --save-graph 
       book-links/book-graph.mp.zst
     deps:
     - path: book-links/all-isbns.parquet
       hash: md5
-      md5: f93af081ea7e4622a4c9fa5f507a33ec
-      size: 469742020
+      md5: 74aa9453f30ca4a59aded4b1d8a645e0
+      size: 470453623
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
-      md5: 0a914e72cf28c4b16d44128654c6fb0f
-      size: 15563753
+      md5: cddbee1ca4364373ebf8534e5debc313
+      size: 15562808
     - path: goodreads/gr-book-ids.parquet
       hash: md5
       md5: 1dd022fe8f16958d144dc9cb2d609b70
@@ -63,12 +63,12 @@ stages:
       size: 18794299
     - path: loc-mds/book-isbn-ids.parquet
       hash: md5
-      md5: 81e29126957a577f59b22261549f745a
-      size: 35620322
+      md5: b71dbaa19228083b34452fa281d34b76
+      size: 35622919
     - path: openlibrary/edition-isbn-ids.parquet
       hash: md5
-      md5: 4ce5029867faf38e46f780ad897c78db
-      size: 219537719
+      md5: 1ff0295ec615399ef84514a7d8a1acee
+      size: 219537897
     - path: openlibrary/edition-works.parquet
       hash: md5
       md5: 73f61617f4f5c360f10b42bfb55b39b9
@@ -93,28 +93,28 @@ stages:
     outs:
     - path: book-links/book-graph.mp.zst
       hash: md5
-      md5: 5ce68d9884c86b335330f8ef94e4fac3
-      size: 2147950001
+      md5: 18d3742f16dfa26568eddfc72b0d4838
+      size: 2149353769
     - path: book-links/cluster-graph-edges.parquet
       hash: md5
-      md5: 24e009197baf3141ed2bb15f1ad5ef15
-      size: 360135799
+      md5: efffc96e72cb3e98e9a379e973a56162
+      size: 360144007
     - path: book-links/cluster-graph-nodes.parquet
       hash: md5
-      md5: 27b985f54954beec6d56a4b2a3afc64d
-      size: 1336065400
+      md5: 52745168b76d5422a0770b9f4071d7f6
+      size: 1337665185
     - path: book-links/cluster-metrics.json
       hash: md5
       md5: c6ab099ae2e2b52261d431f0fd319fbc
       size: 57
     - path: book-links/cluster-stats.parquet
       hash: md5
-      md5: a6201f9ad1967f00483ef304684e2b2c
-      size: 184446797
+      md5: dfae360c6fecd01afdd60e4a90c924d9
+      size: 184682613
     - path: book-links/isbn-clusters.parquet
       hash: md5
-      md5: f2b472e3e17efee797fa106c6d382d03
-      size: 531184883
+      md5: 136f295e9252a50b01ee4eb563c0bab9
+      size: 531689880
   cluster-ol-first-authors:
     cmd: duckscript cluster-ol-first-authors.sql
     deps:

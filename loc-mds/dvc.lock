@@ -101,8 +101,8 @@ stages:
     deps:
     - path: book-links/isbns.db
       hash: md5
-      md5: 04e235fa542a7685b9b67d88851ac94b
-      size: 3240636416
+      md5: c4f26c586d955d29b941d21a7cc62c56
+      size: 3250335744
     - path: loc-mds/book-isbns.parquet
       hash: md5
       md5: a8a2cc6c587d66b4b5885f980080c644
@@ -110,8 +110,8 @@ stages:
     outs:
     - path: loc-mds/book-isbn-ids.parquet
       hash: md5
-      md5: 81e29126957a577f59b22261549f745a
-      size: 35620322
+      md5: b71dbaa19228083b34452fa281d34b76
+      size: 35622919
   loc-clusters:
     cmd: python ../run.py --rust fusion loc-clusters.tcl
     deps:

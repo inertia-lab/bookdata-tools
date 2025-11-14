@@ -36,8 +36,8 @@ stages:
       size: 2043729443
     - path: ../src/cli/goodreads
       hash: md5
-      md5: 8d4c32953ec5e669d02fa9319d237b6c.dir
-      size: 3325
+      md5: d0990613e2a239701d14d8758e376f38.dir
+      size: 3231
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
@@ -89,8 +89,8 @@ stages:
     deps:
     - path: book-links/isbns.db
       hash: md5
-      md5: 04e235fa542a7685b9b67d88851ac94b
-      size: 3240636416
+      md5: c4f26c586d955d29b941d21a7cc62c56
+      size: 3250335744
     - path: goodreads/gr-book-ids.parquet
       hash: md5
       md5: 1dd022fe8f16958d144dc9cb2d609b70
@@ -102,8 +102,8 @@ stages:
     outs:
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
-      md5: 0a914e72cf28c4b16d44128654c6fb0f
-      size: 15563753
+      md5: cddbee1ca4364373ebf8534e5debc313
+      size: 15562808
   cluster-ratings:
     cmd: duckscript gr-cluster-ratings.sql
     deps:
@@ -125,23 +125,25 @@ stages:
       md5: 75f5dbbadfad450ff0db33ddbc682a37
       size: 638943864
   book-links:
-    cmd: cargo run --release -- cluster extract-books -o 
-      goodreads/gr-book-link.parquet -n book_id --join-file 
-      goodreads/gr-book-ids.parquet --join-field work_id GR-B
+    cmd: duckscript gr-book-link.sql
     deps:
-    - path: book-links/cluster-graph-nodes.parquet
+    - path: ../book-links/cluster-graph-nodes.parquet
       hash: md5
-      md5: 9e30b7e857742c3fcdb95fe7e0dc5b01
-      size: 1303216110
-    - path: goodreads/gr-book-ids.parquet
+      md5: 52745168b76d5422a0770b9f4071d7f6
+      size: 1337665185
+    - path: gr-book-ids.parquet
       hash: md5
-      md5: b0468ecf2185efa11f4353e3e62d97af
-      size: 43451805
+      md5: 1dd022fe8f16958d144dc9cb2d609b70
+      size: 44282866
+    - path: gr-book-link.sql
+      hash: md5
+      md5: b77b4b68e30bdc20b4c6babb554528f9
+      size: 361
     outs:
-    - path: goodreads/gr-book-link.parquet
+    - path: gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: ec6651a65ac8b06880a99ba53e1046d4
+      size: 25719190
   cluster-interactions:
     cmd: python cluster-ratings.py
     deps:

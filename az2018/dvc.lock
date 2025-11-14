@@ -95,9 +95,9 @@ stages:
     outs:
     - path: ratings.parquet
       hash: md5
-      md5: e6022d7226cef9ad61f33aa8bc261c39
-      size: 9539248274
+      md5: ffe4b777dc33e98943e72f799ad14f99
+      size: 9539240045
     - path: reviews.parquet
       hash: md5
-      md5: b655ab789217305722b33ea86bd670b8
-      size: 587535380
+      md5: aee500e89d3da646e84a181c928fdcc9
+      size: 587529713
