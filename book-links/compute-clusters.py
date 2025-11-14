@@ -2,16 +2,12 @@
 Cluster the book graph data.
 
 Usage:
-    compute-clusters.py [-v] DB
+    compute-clusters.py [-v]
 
 Args:
     -v, --verbose
         Enable verbose log output.
-    DB
-        The name of the database file to save the clustering into.
 """
-
-from pathlib import Path
 
 import duckdb
 from bookdata.codes import register_udfs
@@ -31,15 +27,24 @@ def main():
 
     cfg = BookDataConfig.load()
 
-    db_file = Path(opts["DB"])
-    if db_file.exists():
-        _log.warn("databse %s already exists, removing", db_file)
-        db_file.unlink()
-    _log.info("opening database %s", db_file)
-    with duckdb.connect(db_file) as db:
+    _log.info("opening database")
+    with duckdb.connect() as db:
         register_udfs(db)
         load_graph(db, cfg)
         compute_clusters(db)
+        _log.info("exporting database")
+        db.execute(
+            """
+            COPY bg_nodes
+            TO 'book-links/book-graph-nodes.parquet' (FORMAT parquet, COMPRESSION zstd)
+            """
+        )
+        db.execute(
+            """
+            COPY bg_edges
+            TO 'book-links/book-graph-edges.parquet' (FORMAT parquet, COMPRESSION zstd)
+            """
+        )
 
 
 def load_graph(db: duckdb.DuckDBPyConnection, cfg: BookDataConfig):
@@ -266,20 +271,11 @@ def load_gr_work_edges(db):
 
 
 def compute_clusters(db: duckdb.DuckDBPyConnection):
-    db.execute(
-        """
-        CREATE TEMPORARY TABLE cluster_work (
-            code INTEGER PRIMARY KEY,
-            cluster INTEGER NOT NULL,
-            size INTEGER NOT NULL,
-        );
-        """
-    )
     _log.info("preparing cluster operation")
     db.execute(
         """
-        INSERT INTO cluster_work (code, cluster, size)
-        SELECT code, code, 1
+        CREATE TEMPORARY TABLE cluster_work AS
+        SELECT code, code AS cluster, 1 AS size
         FROM bg_nodes
         """
     )
@@ -292,19 +288,16 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
         epoch += 1
         elog = log.bind(epoch=epoch, remaining=remaining)
         elog.info("beginning cluster iteration")
-        elog.debug("updating cluster IDs")
+        elog.debug("computing updated cluster IDs")
         db.execute(
             """
-            UPDATE cluster_work
-            SET cluster = LEAST(cluster_work.cluster, nh.cluster)
-            FROM (
-                SELECT n.node, MIN(w.cluster) AS cluster
-                FROM bg_neighbors n
-                JOIN cluster_work w ON n.nbr = wcode
-                SEMI JOIN cluster_work w2 ON n.node = w2.code
-                GROUP BY n.node
-            ) nh
-            WHERE cluster_work.code = nh.node
+            CREATE OR REPLACE TEMPORARY TABLE new_clusters AS
+            SELECT w.code AS code,
+                LEAST(w.cluster, MIN(w2.cluster)) AS cluster
+            FROM cluster_work w
+            JOIN bg_neighbors n ON (w.code = n.node)
+            JOIN cluster_work w2 ON (n.nbr = w2.code)
+            GROUP BY w.code, w.cluster
             """
         )
         elog.debug("counting cluster sizes")
@@ -312,17 +305,18 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
             """
             CREATE OR REPLACE TEMPORARY TABLE cluster_sizes AS
             SELECT cluster, COUNT(code) AS size
-            FROM cluster_work
+            FROM new_clusters
             GROUP BY cluster
             """
         )
-        elog.debug("saving finished cluster clusters")
+        elog.debug("saving finished clusters")
         db.execute(
             """
             UPDATE bg_nodes
             SET cluster = w.cluster
             FROM cluster_work w
-            JOIN cluster_sizes s USING (cluster)
+            JOIN new_clusters nc USING (code)
+            JOIN cluster_sizes s ON nc.cluster = s.cluster
             WHERE w.code = bg_nodes.code
             AND s.size = w.size
             """
@@ -332,18 +326,16 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
         elog.debug("clearing finished clusters from work")
         db.execute(
             """
-            DELETE FROM cluster_work AS w
-            USING cluster_sizes s
-            WHERE w.cluster = s.cluster AND w.size = s.size
-            """
-        )
-        elog.debug("updating unfinished cluster sizes")
-        db.execute(
-            """
-            UPDATE cluster_work
-            SET size = cs.size
-            FROM cluster_sizes cs
-            WHERE cluster_work.cluster = cs.cluster
+            CREATE OR REPLACE TEMPORARY TABLE cluster_work AS
+            SELECT code, cluster, size
+            FROM new_clusters
+            JOIN cluster_sizes USING (cluster)
+            WHERE code NOT IN (
+                SELECT code
+                FROM cluster_work w
+                JOIN cluster_sizes s USING (cluster)
+                WHERE w.size = s.size
+            )
             """
         )
         elog.debug("counting remaining work nodes")

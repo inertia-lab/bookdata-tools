@@ -21,7 +21,7 @@ bd.pipeline({
 
   cluster: {
     wdir: '..',
-    cmd: 'python book-links/compute-clusters.py book-links/book-graph.db',
+    cmd: 'python book-links/compute-clusters.py',
     deps: [
       'book-links/compute-clusters.py',
       'book-links/all-isbns.parquet',
@@ -36,21 +36,20 @@ bd.pipeline({
       'goodreads/book-isbn-ids.parquet',
     ] else [],
     outs: [
-      'book-links/book-graph.db',
+      'book-links/book-graph-nodes.parquet',
+      'book-links/book-graph-edges.parquet',
     ],
   },
 
   'export-clusters': {
-    cmd: 'duckscript --read-only -d book-graph.db export-clusters.sql',
+    cmd: 'duckscript export-clusters.sql',
     deps: [
-      'book-graph.db',
       'export-clusters.sql',
+      'book-graph-nodes.parquet',
     ],
     outs: [
       'isbn-clusters.parquet',
       'cluster-stats.parquet',
-      'book-graph-nodes.parquet',
-      'book-graph-edges.parquet',
     ],
   },
 

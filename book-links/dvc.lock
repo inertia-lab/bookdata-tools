@@ -42,7 +42,7 @@ stages:
       md5: 5763854e8f99c6fa75f97a9764411466
       size: 3253219328
   cluster:
-    cmd: python book-links/compute-clusters.py book-links/book-graph.db
+    cmd: python book-links/compute-clusters.py
     deps:
     - path: book-links/all-isbns.parquet
       hash: md5
@@ -50,8 +50,8 @@ stages:
       size: 455213646
     - path: book-links/compute-clusters.py
       hash: md5
-      md5: bf3279417f37d3c71365d0fc8e878c9e
-      size: 9827
+      md5: 2d4527ea71060d454125db8a7b3b7f8f
+      size: 9433
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
       md5: 44e61e20c76cbefafd9acd8e6eb6ab6b
@@ -85,10 +85,11 @@ stages:
       md5: 0468fc87dfbf51626285aa24e4b77ee0
       size: 880028181
     outs:
-    - path: book-links/book-graph.db
+    - path: book-links/book-graph
       hash: md5
-      md5: 556d830ba4b6de25c65a8c68b529873d
-      size: 6964916224
+      md5: 1037b7a007f7e6c0414f2018c020472f.dir
+      size: 2010783157
+      nfiles: 7
   cluster-ol-first-authors:
     cmd: duckscript cluster-ol-first-authors.sql
     deps:

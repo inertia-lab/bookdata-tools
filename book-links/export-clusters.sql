@@ -1,3 +1,5 @@
+CREATE TABLE bg_nodes AS SELECT * FROM 'book-graph-nodes.parquet';
+
 COPY (
     SELECT isbn_code(code) AS isbn_id, cluster
     FROM bg_nodes
@@ -17,6 +19,3 @@ COPY (
     FROM bg_nodes
     GROUP BY cluster
 ) TO 'cluster-stats.parquet' (COMPRESSION zstd);
-
-COPY bg_nodes TO 'book-graph-nodes.parquet' (COMPRESSION zstd);
-COPY bg_edges TO 'book-graph-edges.parquet' (COMPRESSION zstd);
