@@ -365,13 +365,21 @@ stages:
       size: 6964916224
     - path: export-clusters.sql
       hash: md5
-      md5: 3747d1298b5106ec23372080590b74fe
-      size: 664
+      md5: 77060db0d6948ead1933810cea3e95b8
+      size: 793
     outs:
+    - path: book-graph-edges.parquet
+      hash: md5
+      md5: 678b405abb21cc1f71d7b1599724d6e2
+      size: 579728939
+    - path: book-graph-nodes.parquet
+      hash: md5
+      md5: 4c653391f28509d20d254cb13974092b
+      size: 1556933828
     - path: cluster-stats.parquet
       hash: md5
-      md5: 34d101d58522ddbf5c35b1beb6ae7cd1
-      size: 294255550
+      md5: bf094c1e20a9568315010188e0816cce
+      size: 294130478
     - path: isbn-clusters.parquet
       hash: md5
       md5: 55c7a71097e50b7ab665840e1c2c18ed

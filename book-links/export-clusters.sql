@@ -17,3 +17,6 @@ COPY (
     FROM bg_nodes
     GROUP BY cluster
 ) TO 'cluster-stats.parquet' (COMPRESSION zstd);
+
+COPY bg_nodes TO 'book-graph-nodes.parquet' (COMPRESSION zstd);
+COPY bg_edges TO 'book-graph-edges.parquet' (COMPRESSION zstd);

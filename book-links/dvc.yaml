@@ -89,6 +89,8 @@ stages:
     outs:
       - isbn-clusters.parquet
       - cluster-stats.parquet
+      - book-graph-nodes.parquet
+      - book-graph-edges.parquet
   gender-stats:
     cmd: python book-links/integration-stats.py
     deps:

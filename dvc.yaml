@@ -39,6 +39,8 @@ stages:
       - book-links/all-isbns
       - book-links/isbn-clusters
       - book-links/cluster-stats
+      - book-links/book-graph-nodes
+      - book-links/book-graph-edges
       - goodreads/book-isbn-ids
       - goodreads/gr-book-link
       - goodreads/gr-cluster-actions

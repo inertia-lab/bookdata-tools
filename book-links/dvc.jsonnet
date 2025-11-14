@@ -49,6 +49,8 @@ bd.pipeline({
     outs: [
       'isbn-clusters.parquet',
       'cluster-stats.parquet',
+      'book-graph-nodes.parquet',
+      'book-graph-edges.parquet',
     ],
   },
 
