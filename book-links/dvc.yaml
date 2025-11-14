@@ -1,8 +1,8 @@
 stages:
-  cluster:
-    cmd: python book-links/compute-clusters.py
+  book-graph:
+    cmd: python book-links/make-graph.py book-links/book-graph.db
     deps:
-      - book-links/compute-clusters.py
+      - book-links/make-graph.py
       - book-links/all-isbns.parquet
       - loc-mds/book-ids.parquet
       - loc-mds/book-isbn-ids.parquet
@@ -13,9 +13,17 @@ stages:
       - goodreads/gr-book-ids.parquet
       - goodreads/book-isbn-ids.parquet
     outs:
+      - book-links/book-graph.db
       - book-links/book-graph-nodes.parquet
       - book-links/book-graph-edges.parquet
     wdir: ..
+  cluster:
+    cmd: duckscript cluster.sql
+    deps:
+      - cluster.sql
+      - book-graph.db
+    outs:
+      - book-graph-clusters.parquet
   cluster-first-authors:
     cmd: duckscript cluster-first-authors.sql
     deps:

@@ -33,6 +33,7 @@ stages:
       - az2018/reviews
       - book-links/book-graph-nodes
       - book-links/book-graph-edges
+      - book-links/book-graph-clusters
       - book-links/cluster-first-authors
       - book-links/cluster-genders
       - book-links/cluster-hashes

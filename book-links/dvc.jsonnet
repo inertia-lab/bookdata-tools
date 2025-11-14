@@ -19,11 +19,11 @@ bd.pipeline({
     ],
   },
 
-  cluster: {
+  'book-graph': {
     wdir: '..',
-    cmd: 'python book-links/compute-clusters.py',
+    cmd: 'python book-links/make-graph.py book-links/book-graph.db',
     deps: [
-      'book-links/compute-clusters.py',
+      'book-links/make-graph.py',
       'book-links/all-isbns.parquet',
       'loc-mds/book-ids.parquet',
       'loc-mds/book-isbn-ids.parquet',
@@ -36,8 +36,20 @@ bd.pipeline({
       'goodreads/book-isbn-ids.parquet',
     ] else [],
     outs: [
+      'book-links/book-graph.db',
       'book-links/book-graph-nodes.parquet',
       'book-links/book-graph-edges.parquet',
+    ],
+  },
+
+  cluster: {
+    cmd: 'duckscript cluster.sql',
+    deps: [
+      'cluster.sql',
+      'book-graph.db',
+    ],
+    outs: [
+      'book-graph-clusters.parquet',
     ],
   },
 

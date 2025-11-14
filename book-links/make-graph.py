@@ -1,12 +1,14 @@
 """
-Cluster the book graph data.
+Create the book graph.
 
 Usage:
-    compute-clusters.py [-v]
+    make-graph.py [-v] DB
 
 Args:
     -v, --verbose
         Enable verbose log output.
+    DB
+        The database file to create.
 """
 
 import duckdb
@@ -27,12 +29,12 @@ def main():
 
     cfg = BookDataConfig.load()
 
-    _log.info("opening database")
-    with duckdb.connect() as db:
+    db_path = opts["DB"]
+    _log.info("opening database %s", db_path)
+    with duckdb.connect(db_path) as db:
         register_udfs(db)
         load_graph(db, cfg)
-        compute_clusters(db)
-        _log.info("exporting database")
+        _log.info("exporting database tables")
         db.execute(
             """
             COPY bg_nodes
@@ -59,7 +61,6 @@ def load_graph(db: duckdb.DuckDBPyConnection, cfg: BookDataConfig):
         """
         CREATE TABLE bg_nodes (
             code INTEGER NOT NULL,
-            cluster INTEGER NULL,
             type node_type NOT NULL,
             label VARCHAR NULL,
         )
@@ -99,14 +100,14 @@ def load_graph(db: duckdb.DuckDBPyConnection, cfg: BookDataConfig):
         load_gr_book_edges(db)
         load_gr_work_edges(db)
 
-    _log.info("setting node primary key")
-    db.execute("ALTER TABLE bg_nodes ADD PRIMARY KEY (code)")
+    # _log.info("setting node primary key")
+    # db.execute("ALTER TABLE bg_nodes ADD PRIMARY KEY (code)")
 
-    _log.info("indexing edge table")
-    _log.debug("creating edge src index")
-    db.execute("CREATE INDEX edge_src_idx ON bg_edges (src)")
-    _log.debug("creating edge dst index")
-    db.execute("CREATE INDEX edge_dst_idx ON bg_edges (dst)")
+    # _log.info("indexing edge table")
+    # _log.debug("creating edge src index")
+    # db.execute("CREATE INDEX edge_src_idx ON bg_edges (src)")
+    # _log.debug("creating edge dst index")
+    # db.execute("CREATE INDEX edge_dst_idx ON bg_edges (dst)")
 
 
 def load_isbn_nodes(db):
