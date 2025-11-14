@@ -37,45 +37,26 @@ bd.pipeline({
     ] else [],
     outs: [
       'book-links/book-graph.db',
-      'book-links/book-graph-nodes.parquet',
-      'book-links/book-graph-edges.parquet',
     ],
-  },
-
-  cluster: {
-    cmd: 'duckscript cluster.sql',
-    deps: [
-      'cluster.sql',
-      'book-graph.db',
-    ],
-    outs: [
-      'book-graph-clusters.parquet',
-    ],
-  },
-
-  'export-clusters': {
-    cmd: 'duckscript export-clusters.sql',
-    deps: [
-      'export-clusters.sql',
-      'book-graph-nodes.parquet',
-    ],
-    outs: [
-      'isbn-clusters.parquet',
-      'cluster-stats.parquet',
-    ],
-  },
-
-  'cluster-metrics': {
-    cmd: 'python cluster-metrics.py',
-    deps: [
-      'cluster-stats.parquet',
-    ],
-    outs: [],
     metrics: [{
-      'cluster-metrics.json': {
+      'book-links/cluster-metrics.json': {
         cache: false,
       },
     }],
+  },
+
+  'export-clusters': {
+    cmd: 'duckscript --read-only -d book-graph.db export-clusters.sql',
+    deps: [
+      'export-clusters.sql',
+      'book-graph.db',
+    ],
+    outs: [
+      'book-graph-nodes.parquet',
+      'book-graph-edges.parquet',
+      'isbn-clusters.parquet',
+      'cluster-stats.parquet',
+    ],
   },
 
   'cluster-ol-first-authors': {

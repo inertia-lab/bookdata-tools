@@ -12,18 +12,12 @@ stages:
       - openlibrary/edition-works.parquet
       - goodreads/gr-book-ids.parquet
       - goodreads/book-isbn-ids.parquet
+    metrics:
+      - book-links/cluster-metrics.json:
+          cache: false
     outs:
       - book-links/book-graph.db
-      - book-links/book-graph-nodes.parquet
-      - book-links/book-graph-edges.parquet
     wdir: ..
-  cluster:
-    cmd: duckscript cluster.sql
-    deps:
-      - cluster.sql
-      - book-graph.db
-    outs:
-      - book-graph-clusters.parquet
   cluster-first-authors:
     cmd: duckscript cluster-first-authors.sql
     deps:
@@ -59,14 +53,6 @@ stages:
       - ../loc-mds/book-authors.parquet
     outs:
       - ../book-links/cluster-loc-first-authors.parquet
-  cluster-metrics:
-    cmd: python cluster-metrics.py
-    deps:
-      - cluster-stats.parquet
-    metrics:
-      - cluster-metrics.json:
-          cache: false
-    outs: []
   cluster-ol-first-authors:
     cmd: duckscript cluster-ol-first-authors.sql
     deps:
@@ -94,8 +80,10 @@ stages:
     cmd: duckscript export-clusters.sql
     deps:
       - export-clusters.sql
-      - book-graph-nodes.parquet
+      - book-graph.db
     outs:
+      - book-graph-nodes.parquet
+      - book-graph-edges.parquet
       - isbn-clusters.parquet
       - cluster-stats.parquet
   gender-stats:

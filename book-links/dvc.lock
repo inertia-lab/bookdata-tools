@@ -406,8 +406,8 @@ stages:
       size: 455213646
     - path: book-links/make-graph.py
       hash: md5
-      md5: 8a32087eb9c2d5245d7d0c0a06021d0b
-      size: 9699
+      md5: 58b8cf7e1de281295f280265b517c4cb
+      size: 9213
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
       md5: 44e61e20c76cbefafd9acd8e6eb6ab6b
@@ -441,15 +441,11 @@ stages:
       md5: 0468fc87dfbf51626285aa24e4b77ee0
       size: 880028181
     outs:
-    - path: book-links/book-graph-edges.parquet
-      hash: md5
-      md5: 678b405abb21cc1f71d7b1599724d6e2
-      size: 579728939
-    - path: book-links/book-graph-nodes.parquet
-      hash: md5
-      md5: e9067e5d16784229b272624946c1168e
-      size: 1067815803
     - path: book-links/book-graph.db
       hash: md5
-      md5: fcecae171b1a7b2602fea7a099b85db4
-      size: 1568681984
+      md5: a225ed89eacc2d0e16f70a6658f27bdf
+      size: 2287480832
+    - path: book-links/cluster-metrics.json
+      hash: md5
+      md5: ad125fe1a719ed780e0dab0e653b9ac7
+      size: 82
