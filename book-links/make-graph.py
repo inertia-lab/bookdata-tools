@@ -14,12 +14,13 @@ Args:
 import json
 
 import duckdb
-import igraph
+import graph_tool as gt
 import numpy as np
 import pandas as pd
 from bookdata.codes import register_udfs
 from bookdata.config import BookDataConfig
 from docopt import docopt
+from graph_tool.topology import label_components
 from humanize import metric
 from lenskit.logging import LoggingConfig, get_logger
 
@@ -269,15 +270,10 @@ def load_gr_work_edges(db):
 
 
 def compute_clusters(db: duckdb.DuckDBPyConnection):
-    _log.info("loading graph nodes")
-    db.execute(
-        """
-        SELECT code
-        FROM bg_nodes
-        ORDER BY node_id
-        """
-    )
-    nodes = db.fetch_df()
+    db.execute("SELECT COUNT(*) FROM bg_nodes")
+    (n,) = db.fetchone() or []
+    _log.info("creating graph with %s nodes", metric(n))
+    graph = gt.Graph(n, False)
 
     _log.info("loading graph edges")
     db.execute(
@@ -288,27 +284,39 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
         JOIN bg_nodes dn ON e.dst = dn.code
         """
     )
-    edges = db.fetch_df()
+    edges = db.fetchnumpy()
+    edges = np.stack([edges["src_id"], edges["dst_id"]], axis=1)
+    assert edges.shape[1] == 2
 
-    _log.info("assembling graph")
-    graph = igraph.Graph.DataFrame(edges, False, nodes)
-    _log.info(
-        "loaded graph with %s nodes and %s edges", metric(len(graph.vs)), metric(len(graph.es))
-    )
+    _log.info("adding %s edges to graph", metric(edges.shape[0]))
+    graph.add_edge_list(edges)
 
     _log.info("computing connected components")
-    cc = graph.connected_components()
+    clust_vpm, hist = label_components(graph)
     clusters = pd.DataFrame(
-        {"node_id": np.arange(1, len(graph.vs) + 1, dtype=np.int32), "cluster": cc.membership}
+        {"node_id": np.arange(1, n + 1, dtype=np.int32), "cluster": clust_vpm.a}
     )
     _log.info("computed %s clusters", metric(clusters["cluster"].nunique()))
     db.execute(
         """
+        CREATE TEMPORARY TABLE tmp_clusters (
+            node_id INTEGER NOT NULL,
+            cno INTEGER NOT NULL
+        )
+        """
+    )
+    db.from_df(clusters).insert_into("tmp_clusters")
+
+    _log.info("resolving cluster numbers")
+    db.execute(
+        """
         CREATE TABLE node_clusters AS
-        SELECT code, cluster
-        FROM clusters
-        JOIN bg_nodes USING (node_id)
-        ORDER BY code
+        SELECT n.code, MIN(nn.code) AS cluster
+        FROM tmp_clusters nc
+        JOIN tmp_clusters oc USING (cno)
+        JOIN bg_nodes n ON nc.node_id = n.node_id
+        JOIN bg_nodes nn ON oc.node_id = nn.node_id
+        GROUP BY n.code
         """
     )
 
@@ -330,6 +338,7 @@ def cluster_metrics(db: duckdb.DuckDBPyConnection):
         GROUP BY cluster
         """
     )
+    _log.info("computing cluster stats")
     db.execute(
         """
         SELECT SUM(n_nodes), COUNT(*), MAX(n_nodes), MAX(n_isbns)
@@ -337,6 +346,7 @@ def cluster_metrics(db: duckdb.DuckDBPyConnection):
         """
     )
     nodes, clusters, largest, max_isbns = db.fetchone() or []
+    _log.info("saving cluster stats")
     with open("book-links/cluster-metrics.json", "wt") as jsf:
         print(
             json.dumps(
