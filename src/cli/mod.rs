@@ -6,8 +6,6 @@
 //! exposes the command line arguments and invocation.
 pub mod bx;
 pub mod cluster;
-pub mod cluster_books;
-pub mod extract_graph;
 pub mod goodreads;
 pub mod index_names;
 pub mod openlib;
@@ -58,9 +56,7 @@ pub trait Command {
 #[derive(Subcommand, Debug)]
 pub enum RootCommand {
     ScanMARC(scan_marc::ScanMARC),
-    ClusterBooks(cluster_books::ClusterBooks),
     IndexNames(index_names::IndexNames),
-    ExtractGraph(extract_graph::ExtractGraph),
     /// Commands for processing OpenLibrary data.
     Openlib(openlib::OpenLib),
     /// Commands for processing BookCrossing data.
