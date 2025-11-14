@@ -72,9 +72,42 @@ def register_udfs(db: duckdb.DuckDBPyConnection):
             type="arrow",
         )
 
+        db.create_function(
+            f"{ns.fn_name}_id",
+            partial(book_id_udf, ns),
+            [INTEGER],
+            return_type=INTEGER,
+            type="arrow",
+        )
+
+        db.create_function(
+            f"is_{ns.fn_name}",
+            partial(book_test_udf, ns),
+            [INTEGER],
+            return_type=INTEGER,
+            type="arrow",
+        )
+
 
 def book_code_udf(ns: NS, ids: pa.Array) -> pa.Array:
     """
     SQL UDF to compute a book code from an ID.
     """
     return pc.add(ids, ns.base)
+
+
+def book_id_udf(ns: NS, ids: pa.Array) -> pa.Array:
+    """
+    SQL UDF to compute a book code from an ID.
+    """
+    sub = pc.subtract(ids, ns.base)
+    return pc.if_else(pc.greater_equal(sub, 0), sub, None)
+
+
+def book_test_udf(ns: NS, ids: pa.Array) -> pa.Array:
+    """
+    SQL UDF to compute a book code from an ID.
+    """
+    sub = pc.subtract(ids, ns.base)
+    ns = pc.subtract(ids, ns.base + NS_MULT_BASE)
+    return pc.and_(pc.greater_equal(sub, 0), pc.less(ns, 0))
