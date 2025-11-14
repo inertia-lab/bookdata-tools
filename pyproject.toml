@@ -11,7 +11,7 @@ requires-python = "~=3.12"
 
 [project.scripts]
 duckscript = "bookdata.duckscript:main"
-pqinfo = "bookdata.pqinfo:main"
+pq-info = "bookdata.pqinfo:main"
 
 [tool.uv.build-backend]
 module-root = "src/python"

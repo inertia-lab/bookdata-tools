@@ -17,7 +17,7 @@ stages:
           cache: false
   schema:
     do:
-      cmd: cargo run --release -- pq-info -o ${item}.json ${item}.parquet
+      cmd: pq-info -o ${item}.json ${item}.parquet
       deps:
         - ${item}.parquet
       outs:

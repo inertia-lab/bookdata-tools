@@ -40,7 +40,7 @@ bd.pipeline({
   schema: {
     foreach: parquets,
     do: {
-      cmd: bd.cmd('pq-info -o ${item}.json ${item}.parquet'),
+      cmd: 'pq-info -o ${item}.json ${item}.parquet',
       deps: ['${item}.parquet'],
       outs: [
         { '${item}.json': { cache: false } },
