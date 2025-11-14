@@ -31,16 +31,14 @@ stages:
       - az2018/az-cluster-ratings-5core
       - az2018/ratings
       - az2018/reviews
-      - book-links/isbn-clusters
-      - book-links/cluster-stats
-      - book-links/cluster-graph-nodes
-      - book-links/cluster-graph-edges
       - book-links/cluster-first-authors
       - book-links/cluster-genders
       - book-links/cluster-hashes
       - book-links/cluster-loc-first-authors
       - book-links/cluster-ol-first-authors
       - book-links/all-isbns
+      - book-links/isbn-clusters
+      - book-links/cluster-stats
       - goodreads/book-isbn-ids
       - goodreads/gr-book-link
       - goodreads/gr-cluster-actions

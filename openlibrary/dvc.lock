@@ -97,8 +97,8 @@ stages:
     deps:
     - path: book-links/isbns.db
       hash: md5
-      md5: c4f26c586d955d29b941d21a7cc62c56
-      size: 3250335744
+      md5: 5763854e8f99c6fa75f97a9764411466
+      size: 3253219328
     - path: openlibrary/edition-isbns.parquet
       hash: md5
       md5: 849038d2fe02ee78adff149ca944eb11
@@ -106,8 +106,8 @@ stages:
     outs:
     - path: openlibrary/edition-isbn-ids.parquet
       hash: md5
-      md5: 1ff0295ec615399ef84514a7d8a1acee
-      size: 219537897
+      md5: f1d01fabf3ab7bdbc0b6c9806c1066ca
+      size: 225822867
   schema@edition-isbn-ids:
     cmd: python ../run.py --rust pq-info -o edition-isbn-ids.json 
       edition-isbn-ids.parquet

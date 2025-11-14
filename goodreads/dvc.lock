@@ -89,8 +89,8 @@ stages:
     deps:
     - path: book-links/isbns.db
       hash: md5
-      md5: c4f26c586d955d29b941d21a7cc62c56
-      size: 3250335744
+      md5: 5763854e8f99c6fa75f97a9764411466
+      size: 3253219328
     - path: goodreads/gr-book-ids.parquet
       hash: md5
       md5: 1dd022fe8f16958d144dc9cb2d609b70
@@ -102,8 +102,8 @@ stages:
     outs:
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
-      md5: cddbee1ca4364373ebf8534e5debc313
-      size: 15562808
+      md5: 44e61e20c76cbefafd9acd8e6eb6ab6b
+      size: 16169266
   cluster-ratings:
     cmd: duckscript gr-cluster-ratings.sql
     deps:

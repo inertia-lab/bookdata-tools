@@ -8,6 +8,7 @@
 /gender-stats.csv.gz
 /cluster-codes.parquet
 /book-graph.mp.zst
+/book-graph.db
 /gender-stats.csv
 /cluster-hashes.parquet
 /cluster-graph-edges.parquet

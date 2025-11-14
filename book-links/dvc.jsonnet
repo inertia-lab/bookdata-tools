@@ -21,10 +21,9 @@ bd.pipeline({
 
   cluster: {
     wdir: '..',
-    cmd: bd.cmd('cluster-books --save-graph book-links/book-graph.mp.zst'),
+    cmd: 'python book-links/compute-clusters.py book-links/book-graph.db',
     deps: [
-      'src/cli/cluster_books.rs',
-      'src/graph/',
+      'book-links/compute-clusters.py',
       'book-links/all-isbns.parquet',
       'loc-mds/book-ids.parquet',
       'loc-mds/book-isbn-ids.parquet',
@@ -37,15 +36,33 @@ bd.pipeline({
       'goodreads/book-isbn-ids.parquet',
     ] else [],
     outs: [
-      'book-links/book-graph.mp.zst',
-      'book-links/isbn-clusters.parquet',
-      'book-links/cluster-stats.parquet',
-      'book-links/cluster-graph-nodes.parquet',
-      'book-links/cluster-graph-edges.parquet',
+      'book-links/book-graph.db',
     ],
-    metrics: [
-      { 'book-links/cluster-metrics.json': { cache: false } },
+  },
+
+  'export-clusters': {
+    cmd: 'duckscript --read-only -d book-graph.db export-clusters.sql',
+    deps: [
+      'book-graph.db',
+      'export-clusters.sql',
     ],
+    outs: [
+      'isbn-clusters.parquet',
+      'cluster-stats.parquet',
+    ],
+  },
+
+  'cluster-metrics': {
+    cmd: 'python cluster-metrics.py',
+    deps: [
+      'cluster-stats.parquet',
+    ],
+    outs: [],
+    metrics: [{
+      'cluster-metrics.json': {
+        cache: false,
+      },
+    }],
   },
 
   'cluster-ol-first-authors': {

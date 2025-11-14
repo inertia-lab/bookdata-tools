@@ -1,9 +1,8 @@
 stages:
   cluster:
-    cmd: cargo run --release -- cluster-books --save-graph book-links/book-graph.mp.zst
+    cmd: python book-links/compute-clusters.py book-links/book-graph.db
     deps:
-      - src/cli/cluster_books.rs
-      - src/graph/
+      - book-links/compute-clusters.py
       - book-links/all-isbns.parquet
       - loc-mds/book-ids.parquet
       - loc-mds/book-isbn-ids.parquet
@@ -13,15 +12,8 @@ stages:
       - openlibrary/edition-works.parquet
       - goodreads/gr-book-ids.parquet
       - goodreads/book-isbn-ids.parquet
-    metrics:
-      - book-links/cluster-metrics.json:
-          cache: false
     outs:
-      - book-links/book-graph.mp.zst
-      - book-links/isbn-clusters.parquet
-      - book-links/cluster-stats.parquet
-      - book-links/cluster-graph-nodes.parquet
-      - book-links/cluster-graph-edges.parquet
+      - book-links/book-graph.db
     wdir: ..
   cluster-first-authors:
     cmd: duckscript cluster-first-authors.sql
@@ -58,6 +50,14 @@ stages:
       - ../loc-mds/book-authors.parquet
     outs:
       - ../book-links/cluster-loc-first-authors.parquet
+  cluster-metrics:
+    cmd: python cluster-metrics.py
+    deps:
+      - cluster-stats.parquet
+    metrics:
+      - cluster-metrics.json:
+          cache: false
+    outs: []
   cluster-ol-first-authors:
     cmd: duckscript cluster-ol-first-authors.sql
     deps:
@@ -81,6 +81,14 @@ stages:
     outs:
       - isbns.db
       - all-isbns.parquet
+  export-clusters:
+    cmd: duckscript --read-only -d book-graph.db export-clusters.sql
+    deps:
+      - book-graph.db
+      - export-clusters.sql
+    outs:
+      - isbn-clusters.parquet
+      - cluster-stats.parquet
   gender-stats:
     cmd: python book-links/integration-stats.py
     deps:

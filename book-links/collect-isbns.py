@@ -59,7 +59,7 @@ def main(opts: ParsedOptions):
         db.execute(
             """
             CREATE TABLE isbns AS
-            SELECT row_number() OVER (ORDER BY isbn) AS isbn_id, isbn
+            SELECT (row_number() OVER (ORDER BY isbn))::INT32 AS isbn_id, isbn
             FROM (SELECT DISTINCT isbn FROM isbn_rec)
             """
         )

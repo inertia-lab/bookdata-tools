@@ -78,6 +78,7 @@ def register_udfs(db: duckdb.DuckDBPyConnection):
             [INTEGER],
             return_type=INTEGER,
             type="arrow",
+            null_handling="special",
         )
 
         db.create_function(
