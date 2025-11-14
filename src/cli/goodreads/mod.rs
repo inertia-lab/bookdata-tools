@@ -24,9 +24,6 @@ impl Command for Goodreads {
             GRCmd::Scan { data } => {
                 data.exec()?;
             }
-            GRCmd::ClusterInteractions(opts) => {
-                opts.exec()?;
-            }
         }
 
         Ok(())
