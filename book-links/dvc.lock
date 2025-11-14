@@ -50,8 +50,8 @@ stages:
       size: 455213646
     - path: book-links/compute-clusters.py
       hash: md5
-      md5: ba3a20509a80136c265e73ba9c165d08
-      size: 9903
+      md5: bf3279417f37d3c71365d0fc8e878c9e
+      size: 9827
     - path: goodreads/book-isbn-ids.parquet
       hash: md5
       md5: 44e61e20c76cbefafd9acd8e6eb6ab6b
@@ -87,8 +87,8 @@ stages:
     outs:
     - path: book-links/book-graph.db
       hash: md5
-      md5: ffa1c398b80fe97a99c3bebd82816b70
-      size: 6984052736
+      md5: 556d830ba4b6de25c65a8c68b529873d
+      size: 6964916224
   cluster-ol-first-authors:
     cmd: duckscript cluster-ol-first-authors.sql
     deps:
@@ -361,8 +361,8 @@ stages:
     deps:
     - path: book-graph.db
       hash: md5
-      md5: ffa1c398b80fe97a99c3bebd82816b70
-      size: 6984052736
+      md5: 556d830ba4b6de25c65a8c68b529873d
+      size: 6964916224
     - path: export-clusters.sql
       hash: md5
       md5: 3747d1298b5106ec23372080590b74fe
@@ -370,8 +370,8 @@ stages:
     outs:
     - path: cluster-stats.parquet
       hash: md5
-      md5: 67503d499e6226596c7700a11ff9013a
-      size: 294036566
+      md5: 34d101d58522ddbf5c35b1beb6ae7cd1
+      size: 294255550
     - path: isbn-clusters.parquet
       hash: md5
       md5: 55c7a71097e50b7ab665840e1c2c18ed
@@ -381,8 +381,8 @@ stages:
     deps:
     - path: cluster-stats.parquet
       hash: md5
-      md5: 67503d499e6226596c7700a11ff9013a
-      size: 294036566
+      md5: 34d101d58522ddbf5c35b1beb6ae7cd1
+      size: 294255550
     outs:
     - path: cluster-metrics.json
       hash: md5

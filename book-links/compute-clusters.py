@@ -68,6 +68,16 @@ def load_graph(db: duckdb.DuckDBPyConnection, cfg: BookDataConfig):
         )
         """
     )
+    db.execute(
+        """
+        CREATE VIEW bg_neighbors AS
+        SELECT src AS node, dst AS nbr
+        FROM bg_edges
+        UNION ALL
+        SELECT dst AS node, src AS nbr
+        FROM bg_edges
+        """
+    )
 
     load_isbn_nodes(db)
     load_loc_nodes(db)
@@ -224,7 +234,7 @@ def load_gr_book_edges(db):
         """
     )
     (n,) = db.fetchone() or [0]
-    _log.info("added %d GR Work edges", n)
+    _log.info("added %d GR Book edges", n)
 
 
 def load_gr_work_nodes(db):
@@ -288,21 +298,13 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
             UPDATE cluster_work
             SET cluster = LEAST(cluster_work.cluster, nh.cluster)
             FROM (
-                SELECT code, MIN(cluster) AS cluster
-                FROM (
-                    -- get right edges
-                    SELECT src AS code, cluster
-                    FROM bg_edges e
-                    JOIN cluster_work w ON (w.code = e.dst)
-                    -- add left edges
-                    UNION ALL
-                    SELECT dst AS code, cluster
-                    FROM bg_edges e
-                    JOIN cluster_work w ON (w.code = e.src)
-                ) nbr
-                GROUP BY code
+                SELECT n.node, MIN(w.cluster) AS cluster
+                FROM bg_neighbors n
+                JOIN cluster_work w ON n.nbr = wcode
+                SEMI JOIN cluster_work w2 ON n.node = w2.code
+                GROUP BY n.node
             ) nh
-            WHERE cluster_work.code = nh.code
+            WHERE cluster_work.code = nh.node
             """
         )
         elog.debug("counting cluster sizes")
@@ -326,7 +328,7 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
             """
         )
         (n,) = db.fetchone() or []
-        elog.info("finalized %d node clusters", n)
+        elog.info("finalized clusters for %d nodes", n)
         elog.debug("clearing finished clusters from work")
         db.execute(
             """
@@ -348,19 +350,12 @@ def compute_clusters(db: duckdb.DuckDBPyConnection):
         db.execute("SELECT COUNT(*) FROM cluster_work")
         (remaining,) = db.fetchone() or [0]
 
-    _log.info("finished clustering after %d epochs", epoch)
-    _log.info("committing cluster results")
-    db.execute(
-        """
-        UPDATE bg_nodes
-        SET cluster = cw.cluster
-        FROM cluster_work cw
-        WHERE bg_nodes.code = cw.code
-        """
-    )
-    db.execute("SELECT COUNT(DISTINCT cluster) FROM bg_nodes")
-    (count,) = db.fetchone() or []
-    _log.info("found %d clusters", count)
+    log.info("finished clustering after %d epochs", epoch)
+    db.execute("SELECT COUNT(code), COUNT(cluster), COUNT(DISTINCT cluster) FROM bg_nodes")
+    n_total, n_clustered, n_clusters = db.fetchone() or []
+    if n_clustered != n_total:
+        log.warn("missing clusters for %d nodes", n_total - n_clustered)
+    log.info("found %d clusters", n_clusters)
 
 
 if __name__ == "__main__":
