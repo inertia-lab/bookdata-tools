@@ -10,4 +10,4 @@ COPY (
     SELECT book_id,  work_id, cluster
     FROM book_nodes
     LEFT JOIN 'gr-book-ids.parquet' USING (book_id)
-) TO 'gr-book-link.parquet';
+) TO 'gr-book-link.parquet' (COMPRESSION zstd);
