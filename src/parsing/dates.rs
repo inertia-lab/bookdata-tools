@@ -19,6 +19,6 @@ pub fn check_ts(context: &'static str, cutoff: i32) -> impl Fn(NaiveDateTime) ->
         if date.year() < cutoff {
             warn!("{} is ancient: {}", context, date);
         }
-        date.timestamp() as f32
+        date.and_utc().timestamp() as f32
     }
 }
