@@ -19,6 +19,7 @@ pub struct RawWork {
     #[serde(default)]
     pub original_publication_month: String,
     #[serde(default)]
+    #[allow(unused)]
     pub original_publication_day: String,
 }
 

@@ -25,7 +25,9 @@ pub struct RawReview {
     pub n_votes: i32,
     pub date_added: String,
     pub date_updated: String,
+    #[allow(unused)]
     pub read_at: String,
+    #[allow(unused)]
     pub started_at: String,
 }
 
