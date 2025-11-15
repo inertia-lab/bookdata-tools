@@ -192,36 +192,36 @@ stages:
       md5: 304183b4d6978609092f6288b1f9b444
       size: 447245207
   cluster-genders:
-    cmd: cargo run --release -- cluster extract-author-gender -o 
+    cmd: cargo run --release -- cluster-gender -o 
       book-links/cluster-genders.parquet -A 
       book-links/cluster-first-authors.parquet
     deps:
     - path: book-links/cluster-first-authors.parquet
       hash: md5
-      md5: 3d7f746a16772709076da4010aa35bd5
-      size: 460950062
+      md5: 304183b4d6978609092f6288b1f9b444
+      size: 447245207
     - path: book-links/cluster-stats.parquet
       hash: md5
-      md5: 5c67228a387f9834d2af53f3c488edfc
-      size: 173465608
-    - path: src/cli/cluster
+      md5: f9d1a0e11c6dd3f293185e2ec74cfb30
+      size: 196825496
+    - path: src/cli/cluster_gender
       hash: md5
-      md5: efb2fd12447426c01d3905b429320cf1.dir
-      size: 17967
-      nfiles: 7
+      md5: a1dfe5607551eb04c87dc83e0df4d3c0.dir
+      size: 8400
+      nfiles: 3
     - path: viaf/author-genders.parquet
       hash: md5
-      md5: 40210d339b0b8c2501d81b0497c905f1
-      size: 5518646
+      md5: 497d9dcbbd5f0545e3c129d240fe7e43
+      size: 113243219
     - path: viaf/author-name-index.parquet
       hash: md5
-      md5: b4de067e981ce0f5aa7605972f778ea6
-      size: 448912167
+      md5: 44182df743312f313143894e6c8941d8
+      size: 714009649
     outs:
     - path: book-links/cluster-genders.parquet
       hash: md5
-      md5: 6cf626b33172195a51bfc1b3560b1832
-      size: 163010492
+      md5: 5bd5d5a066c8ea060131ad25acb2aeea
+      size: 207979445
   gender-stats:
     cmd: python book-links/integration-stats.py
     deps:
