@@ -1,20 +1,27 @@
 //! Data structure for mapping string keys to numeric identifiers.
-use hashbrown::hash_map::{HashMap, Keys};
 use std::borrow::Borrow;
 use std::fs::File;
 use std::hash::Hash;
 use std::path::Path;
+use std::sync::Arc;
 
-use anyhow::Result;
+use arrow::{
+    array::{Int32Array, RecordBatch, StringArray},
+    datatypes::{DataType, Field, Schema},
+};
+use hashbrown::hash_map::{HashMap, Keys};
+use parquet::arrow::{arrow_reader::ParquetRecordBatchReaderBuilder, ArrowWriter, ProjectionMask};
+
+use anyhow::{anyhow, Result};
 use log::*;
-use polars::prelude::*;
-use serde::de::DeserializeOwned;
 use thiserror::Error;
 
 #[cfg(test)]
 use quickcheck::{Arbitrary, Gen};
 #[cfg(test)]
 use tempfile::tempdir;
+
+use crate::arrow::writer::parquet_writer_defaults;
 
 /// The type of index identifiers.
 pub type Id = i32;
@@ -117,15 +124,21 @@ impl IdIndex<String> {
         vec
     }
 
-    /// Conver this ID index into a [DataFrame], with columns for ID and key.
-    pub fn data_frame(&self, id_col: &str, key_col: &str) -> Result<DataFrame, PolarsError> {
+    /// Convert this ID index into an Arrow RecordBatch, with columns for ID and key.
+    pub fn record_batch(&self, id_col: &str, key_col: &str) -> Result<RecordBatch> {
         debug!("preparing data frame for index");
         let n = self.map.len() as i32;
-        let keys = self.key_vec();
-        let ids = Int32Chunked::new(id_col, 1..(n + 1));
-        let keys = StringChunked::new(key_col, keys);
+        let ids: Vec<_> = (0..n).collect();
+        let ids = Int32Array::from(ids);
+        let keys = StringArray::from(self.key_vec());
 
-        DataFrame::new(vec![ids.into_series(), keys.into_series()])
+        let schema = Schema::new(vec![
+            Field::new(id_col, DataType::Int32, false),
+            Field::new(key_col, DataType::Utf8, false),
+        ]);
+
+        let rb = RecordBatch::try_new(Arc::new(schema), vec![Arc::new(ids), Arc::new(keys)])?;
+        Ok(rb)
     }
 
     /// Load from a Parquet file, with a standard configuration.
@@ -147,46 +160,45 @@ impl IdIndex<String> {
         let path_str = path.as_ref().to_string_lossy();
         info!("reading index from file {}", path_str);
         let file = File::open(path.as_ref())?;
-        let frame = ParquetReader::new(file).finish()?;
-        debug!("file schema: {:?}", frame.schema());
-
-        let ic = frame.column(id_col)?.i32()?;
-        let kc = frame.column(key_col)?.str()?;
+        let builder = ParquetRecordBatchReaderBuilder::try_new(file)?;
+        let project = ProjectionMask::columns(builder.parquet_schema(), [id_col, key_col]);
+        let reader = builder.with_projection(project).build()?;
 
         let mut map = HashMap::new();
 
         debug!("reading file contents");
-        let iter = ic.into_iter().zip(kc.into_iter());
-        for pair in iter {
-            if let (Some(id), Some(key)) = pair {
-                map.insert(key.to_string(), id);
+        for batch in reader {
+            let batch = batch?;
+            assert_eq!(batch.schema().field(0).name(), id_col);
+            assert_eq!(batch.schema().field(1).name(), key_col);
+            let ic = batch
+                .column(0)
+                .as_any()
+                .downcast_ref::<Int32Array>()
+                .ok_or_else(|| {
+                    anyhow!(
+                        "invalid id column type {}",
+                        batch.schema().field(0).data_type()
+                    )
+                })?;
+            let kc = batch
+                .column(1)
+                .as_any()
+                .downcast_ref::<StringArray>()
+                .ok_or_else(|| {
+                    anyhow!(
+                        "invalid id column type {}",
+                        batch.schema().field(0).data_type()
+                    )
+                })?;
+            for pair in ic.into_iter().zip(kc.into_iter()) {
+                if let (Some(id), Some(key)) = pair {
+                    map.insert(key.to_string(), id);
+                }
             }
         }
 
         info!("read {} keys from {}", map.len(), path_str);
-
-        Ok(IdIndex { map, frozen: false })
-    }
-
-    /// Load an index from a CSV file.
-    ///
-    /// This loads an index from a CSV file.  It assumes the first column is the ID, and the
-    /// second column is the key.
-    #[allow(dead_code)]
-    pub fn load_csv<P: AsRef<Path>, K: Eq + Hash + DeserializeOwned>(
-        path: P,
-    ) -> Result<IdIndex<K>> {
-        info!("reading ID index from from {:?}", path.as_ref());
-        let input = csv::Reader::from_path(path)?;
-        let recs = input.into_deserialize();
-
-        let mut map = HashMap::new();
-
-        for row in recs {
-            let rec: (i32, K) = row?;
-            let (id, key) = rec;
-            map.insert(key, id);
-        }
 
         Ok(IdIndex { map, frozen: false })
     }
@@ -198,13 +210,20 @@ impl IdIndex<String> {
 
     /// Save to a Parquet file with the standard configuration.
     pub fn save<P: AsRef<Path>>(&self, path: P, id_col: &str, key_col: &str) -> Result<()> {
-        let mut frame = self.data_frame(id_col, key_col)?;
+        let frame = self.record_batch(id_col, key_col)?;
 
         let path = path.as_ref();
         info!("saving index to {:?}", path);
+        let schema = Schema::new(vec![
+            Field::new(id_col, DataType::Int32, false),
+            Field::new(key_col, DataType::Utf8, false),
+        ]);
+        let schema = Arc::new(schema);
         let file = File::create(path)?;
-        let writer = ParquetWriter::new(file).with_compression(ParquetCompression::Zstd(None));
-        writer.finish(&mut frame)?;
+        let props = parquet_writer_defaults().build();
+        let mut writer = ArrowWriter::try_new(file, schema, Some(props))?;
+        writer.write(&frame)?;
+        writer.finish()?;
 
         Ok(())
     }
