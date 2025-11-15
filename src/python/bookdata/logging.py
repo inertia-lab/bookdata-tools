@@ -6,7 +6,7 @@ from rich.console import Console
 from rich.logging import RichHandler
 
 
-def setup_logging(verbose: bool, *, lenskit: bool = False):
+def setup_logging(verbose: bool = False, *, lenskit: bool = False):
     if lenskit:
         from lenskit.logging import LoggingConfig
 

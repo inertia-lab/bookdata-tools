@@ -14,24 +14,24 @@ Options:
 """
 
 import json
+from logging import getLogger
 from pathlib import Path
 
 import pyarrow.parquet as pq
+import rich.console
 from docopt import docopt
 from humanize import metric, naturalsize
-from lenskit.logging import LoggingConfig, get_logger, stdout_console
 
-_log = get_logger("__name__")
+from bookdata.logging import setup_logging
+
+_log = getLogger("__name__")
 
 
 def main():
     opts = docopt(__doc__ or "")
-    console = stdout_console()
+    console = rich.console.Console()
 
-    lc = LoggingConfig()
-    if opts["--verbose"]:
-        lc.set_verbose(True)
-    lc.apply()
+    setup_logging(opts["--verbose"])
 
     src = Path(opts["PARQUET"])
     fmeta = src.stat()

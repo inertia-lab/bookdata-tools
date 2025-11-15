@@ -5,11 +5,13 @@ Usage:
     integration-stats.py
 """
 
+from logging import getLogger
+
 import duckdb
 from bookdata.config import BookDataConfig
-from lenskit.logging import basic_logging, get_logger
+from bookdata.logging import setup_logging
 
-_log = get_logger("integration-stats")
+_log = getLogger("integration-stats")
 
 GENDER_FILE = "book-links/cluster-genders.parquet"
 ISBN_CLUSTER_FILE = "book-links/isbn-clusters.parquet"
@@ -26,7 +28,7 @@ ACTION_FILES = [
 
 
 def main():
-    basic_logging()
+    setup_logging()
     cfg = BookDataConfig.load()
 
     with duckdb.connect() as db:

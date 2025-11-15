@@ -6,6 +6,8 @@ Usage:
     kcore [options] -o OUT SRC
 
 Options:
+    -v, --verbose
+        Enable verbose logging.
     -k K, --k=K
         Size of core [default: 5].
     -U UK, --user-k=UK
@@ -24,15 +26,17 @@ Options:
         Input file.
 """
 
-import duckdb
-from docopt import ParsedOptions, docopt
-from lenskit.logging import basic_logging, get_logger
+from logging import getLogger
 
-_log = get_logger("kcore")
+import duckdb
+from bookdata.logging import setup_logging
+from docopt import ParsedOptions, docopt
+
+_log = getLogger("kcore")
 
 
 def main(opts: ParsedOptions):
-    basic_logging()
+    setup_logging(opts["--verbose"])
 
     src = opts["SRC"]
     dst = opts["--output"]

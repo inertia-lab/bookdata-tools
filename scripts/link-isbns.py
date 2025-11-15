@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
 Generate table linking identifiers to ISBNs.
 
@@ -16,31 +15,32 @@ Options:
         Read record ISBNs from file INPUT.
 """
 
+from logging import getLogger
+
 import duckdb
 import pyprojroot
+from bookdata.logging import setup_logging
 from docopt import ParsedOptions, docopt
-from lenskit.logging import basic_logging, get_logger
 
-_log = get_logger("link-isbns")
+_log = getLogger("link-isbns")
 
 ROOT = pyprojroot.find_root(pyprojroot.has_dir(".git"))
 
 
 def main(opts: ParsedOptions):
-    basic_logging()
+    setup_logging()
     out = opts["--output"]
     rec_field = opts["--record-id"]
     isbn_field = opts["--isbn-field"]
     src = opts["INPUT"]
-    log = _log.bind(record=rec_field)
 
     with duckdb.connect() as db:
-        log.info("attaching ISBN database")
         isbn_db = ROOT / "book-links" / "isbns.db"
+        _log.info("attaching ISBN database %s", isbn_db)
         db.execute(f"ATTACH '{isbn_db}' AS isbns (READONLY)")
 
         if len(isbn_field) == 1:
-            log.info("making single-ISBN query")
+            _log.info("making single-ISBN query for field %s", isbn_field)
             query = f"""
                 SELECT DISTINCT {rec_field}, isbn_id
                 FROM '{src}' s
@@ -48,7 +48,7 @@ def main(opts: ParsedOptions):
                 ORDER BY {rec_field}
             """
         else:
-            log.info("making multi-ISBN query")
+            _log.info("making multi-ISBN query")
             up_expr = ", ".join(isbn_field)
             query = f"""
                 SELECT DISTINCT {rec_field}, isbn_id
@@ -61,7 +61,7 @@ def main(opts: ParsedOptions):
                 ORDER BY {rec_field}
             """
 
-        log.info("generating ISBN link file")
+        _log.info("generating ISBN link file")
         db.execute(f"COPY ({query}) TO '{out}' (COMPRESSION zstd)")
 
 

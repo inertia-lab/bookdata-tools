@@ -12,15 +12,16 @@ Options:
 """
 
 import sys
+from logging import getLogger
 from pathlib import Path
 
 import pandas as pd
+from bookdata.logging import setup_logging
 from docopt import docopt
 from lenskit.data import DatasetBuilder
-from lenskit.logging import LoggingConfig, get_logger
 from scipy.sparse import csr_array
 
-_log = get_logger("gr-dataset")
+_log = getLogger("gr-dataset")
 
 GR_WORK_BASE = 400_000_000
 GR_BOOK_BASE = 500_000_000
@@ -28,10 +29,7 @@ GR_BOOK_BASE = 500_000_000
 
 def main():
     opts = docopt(__doc__ or "")
-    lc = LoggingConfig()
-    if opts["--verbose"]:
-        lc.set_verbose()
-    lc.apply()
+    setup_logging(opts["--verbose"], lenskit=True)
 
     out_dir = Path(opts["DIR"])
 

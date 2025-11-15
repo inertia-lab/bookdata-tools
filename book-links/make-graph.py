@@ -12,6 +12,7 @@ Args:
 """
 
 import json
+from logging import getLogger
 
 import duckdb
 import graph_tool as gt
@@ -19,20 +20,17 @@ import numpy as np
 import pandas as pd
 from bookdata.codes import register_udfs
 from bookdata.config import BookDataConfig
+from bookdata.logging import setup_logging
 from docopt import docopt
 from graph_tool.topology import label_components
 from humanize import metric
-from lenskit.logging import LoggingConfig, get_logger
 
-_log = get_logger("cluster")
+_log = getLogger("cluster")
 
 
 def main():
     opts = docopt(__doc__ or "")
-    lc = LoggingConfig()
-    if opts["--verbose"]:
-        lc.set_verbose(True)
-    lc.apply()
+    setup_logging(opts["--verbose"])
 
     cfg = BookDataConfig.load()
 

@@ -12,14 +12,15 @@ Options:
         Write output to OUT.
 """
 
+from logging import getLogger
 from pathlib import Path
 
 import duckdb
 import yaml
+from bookdata.logging import setup_logging
 from docopt import ParsedOptions, docopt
-from lenskit.logging import basic_logging, get_logger
 
-_log = get_logger("collect-isbns")
+_log = getLogger("collect-isbns")
 
 CFG_FILE = Path("../config.yaml")
 SOURCES = {
@@ -33,7 +34,7 @@ SOURCES = {
 
 
 def main(opts: ParsedOptions):
-    basic_logging()
+    setup_logging()
     cfg = yaml.load(CFG_FILE.read_text(), yaml.SafeLoader)
     with duckdb.connect(opts["--database"]) as db:
         active = []
@@ -94,7 +95,7 @@ def main(opts: ParsedOptions):
 
 
 def scan_source(db: duckdb.DuckDBPyConnection, name: str, path: str, cols: list[str]):
-    _log.info("loading %s", name, path=path)
+    _log.info("loading %s from %s", name, path)
     for col in cols:
         _log.info("counting column %s of %s", col, name)
         db.execute(
