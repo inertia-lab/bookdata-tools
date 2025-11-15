@@ -69,6 +69,9 @@ def _run_script(db: DuckDBPyConnection, script: Path):
 
     for stmt in statements:
         logger.debug("executing %s statement: %s", stmt.type, stmt.query.strip())
+        hm = re.search(r"^--!\s+(.*?)\s*$", stmt.query, re.MULTILINE)
+        if hm:
+            logger.info("beginning section [cyan]%s[/cyan]", hm.group(1), extra={"markup": True})
         if stmt.type == StatementType.SELECT:  # type: ignore
             # SELECT statements are just to print intermediate results
             logger.info("executed SELECT")
