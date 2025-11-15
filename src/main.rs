@@ -10,7 +10,6 @@ mod cleaning;
 mod cli;
 mod gender;
 mod goodreads;
-mod graph;
 mod ids;
 mod interactions;
 mod io;
