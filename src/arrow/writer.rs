@@ -14,59 +14,17 @@ use parquet::file::properties::{WriterProperties, WriterPropertiesBuilder, Write
 use parquet::file::writer::SerializedFileWriter;
 use parquet::record::RecordWriter;
 use parquet::schema::types::TypePtr;
-use polars::io::parquet::{BatchedWriter, ZstdLevel};
-use polars::prelude::{ArrowSchema, DataFrame, ParquetCompression, ParquetWriter};
+use polars::io::parquet::BatchedWriter;
+use polars::prelude::DataFrame;
 use polars_arrow::array::Array as PArray;
 use polars_arrow::chunk::Chunk as PChunk;
-use polars_parquet::write::{
-    transverse, CompressionOptions, Encoding, FileWriter, RowGroupIterator, Version, WriteOptions,
-};
+use polars_parquet::write::{transverse, Encoding, FileWriter, RowGroupIterator};
 
-use crate::arrow::nonnull_schema;
 use crate::io::object::{ObjectWriter, ThreadObjectWriter, UnchunkWriter};
 use crate::io::DataSink;
-use crate::util::logging::item_progress;
 
 const BATCH_SIZE: usize = 1024 * 1024;
 const ZSTD_LEVEL: i32 = 3;
-
-/// Open a Parquet writer using BookData defaults.
-fn open_plpq_writer<P: AsRef<Path>>(path: P, schema: ArrowSchema) -> Result<FileWriter<File>> {
-    let compression = CompressionOptions::Zstd(None);
-    let options = WriteOptions {
-        write_statistics: true,
-        version: Version::V2,
-        compression,
-        data_pagesize_limit: None,
-    };
-
-    info!("creating Parquet file {:?}", path.as_ref());
-    let file = OpenOptions::new()
-        .create(true)
-        .truncate(true)
-        .write(true)
-        .open(path)?;
-    let writer = FileWriter::try_new(file, schema, options)?;
-
-    Ok(writer)
-}
-
-/// Open a Polars data frame Parquet writer using BookData defaults.
-pub fn open_polars_writer<P: AsRef<Path>>(path: P) -> Result<ParquetWriter<File>> {
-    info!("creating Parquet file {:?}", path.as_ref());
-    let file = OpenOptions::new()
-        .create(true)
-        .truncate(true)
-        .write(true)
-        .open(path)?;
-    let writer = ParquetWriter::new(file)
-        .with_compression(ParquetCompression::Zstd(Some(ZstdLevel::try_new(
-            ZSTD_LEVEL,
-        )?)))
-        .with_row_group_size(Some(BATCH_SIZE));
-
-    Ok(writer)
-}
 
 pub fn parquet_writer_defaults() -> WriterPropertiesBuilder {
     WriterProperties::builder()
@@ -92,43 +50,6 @@ pub fn open_parquet_writer<P: AsRef<Path>>(
     let writer = SerializedFileWriter::new(file, schema, Arc::new(props))?;
 
     Ok(writer)
-}
-
-/// Save a data frame to a Parquet file.
-pub fn save_df_parquet<P: AsRef<Path>>(df: DataFrame, path: P) -> Result<()> {
-    let path = path.as_ref();
-    debug!("writing file {}", path.display());
-    debug!("{}: schema {:?}", path.display(), df.schema());
-    let mut df = df;
-    let writer = open_polars_writer(path)?;
-    let size = writer
-        .with_row_group_size(Some(BATCH_SIZE))
-        .finish(&mut df)?;
-    debug!("{}: wrote {}", path.display(), friendly::bytes(size));
-    Ok(())
-}
-
-/// Save a data frame to a Prquet file without nulls in the schema.
-pub fn save_df_parquet_nonnull<P: AsRef<Path>>(df: DataFrame, path: P) -> Result<()> {
-    let path = path.as_ref();
-    debug!("writing file {}", path.display());
-    debug!("{}: initial schema {:?}", path.display(), df.schema());
-    let schema = nonnull_schema(&df);
-    debug!("{}: nonnull schema {:?}", path.display(), schema);
-    let mut writer = open_plpq_writer(path, schema)?;
-    let pb = item_progress(df.n_chunks(), "writing chunks");
-    for chunk in df.iter_chunks(false) {
-        writer.write_object(chunk)?;
-        pb.tick();
-    }
-    let size = writer.end(None)?;
-    debug!(
-        "{}: wrote {} chunks in {}",
-        path.display(),
-        df.n_chunks(),
-        friendly::bytes(size)
-    );
-    Ok(())
 }
 
 /// Parquet table writer.

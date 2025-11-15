@@ -10,18 +10,8 @@ use log::*;
 use parquet::file::reader::{ChunkReader, FileReader};
 use parquet::file::serialized_reader::SerializedFileReader;
 use parquet::record::RecordReader;
-use polars::prelude::*;
 
 use crate::util::logging::{item_progress, measure_and_send, meter_bar};
-
-/// Scan a Parquet file into a data frame.
-pub fn scan_df_parquet<P: AsRef<Path>>(file: P) -> Result<LazyFrame> {
-    let file = file.as_ref();
-    debug!("scanning file {}", file.display());
-    let df = LazyFrame::scan_parquet(file, ScanArgsParquet::default())?;
-    debug!("{}: schema {:?}", file.display(), df.schema()?);
-    Ok(df)
-}
 
 /// Iterator over deserialized records from a Parquet file.
 pub struct RecordIter<R>
