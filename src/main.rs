@@ -11,7 +11,6 @@ mod cli;
 mod gender;
 mod goodreads;
 mod ids;
-mod interactions;
 mod io;
 mod layout;
 mod marc;
