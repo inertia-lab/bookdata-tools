@@ -14,8 +14,8 @@ stages:
       size: 4095
     - path: ../src/marc
       hash: md5
-      md5: 3641d210003d76bb829c4f9b9c6085a2.dir
-      size: 23134
+      md5: 9100fbb7a104865d91de69fc07a31695.dir
+      size: 23137
       nfiles: 5
     outs:
     - path: viaf.parquet
@@ -40,8 +40,8 @@ stages:
     deps:
     - path: author-genders.sql
       hash: md5
-      md5: cdac4515a73f6d34ab540b78611d1e09
-      size: 212
+      md5: 75c60daf97a5826c6b180ea9055a7bc4
+      size: 254
     - path: viaf.parquet
       hash: md5
       md5: 15da0b8c32266ed1582deb9ea4db5630
@@ -49,8 +49,8 @@ stages:
     outs:
     - path: author-genders.parquet
       hash: md5
-      md5: edcaa024c8964be316c5a8589ae20a00
-      size: 113256862
+      md5: 497d9dcbbd5f0545e3c129d240fe7e43
+      size: 113243219
   index-names:
     cmd: cargo run --release -- index-names --marc-authorities viaf.parquet 
       author-name-index.parquet
