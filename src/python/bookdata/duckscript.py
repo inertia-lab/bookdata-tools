@@ -22,24 +22,22 @@ Options:
 
 from __future__ import annotations
 
+import logging
 import re
 from pathlib import Path
 
 from docopt import docopt
 from duckdb import DuckDBPyConnection, Statement, StatementType, connect, extract_statements
-from lenskit.logging import LoggingConfig, get_logger
 
 from bookdata.codes import register_udfs
+from bookdata.logging import setup_logging
 
-logger = get_logger("poprox_recommender.data.duckscript")
+logger = logging.getLogger(__name__)
 
 
 def main():
     options = docopt(__doc__ or "")
-    log_cfg = LoggingConfig()
-    if options["--verbose"]:
-        log_cfg.set_verbose(True)
-    log_cfg.apply()
+    setup_logging(options["--verbose"])
 
     db_path = options["--database"]
     if db_path:
@@ -70,8 +68,8 @@ def _run_script(db: DuckDBPyConnection, script: Path):
     logger.info("running %d statements from %s", len(statements), script)
 
     for stmt in statements:
-        logger.debug("executing %s statement", stmt.type, query=stmt.query.strip())
-        if stmt.type == StatementType.SELECT_STATEMENT:
+        logger.debug("executing %s statement: %s", stmt.type, stmt.query.strip())
+        if stmt.type == StatementType.SELECT:  # type: ignore
             # SELECT statements are just to print intermediate results
             logger.info("executed SELECT")
             print(db.query(stmt.query))
@@ -79,11 +77,11 @@ def _run_script(db: DuckDBPyConnection, script: Path):
             # all other statement types we execute.
             db.execute(stmt)
             res = db.fetchone()
-            meta = {}
             if res is not None:
                 (n,) = res
-                meta["rows"] = n
-            logger.info("executed %s", _pretty_query(stmt), type=str(stmt.type), **meta)
+                logger.info("executed %s (%d rows)", _pretty_query(stmt), n)
+            else:
+                logger.info("executed %s", _pretty_query(stmt))
 
 
 def _pretty_query(stmt: Statement) -> str:
@@ -94,7 +92,7 @@ def _pretty_query(stmt: Statement) -> str:
     if m:
         pretty = m.group(1)
     else:
-        logger.warn("unparsable query: %s", query)
+        logger.warning("unparsable query: %s", query)
         pretty = query
     pretty = re.sub(r"\s+", " ", pretty)
     return pretty
