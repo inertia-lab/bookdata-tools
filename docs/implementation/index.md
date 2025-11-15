@@ -22,12 +22,13 @@ These goals are realized through a few technology and design decisions:
 1. Add the new data file(s), if necessary, to `data`, and update the
    documentation to describe how to download them.
 2. Implement a `scan` stage to process the raw imported data into tabular form.
-   The code can be written in either Rust or Python, depending on performance
-   needs.
+   The code can be written in either Rust, Python, or DuckDB SQL, depending on
+   performance needs.
 3. If necessary, add the inputs to the ISBN collection (under `book-links`) and clustering
    to connect it with the rest of the code.
-4. Implement stages to integrate the data with the rest of the tools.  Again, this
-   code can be in Rust or Python.  We usually use Polars (either the Rust or the Python
-   API) to efficiently process large data files.
+4. Implement stages to integrate the data with the rest of the tools.  Again,
+   this code can be in Rust, Python, or SQL.  We usually use DuckDB to
+   efficiently process large data files, except in cases where writing data
+   processing code directly in Rust is more efficient.
 
 See the [Pipeline DSL](pipeline.md) for information about how to update the pipeline.
