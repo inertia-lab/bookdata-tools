@@ -1,9 +1,10 @@
 //! GoodReads book identifier and linking support.
 use std::{collections::HashMap, fs::File};
 
-use anyhow::Result;
+use anyhow::{anyhow, Result};
+use arrow::array::{Array, Int32Array};
 use log::*;
-use polars::prelude::*;
+use parquet::arrow::{arrow_reader::ParquetRecordBatchReaderBuilder, ProjectionMask};
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -38,22 +39,51 @@ impl BookLinkRecord {
 pub fn load_id_links() -> Result<BookLinkMap> {
     let path = GR_LINK_FILE.resolve()?;
     let file = File::open(path)?;
-    let pqf = ParquetReader::new(file);
-    let df = pqf.finish()?;
 
-    let mut map = HashMap::with_capacity(df.height());
+    let builder = ParquetRecordBatchReaderBuilder::try_new(file)?;
+    let meta = builder.metadata();
+    let n_rows = meta.file_metadata().num_rows();
+    let project = ProjectionMask::columns(
+        meta.file_metadata().schema_descr(),
+        ["book_id", "work_id", "cluster"],
+    );
+    let reader = builder.with_projection(project).build()?;
 
-    let c_book = df.column("book_id")?.i32()?;
-    let c_work = df.column("work_id")?.i32()?;
-    let c_cluster = df.column("cluster")?.i32()?;
+    let mut map = HashMap::with_capacity(n_rows as usize);
 
-    for i in 0..df.height() {
-        let rec: BookLinkRecord = BookLinkRecord {
-            book_id: c_book.get(i).unwrap(),
-            work_id: c_work.get(i),
-            cluster: c_cluster.get(i).unwrap(),
-        };
-        map.insert(rec.book_id, rec);
+    for batch in reader {
+        let batch = batch?;
+        assert_eq!(batch.schema().field(0).name(), "book_id");
+        assert_eq!(batch.schema().field(1).name(), "work_id");
+        assert_eq!(batch.schema().field(2).name(), "cluster");
+        let book_id_col = batch
+            .column(0)
+            .as_any()
+            .downcast_ref::<Int32Array>()
+            .ok_or_else(|| anyhow!("invalid book_id column"))?;
+        let work_id_col = batch
+            .column(1)
+            .as_any()
+            .downcast_ref::<Int32Array>()
+            .ok_or_else(|| anyhow!("invalid work_id column"))?;
+        let cluster_col = batch
+            .column(2)
+            .as_any()
+            .downcast_ref::<Int32Array>()
+            .ok_or_else(|| anyhow!("invalid cluster column"))?;
+
+        for i in 0..batch.num_rows() {
+            let rec: BookLinkRecord = BookLinkRecord {
+                book_id: book_id_col.value(i),
+                work_id: if work_id_col.is_valid(i) {
+                    Some(work_id_col.value(i))
+                } else {
+                    None
+                },
+                cluster: cluster_col.value(i),
+            };
+            map.insert(rec.book_id, rec);
+        }
     }
 
     info!("read {} book links from {}", map.len(), GR_LINK_FILE);
