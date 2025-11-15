@@ -14,11 +14,6 @@ use parquet::file::properties::{WriterProperties, WriterPropertiesBuilder, Write
 use parquet::file::writer::SerializedFileWriter;
 use parquet::record::RecordWriter;
 use parquet::schema::types::TypePtr;
-use polars::io::parquet::BatchedWriter;
-use polars::prelude::DataFrame;
-use polars_arrow::array::Array as PArray;
-use polars_arrow::chunk::Chunk as PChunk;
-use polars_parquet::write::{transverse, Encoding, FileWriter, RowGroupIterator};
 
 use crate::io::object::{ObjectWriter, ThreadObjectWriter, UnchunkWriter};
 use crate::io::DataSink;
@@ -164,33 +159,6 @@ where
     }
 }
 
-/// Implementation of object writer for Polars Arrow writers
-impl<W> ObjectWriter<PChunk<Box<dyn PArray + 'static>>> for FileWriter<W>
-where
-    W: Write,
-{
-    fn write_object(&mut self, chunk: PChunk<Box<dyn PArray + 'static>>) -> Result<()> {
-        let schema = self.schema();
-        let encodings: Vec<_> = schema
-            .fields
-            .iter()
-            .map(|f| transverse(&f.data_type, |_| Encoding::Plain))
-            .collect();
-        let options = self.options();
-        let chunks = vec![Ok(chunk)];
-        let groups = RowGroupIterator::try_new(chunks.into_iter(), &schema, options, encodings)?;
-        for group in groups {
-            self.write(group?)?;
-        }
-        Ok(())
-    }
-
-    fn finish(mut self) -> Result<usize> {
-        self.end(None)?;
-        Ok(0)
-    }
-}
-
 impl<W> ObjectWriter<RecordBatch> for ArrowWriter<W>
 where
     W: Write + Send,
@@ -222,21 +190,5 @@ where
     fn finish(self) -> Result<usize> {
         self.close()?;
         Ok(0)
-    }
-}
-
-/// Implementation of object writer for Polars Parquet batched writer
-impl<W> ObjectWriter<DataFrame> for BatchedWriter<W>
-where
-    W: Write,
-{
-    fn write_object(&mut self, df: DataFrame) -> Result<()> {
-        self.write_batch(&df)?;
-        Ok(())
-    }
-
-    fn finish(mut self) -> Result<usize> {
-        let size = BatchedWriter::finish(&mut self)?;
-        Ok(size as usize)
     }
 }
