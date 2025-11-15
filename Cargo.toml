@@ -60,14 +60,6 @@ unicode-normalization = "0.1"
 arrow = "~55"
 parquet = "~55"
 parquet_derive = "~55"
-polars = { version = "~0.37", default-features = false, features = ["parquet", "csv", "lazy", "dtype-slim", "dtype-i8", "dtype-u8", "dtype-i16", "dtype-u16" # "dtype-full",
-] }
-# we need direct access to the Polars arrow & Parquet backends
-# they have vendored & taken over maintenance of arrow2/parquet2
-polars-arrow = "~0.37"
-# include direct polars-core for docs to work
-polars-core = "~0.37"
-polars-parquet = "~0.37"
 
 # we use snmalloc, since allocate and free across threads is common
 # snmalloc-rs = { version = "^0.3.8", features = ["build_cc", "lto"] }
