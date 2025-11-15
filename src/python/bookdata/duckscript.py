@@ -71,7 +71,7 @@ def _run_script(db: DuckDBPyConnection, script: Path):
 
     for stmt in statements:
         logger.debug("executing %s statement", stmt.type, query=stmt.query.strip())
-        if stmt.type == StatementType.SELECT:
+        if stmt.type == StatementType.SELECT_STATEMENT:
             # SELECT statements are just to print intermediate results
             logger.info("executed SELECT")
             print(db.query(stmt.query))
