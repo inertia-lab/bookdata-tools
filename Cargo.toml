@@ -57,9 +57,9 @@ unicode-normalization = "0.1"
 
 # heavy use of the Polars data processing engine
 # apache parquet
-arrow = "~55"
-parquet = "~55"
-parquet_derive = "~55"
+arrow = "~57"
+parquet = "~57"
+parquet_derive = "~57"
 
 # we use snmalloc, since allocate and free across threads is common
 # snmalloc-rs = { version = "^0.3.8", features = ["build_cc", "lto"] }

@@ -170,7 +170,7 @@ where
 
     fn finish(self) -> Result<usize> {
         let meta = self.close()?;
-        Ok(meta.num_rows as usize)
+        Ok(meta.file_metadata().num_rows() as usize)
     }
 }
 
