@@ -1,6 +1,7 @@
 //! Read cluster information.
 use std::collections::HashMap;
 use std::convert::identity;
+use std::fs::File;
 use std::path::Path;
 
 use super::authors::AuthorTable;
@@ -9,8 +10,12 @@ use crate::gender::*;
 use crate::prelude::*;
 use crate::util::logging::item_progress;
 use anyhow::Result;
+use arrow::array::Int32Array;
+use arrow::compute::kernels;
+use arrow::datatypes::DataType;
+use parquet::arrow::arrow_reader::ParquetRecordBatchReaderBuilder;
+use parquet::arrow::ProjectionMask;
 use parquet_derive::ParquetRecordReader;
-use polars::prelude::*;
 
 /// Record for storing a cluster's gender statistics while aggregating.
 #[derive(Debug, Default)]
@@ -61,17 +66,31 @@ pub fn read_resolve(path: &Path, authors: &AuthorTable) -> Result<ClusterTable> 
 /// Read the full list of cluster IDs.
 pub fn all_clusters<P: AsRef<Path>>(path: P) -> Result<Vec<i32>> {
     info!("reading cluster IDs from {}", path.as_ref().display());
-    let path = path
-        .as_ref()
-        .to_str()
-        .map(|s| s.to_string())
-        .ok_or(anyhow!("invalid unicode path"))?;
-    let df = LazyFrame::scan_parquet(path, Default::default())?;
-    let df = df.select([col("cluster")]);
-    let clusters = df.collect()?;
-    let ids = clusters.column("cluster")?.i32()?;
+    let path = path.as_ref();
+    let file = File::open(&path)?;
+    let builder = ParquetRecordBatchReaderBuilder::try_new(file)?;
+    let meta = builder.metadata().clone();
+    let schema = builder.parquet_schema();
+    let project = ProjectionMask::columns(schema, ["cluster"]);
+
+    let reader = builder.with_projection(project).build()?;
+    let mut ids = Vec::with_capacity(meta.file_metadata().num_rows() as usize);
+
+    let pb = item_progress(meta.file_metadata().num_rows() as usize, "clusters");
+    for rb in reader {
+        let rb = rb?;
+        assert_eq!(rb.schema().field(0).name(), "cluster");
+        let col = rb.column(0);
+        let col = kernels::cast(col, &DataType::Int32)?;
+        let col = col
+            .as_any()
+            .downcast_ref::<Int32Array>()
+            .ok_or_else(|| anyhow!("invalid type for cluster field"))?;
+        ids.extend(col.iter().filter_map(identity));
+        pb.inc(col.len() as u64);
+    }
+    pb.finish();
 
     info!("found {} cluster IDs", ids.len());
-
-    Ok(ids.into_iter().filter_map(identity).collect())
+    Ok(ids)
 }

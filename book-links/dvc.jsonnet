@@ -100,9 +100,9 @@ bd.pipeline({
 
   'cluster-genders': {
     wdir: '..',
-    cmd: bd.cmd('cluster extract-author-gender -o book-links/cluster-genders.parquet -A book-links/cluster-first-authors.parquet'),
+    cmd: bd.cmd('cluster-gender -o book-links/cluster-genders.parquet -A book-links/cluster-first-authors.parquet'),
     deps: [
-      'src/cli/cluster',
+      'src/cli/cluster_gender',
       'book-links/cluster-stats.parquet',
       'book-links/cluster-first-authors.parquet',
       'viaf/author-name-index.parquet',

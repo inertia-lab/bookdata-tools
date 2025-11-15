@@ -5,7 +5,7 @@
 //! implemented as subcommands.  Each subcommand implements the [Command] trait, which
 //! exposes the command line arguments and invocation.
 pub mod bx;
-pub mod cluster;
+pub mod cluster_gender;
 pub mod goodreads;
 pub mod index_names;
 pub mod openlib;
@@ -64,23 +64,16 @@ pub enum RootCommand {
     /// Commands for processing GoodReads data.
     Goodreads(goodreads::Goodreads),
     /// Commands for working with clusters.
-    Cluster(ClusterCommandWrapper),
+    ClusterGender(cluster_gender::AuthorGender),
 }
 
 wrap_subcommands!(BXCommand);
-wrap_subcommands!(ClusterCommand);
 
 #[enum_dispatch(Command)]
 #[derive(Subcommand, Debug)]
 enum BXCommand {
     /// Extract BX from source data and clean.
     Extract(bx::Extract),
-}
-
-#[enum_dispatch(Command)]
-#[derive(Subcommand, Debug)]
-pub enum ClusterCommand {
-    ExtractAuthorGender(cluster::author_gender::AuthorGender),
 }
 
 /// Entry point for the Book Data Tools.
