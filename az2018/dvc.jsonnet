@@ -27,14 +27,13 @@ local source_stages = {
 
 bd.pipeline(source_stages[bd.config.az2018.source] {
   'cluster-ratings': {
-    wdir: '..',
     cmd: 'duckscript az-cluster-ratings.sql',
     deps: [
       'az-cluster-ratings.sql',
-      'az2018/ratings.parquet',
-      'book-links/isbn-clusters.parquet',
+      'ratings.parquet',
+      '../book-links/isbn-clusters.parquet',
     ],
-    outs: ['az2018/az-cluster-ratings.parquet'],
+    outs: ['az-cluster-ratings.parquet'],
   },
 
   'cluster-ratings-5core': {

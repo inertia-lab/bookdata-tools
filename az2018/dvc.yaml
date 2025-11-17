@@ -3,11 +3,10 @@ stages:
     cmd: duckscript az-cluster-ratings.sql
     deps:
       - az-cluster-ratings.sql
-      - az2018/ratings.parquet
-      - book-links/isbn-clusters.parquet
+      - ratings.parquet
+      - ../book-links/isbn-clusters.parquet
     outs:
-      - az2018/az-cluster-ratings.parquet
-    wdir: ..
+      - az-cluster-ratings.parquet
   cluster-ratings-5core:
     cmd: python ../scripts/kcore.py -o az-cluster-ratings-5core.parquet az-cluster-ratings.parquet
     deps:

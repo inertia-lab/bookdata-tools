@@ -11,14 +11,13 @@ bd.pipeline({
   },
 
   'cluster-ratings': {
-    wdir: '..',
     cmd: 'duckscript az-cluster-ratings.sql',
     deps: [
       'az-cluster-ratings.sql',
-      'az2014/ratings.parquet',
-      'book-links/isbn-clusters.parquet',
+      'ratings.parquet',
+      '../book-links/isbn-clusters.parquet',
     ],
-    outs: ['az2014/az-cluster-ratings.parquet'],
+    outs: ['az-cluster-ratings.parquet'],
   },
 
   'cluster-ratings-5core': {
