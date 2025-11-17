@@ -205,21 +205,21 @@ stages:
     deps:
     - path: gr-book-link.parquet
       hash: md5
-      md5: de89a4c55136745ec8e74bd9bfb45356
-      size: 19964329
+      md5: 2f7e93647c5107cfbde560e6da3676a7
+      size: 30995622
     - path: gr-interactions.parquet
       hash: md5
-      md5: 6240470ddee327bbb13b00f296c16c6b
-      size: 3766175599
+      md5: 2beffb5821477cc18d7addd94131d597
+      size: 3788954310
     - path: gr-work-actions.sql
       hash: md5
-      md5: fbb52ab9e617e5599507f66077df0071
-      size: 548
+      md5: e8b86aef98602b6f5fc21555ccc204e5
+      size: 544
     outs:
     - path: gr-work-actions.parquet
       hash: md5
-      md5: 3aa9e3c0250f9bfbc6bb5da08e995e1c
-      size: 1392860250
+      md5: 974fce6d07967170d9364c4887517a4f
+      size: 1392820777
   work-gender:
     cmd: duckscript gr-work-item-gender.sql
     deps:
@@ -522,39 +522,41 @@ stages:
       md5: a781c1187ee36e5f95c3315ddec01b75
       size: 1473323208
   cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o gr-cluster-ratings-5core.parquet 
+    cmd: python ../scripts/kcore.py -o gr-cluster-ratings-5core.parquet 
       gr-cluster-ratings.parquet
     deps:
-    - path: ../src/cli/kcore.rs
+    - path: ../scripts/kcore.py
       hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
+      md5: 3885126eed8aabff7da2f1a8541fd491
+      size: 3440
+      isexec: true
     - path: gr-cluster-ratings.parquet
       hash: md5
-      md5: 0b7d4d05919f5e674a60813ed24424e0
-      size: 772173497
+      md5: 7d6c50935f74dfa415549662709bb910
+      size: 639303080
     outs:
     - path: gr-cluster-ratings-5core.parquet
       hash: md5
-      md5: 26ce276aba1369db8f39d78ef7ccaf05
-      size: 753852532
+      md5: 2434aa88c1a30cb39fc113942ff5d5fc
+      size: 628869618
   cluster-actions-5core:
-    cmd: cargo run --release -- kcore -o gr-cluster-actions-5core.parquet 
+    cmd: python ../scripts/kcore.py -o gr-cluster-actions-5core.parquet 
       gr-cluster-actions.parquet
     deps:
-    - path: ../src/cli/kcore.rs
+    - path: ../scripts/kcore.py
       hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
+      md5: 3885126eed8aabff7da2f1a8541fd491
+      size: 3440
+      isexec: true
     - path: gr-cluster-actions.parquet
       hash: md5
-      md5: 5db327b8d6a8f07c64c4c73cf2b8d61c
-      size: 1465741747
+      md5: e6ce1a8c1d10b85d3fcbf91f96170c8e
+      size: 1372901034
     outs:
     - path: gr-cluster-actions-5core.parquet
       hash: md5
-      md5: b3ddbaf06b9876d6f8b7e63189bf81ea
-      size: 1454641544
+      md5: a83d4443c268d1622e6ecc0890283c85
+      size: 1365275090
   work-ratings-5core:
     cmd: python ../scripts/kcore.py -o gr-work-ratings-5core.parquet 
       gr-work-ratings.parquet
@@ -850,19 +852,20 @@ stages:
       md5: 809fd7bc7ea91c2298414ea253a55223
       size: 1438903898
   work-actions-15core:
-    cmd: cargo run --release -- kcore --user-k 15 --item-k 15 -o 
+    cmd: python ../scripts/kcore.py --user-k 15 --item-k 15 -o 
       gr-work-actions-15core.parquet gr-work-actions.parquet
     deps:
-    - path: ../src/cli/kcore.rs
+    - path: ../scripts/kcore.py
       hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
+      md5: 3885126eed8aabff7da2f1a8541fd491
+      size: 3440
+      isexec: true
     - path: gr-work-actions.parquet
       hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
+      md5: 974fce6d07967170d9364c4887517a4f
+      size: 1392820777
     outs:
     - path: gr-work-actions-15core.parquet
       hash: md5
-      md5: 809fd7bc7ea91c2298414ea253a55223
-      size: 1438903898
+      md5: 2ff122c206a24cb33ec59f6a368ac6b7
+      size: 1362368680

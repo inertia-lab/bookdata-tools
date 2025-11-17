@@ -9,13 +9,13 @@ stages:
       size: 2255
     - path: book-links/cluster-stats.parquet
       hash: md5
-      md5: a11e1f600c7d81d7ee0e52228b29442f
-      size: 196946052
+      md5: 20b94014f6963ad37951a494deaae929
+      size: 196794193
     outs:
     - path: ClusterStats.ipynb
       hash: md5
-      md5: 024fd84fd4fd749e884782f8b64e9fe9
-      size: 112847
+      md5: 40aad95f9ed5f8a0c35654f1b0fbb695
+      size: 113149
   html-report@ClusterStats:
     cmd: jupyter nbconvert --to html "ClusterStats.ipynb"
     deps:
@@ -37,13 +37,13 @@ stages:
       size: 4155
     - path: book-links/gender-stats.csv
       hash: md5
-      md5: 6cff2d4c5ac25c5e0ceec0c1d266136d
+      md5: 3e0d143606c60ac5c246fc8d64237d07
       size: 966
     outs:
     - path: LinkageStats.ipynb
       hash: md5
-      md5: 3494224f7310b61e96d81325625396f9
-      size: 270800
+      md5: a02716f8791849852008ebb3e4b64901
+      size: 271556
   html-report@LinkageStats:
     cmd: jupyter nbconvert --to html "LinkageStats.ipynb"
     deps:
@@ -389,12 +389,12 @@ stages:
     deps:
     - path: az2018/az-cluster-ratings.parquet
       hash: md5
-      md5: a5f20778e75b73fbd97d1fbef43c80fa
-      size: 1162649528
+      md5: 6a4b096e101bd704e2ccf94bb226a841
+      size: 1161641499
     outs:
     - path: az2018/az-cluster-ratings.json
       hash: md5
-      md5: 821e3e147e7fa935cc337173ae9fdbbd
+      md5: e681c7dab60a9dfe65f81d055405f7b4
       size: 554
   schema@az2014/az-cluster-ratings-5core:
     cmd: pq-info -o az2014/az-cluster-ratings-5core.json 
@@ -402,12 +402,12 @@ stages:
     deps:
     - path: az2014/az-cluster-ratings-5core.parquet
       hash: md5
-      md5: eb68910002f1a817281130d8f636f393
-      size: 140637810
+      md5: 52d4dd646d9cc5d83567fbdeacd98734
+      size: 140847938
     outs:
     - path: az2014/az-cluster-ratings-5core.json
       hash: md5
-      md5: f8471b958c60aefff8a9a05c4c2c2862
+      md5: 00c2286ebe6c529019308360f2dcb2e4
       size: 552
   schema@az2014/ratings:
     cmd: pq-info -o az2014/ratings.json az2014/ratings.parquet
@@ -427,12 +427,12 @@ stages:
     deps:
     - path: az2018/az-cluster-ratings-5core.parquet
       hash: md5
-      md5: 349ca3fb04490209a415f37383391156
-      size: 426720330
+      md5: dfc70ba33d0e6e347f980a3493b54170
+      size: 426770262
     outs:
     - path: az2018/az-cluster-ratings-5core.json
       hash: md5
-      md5: 8ba0cbe13a30d7a48ffbc5d3997f693b
+      md5: 4fe7ad769162bdd42e0f3a29bfde869f
       size: 553
   schema@az2014/az-cluster-ratings:
     cmd: pq-info -o az2014/az-cluster-ratings.json 
@@ -440,12 +440,12 @@ stages:
     deps:
     - path: az2014/az-cluster-ratings.parquet
       hash: md5
-      md5: 107cf25d0444cdef61fbfde655828aec
-      size: 520831049
+      md5: 98ed43aad147eeb0c2677200c4c5a156
+      size: 521219867
     outs:
     - path: az2014/az-cluster-ratings.json
       hash: md5
-      md5: 080aa9dc69f373b8de27e89cb8d7b608
+      md5: 7319176da77a4761463937cc2104bb61
       size: 553
   schema@az2018/ratings:
     cmd: pq-info -o az2018/ratings.json az2018/ratings.parquet
@@ -597,44 +597,43 @@ stages:
       md5: 61954e3ac960321b87ea8b60fd00bd97
       size: 517
   schema@goodreads/gr-cluster-ratings-5core:
-    cmd: cargo run --release -- pq-info -o 
-      goodreads/gr-cluster-ratings-5core.json 
+    cmd: pq-info -o goodreads/gr-cluster-ratings-5core.json 
       goodreads/gr-cluster-ratings-5core.parquet
     deps:
     - path: goodreads/gr-cluster-ratings-5core.parquet
       hash: md5
-      md5: 26ce276aba1369db8f39d78ef7ccaf05
-      size: 753852532
+      md5: 2434aa88c1a30cb39fc113942ff5d5fc
+      size: 628869618
     outs:
     - path: goodreads/gr-cluster-ratings-5core.json
       hash: md5
-      md5: 84be3348d48654dd7f3b4c7d0d6be3f7
-      size: 709
+      md5: c0d49d93f19cf8afb9815a596a9343bb
+      size: 467
   schema@book-links/cluster-ol-first-authors:
     cmd: pq-info -o book-links/cluster-ol-first-authors.json 
       book-links/cluster-ol-first-authors.parquet
     deps:
     - path: book-links/cluster-ol-first-authors.parquet
       hash: md5
-      md5: 8164557d14f10147bb2d28c6f0a880a1
-      size: 116
+      md5: 520f241036ef0775e91faa6a9b3b98f5
+      size: 371411571
     outs:
     - path: book-links/cluster-ol-first-authors.json
       hash: md5
-      md5: ae902eb5db6390d8263bf40f1143d214
-      size: 194
+      md5: e1774f7564ffddd60e70ea35ac3626d6
+      size: 207
   schema@book-links/isbn-clusters:
     cmd: pq-info -o book-links/isbn-clusters.json 
       book-links/isbn-clusters.parquet
     deps:
     - path: book-links/isbn-clusters.parquet
       hash: md5
-      md5: 39635232fefd36f6de98f6e2d84ab7f5
-      size: 410037019
+      md5: 148489bff3afb0e243848e2c8ff4d6ef
+      size: 409776085
     outs:
     - path: book-links/isbn-clusters.json
       hash: md5
-      md5: a2d42454373a430e309df10e7cf8eeb7
+      md5: dc276833b43d6b3f0cbf318cf29cf0a2
       size: 265
   schema@book-links/cluster-genders:
     cmd: pq-info -o book-links/cluster-genders.json 
@@ -642,27 +641,26 @@ stages:
     deps:
     - path: book-links/cluster-genders.parquet
       hash: md5
-      md5: 94ababa3ac9cdcbd7c1fa8ad2b6b06a4
-      size: 148470915
+      md5: fff214a371284f099c59e485534e9b7a
+      size: 207992345
     outs:
     - path: book-links/cluster-genders.json
       hash: md5
-      md5: 459477ae7084e002747fb58a90fb98c6
+      md5: 0ddd079dcda5ca7490a12988cf5e632b
       size: 202
   schema@goodreads/gr-cluster-actions-5core:
-    cmd: cargo run --release -- pq-info -o 
-      goodreads/gr-cluster-actions-5core.json 
+    cmd: pq-info -o goodreads/gr-cluster-actions-5core.json 
       goodreads/gr-cluster-actions-5core.parquet
     deps:
     - path: goodreads/gr-cluster-actions-5core.parquet
       hash: md5
-      md5: b3ddbaf06b9876d6f8b7e63189bf81ea
-      size: 1454641544
+      md5: a83d4443c268d1622e6ecc0890283c85
+      size: 1365275090
     outs:
     - path: goodreads/gr-cluster-actions-5core.json
       hash: md5
-      md5: 2c5caab73ce95601ed08e238c4a18b9e
-      size: 621
+      md5: 56bc19fb38e3b31a471558bccf12f793
+      size: 469
   schema@book-links/cluster-graph-edges:
     cmd: cargo run --release -- pq-info -o book-links/cluster-graph-edges.json 
       book-links/cluster-graph-edges.parquet
@@ -702,31 +700,31 @@ stages:
       md5: f71090c27c503431099984c11f37b4c8
       size: 468
   schema@goodreads/gr-work-actions:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions.json 
+    cmd: pq-info -o goodreads/gr-work-actions.json 
       goodreads/gr-work-actions.parquet
     deps:
     - path: goodreads/gr-work-actions.parquet
       hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
+      md5: 974fce6d07967170d9364c4887517a4f
+      size: 1392820777
     outs:
     - path: goodreads/gr-work-actions.json
       hash: md5
-      md5: d8d789f6680dfcfcd8e25006ee28fdf0
-      size: 621
+      md5: a1668f0f6d4e1deeb22fccbb94189c0b
+      size: 469
   schema@book-links/cluster-loc-first-authors:
     cmd: pq-info -o book-links/cluster-loc-first-authors.json 
       book-links/cluster-loc-first-authors.parquet
     deps:
     - path: book-links/cluster-loc-first-authors.parquet
       hash: md5
-      md5: 8164557d14f10147bb2d28c6f0a880a1
-      size: 116
+      md5: cf830cd84fc1c9deaceee241f1291d1a
+      size: 50844750
     outs:
     - path: book-links/cluster-loc-first-authors.json
       hash: md5
-      md5: ae902eb5db6390d8263bf40f1143d214
-      size: 194
+      md5: 7dfdf3e743408580cf3c4e4e831ff4ff
+      size: 205
   schema@goodreads/gr-work-ratings-5core:
     cmd: pq-info -o goodreads/gr-work-ratings-5core.json 
       goodreads/gr-work-ratings-5core.parquet
@@ -746,25 +744,25 @@ stages:
     deps:
     - path: book-links/cluster-first-authors.parquet
       hash: md5
-      md5: 8164557d14f10147bb2d28c6f0a880a1
-      size: 116
+      md5: af48cfca06dffe0edf0f9328d07b59a0
+      size: 431086237
     outs:
     - path: book-links/cluster-first-authors.json
       hash: md5
-      md5: ae902eb5db6390d8263bf40f1143d214
-      size: 194
+      md5: 79479dd5214badc056f766ffdd942552
+      size: 207
   schema@book-links/cluster-hashes:
     cmd: pq-info -o book-links/cluster-hashes.json 
       book-links/cluster-hashes.parquet
     deps:
     - path: book-links/cluster-hashes.parquet
       hash: md5
-      md5: 80f5f5ae51fe18e1954344188e6bf021
-      size: 529444634
+      md5: 2417e97431cc0fd3898990a57ba76bac
+      size: 529488001
     outs:
     - path: book-links/cluster-hashes.json
       hash: md5
-      md5: d77042709414000cd4e7e3e5e9971ea2
+      md5: b490266efea232701b5d0534d4da10d2
       size: 205
   schema@goodreads/gr-cluster-actions:
     cmd: pq-info -o goodreads/gr-cluster-actions.json 
@@ -798,12 +796,12 @@ stages:
     deps:
     - path: book-links/cluster-stats.parquet
       hash: md5
-      md5: a11e1f600c7d81d7ee0e52228b29442f
-      size: 196946052
+      md5: 20b94014f6963ad37951a494deaae929
+      size: 196794193
     outs:
     - path: book-links/cluster-stats.json
       hash: md5
-      md5: 8776ebc052908db791df154a9b6196a4
+      md5: 5306ccaa3a367927fe40abb228549814
       size: 610
   schema@goodreads/gr-cluster-ratings:
     cmd: pq-info -o goodreads/gr-cluster-ratings.json 
@@ -1348,18 +1346,18 @@ stages:
       md5: f76f9f382d3d0c4ad8bd63efc1120e50
       size: 621
   schema@goodreads/gr-work-actions-15core:
-    cmd: cargo run --release -- pq-info -o goodreads/gr-work-actions-15core.json
+    cmd: pq-info -o goodreads/gr-work-actions-15core.json 
       goodreads/gr-work-actions-15core.parquet
     deps:
     - path: goodreads/gr-work-actions-15core.parquet
       hash: md5
-      md5: 809fd7bc7ea91c2298414ea253a55223
-      size: 1438903898
+      md5: 2ff122c206a24cb33ec59f6a368ac6b7
+      size: 1362368680
     outs:
     - path: goodreads/gr-work-actions-15core.json
       hash: md5
-      md5: f76f9f382d3d0c4ad8bd63efc1120e50
-      size: 621
+      md5: 24e6ed451f031b0c845d02e555bb0368
+      size: 469
   schema@book-links/book-graph-nodes:
     cmd: pq-info -o book-links/book-graph-nodes.json 
       book-links/book-graph-nodes.parquet
