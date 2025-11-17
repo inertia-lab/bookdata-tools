@@ -8,11 +8,9 @@ use serde::Serialize;
 
 mod chunks;
 mod thread;
-mod transform;
 
 pub use chunks::{ChunkWriter, UnchunkWriter};
 pub use thread::ThreadObjectWriter;
-pub use transform::MapWriter;
 
 /// Trait for writing objects to some kind of sink.
 pub trait ObjectWriter<T>: Sized {
@@ -44,18 +42,6 @@ pub trait ObjectWriter<T>: Sized {
 
     /// Finish and close the target.
     fn finish(self) -> Result<usize>;
-
-    /// Wrap this object writer in a transformed writer.
-    fn with_transform<F, T2>(self, transform: F) -> MapWriter<F, T2, T, Self>
-    where
-        F: Fn(T2) -> Result<T>,
-    {
-        MapWriter {
-            _phantom: PhantomData,
-            transform,
-            writer: self,
-        }
-    }
 }
 
 /// References can be used as object writers; however, [ObjectWriter::finish] must
