@@ -1,36 +1,30 @@
 {
   "row_count": 218519873,
-  "file_size": 1465741747,
+  "file_size": 1372901034,
   "fields": [
     {
       "name": "user_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "item_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
+    },
+    {
+      "name": "rating",
+      "data_type": "float"
     },
     {
       "name": "first_time",
-      "data_type": "Int64",
-      "nullable": true
+      "data_type": "float"
     },
     {
       "name": "last_time",
-      "data_type": "Int64",
-      "nullable": true
+      "data_type": "float"
     },
     {
       "name": "nactions",
-      "data_type": "UInt32",
-      "nullable": true
-    },
-    {
-      "name": "last_rating",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "int64"
     }
   ]
 }

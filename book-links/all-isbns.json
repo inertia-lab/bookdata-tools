@@ -1,41 +1,34 @@
 {
   "row_count": 44471261,
-  "file_size": 280215236,
+  "file_size": 455391026,
   "fields": [
     {
       "name": "isbn_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "isbn",
-      "data_type": "Utf8",
-      "nullable": true
-    },
-    {
-      "name": "AZ118",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "string"
     },
     {
       "name": "AZ14",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
+    },
+    {
+      "name": "AZ18",
+      "data_type": "int32"
     },
     {
       "name": "GR",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "LOC",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "OL",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     }
   ]
 }

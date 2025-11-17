@@ -1,21 +1,22 @@
 {
   "row_count": 2360655,
-  "file_size": 19964329,
+  "file_size": 30995622,
   "fields": [
     {
       "name": "book_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "work_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
+    },
+    {
+      "name": "item_id",
+      "data_type": "int32"
     },
     {
       "name": "cluster",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     }
   ]
 }

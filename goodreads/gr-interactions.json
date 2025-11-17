@@ -1,56 +1,46 @@
 {
   "row_count": 229154523,
-  "file_size": 3766175599,
+  "file_size": 3788954310,
   "fields": [
     {
       "name": "rec_id",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "review_id",
-      "data_type": "Int64",
-      "nullable": false
+      "data_type": "int64"
     },
     {
       "name": "user_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "book_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "is_read",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "rating",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "float"
     },
     {
       "name": "added",
-      "data_type": "Float32",
-      "nullable": false
+      "data_type": "float"
     },
     {
       "name": "updated",
-      "data_type": "Float32",
-      "nullable": false
+      "data_type": "float"
     },
     {
       "name": "read_started",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "float"
     },
     {
       "name": "read_finished",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "float"
     }
   ]
 }

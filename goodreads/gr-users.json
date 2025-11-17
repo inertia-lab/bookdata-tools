@@ -1,16 +1,14 @@
 {
   "row_count": 876145,
-  "file_size": 18535987,
+  "file_size": 14819627,
   "fields": [
     {
       "name": "user",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "user_hash",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     }
   ]
 }

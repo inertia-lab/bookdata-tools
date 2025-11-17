@@ -45,3 +45,5 @@ db.cfg
 # pixi environments
 .pixi
 *.egg-info
+
+**/*.quarto_ipynb

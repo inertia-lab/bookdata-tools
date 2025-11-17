@@ -32,27 +32,25 @@ stages:
       md5: e122a398de9e64654720f792598b7e1e
       size: 427
   cluster-ratings:
-    cmd: cargo run --release -- amazon cluster-ratings -o 
-      az2018/az-cluster-ratings.parquet az2018/ratings.parquet
+    cmd: duckscript az-cluster-ratings.sql
     deps:
-    - path: az2018/ratings.parquet
+    - path: ../book-links/isbn-clusters.parquet
       hash: md5
-      md5: 31b6a2596a57be584b19291698c0fca6
-      size: 332222776
-    - path: book-links/isbn-clusters.parquet
+      md5: 39635232fefd36f6de98f6e2d84ab7f5
+      size: 410037019
+    - path: az-cluster-ratings.sql
       hash: md5
-      md5: 1f5420bc184b98238f13e1093fcb41b1
-      size: 506027178
-    - path: src/cli/amazon
+      md5: d16c98a7cf0f5c3a5819242d22b6485e
+      size: 500
+    - path: ratings.parquet
       hash: md5
-      md5: 9f38ef337a5585687c8591594263a8c2.dir
-      size: 6197
-      nfiles: 4
+      md5: a2df171717613168bb20e5d6cf977cfb
+      size: 9539279943
     outs:
-    - path: az2018/az-cluster-ratings.parquet
+    - path: az-cluster-ratings.parquet
       hash: md5
-      md5: f051fade383281694e92590526ffe093
-      size: 476709599
+      md5: a5f20778e75b73fbd97d1fbef43c80fa
+      size: 1162649528
   schema@az-cluster-ratings:
     cmd: python ../run.py --rust pq-info -o az-cluster-ratings.json 
       az-cluster-ratings.parquet
@@ -65,22 +63,23 @@ stages:
       md5: da713f0303e3384dfb8624edf8924005
       size: 702
   cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o az-cluster-ratings-5core.parquet 
+    cmd: python ../scripts/kcore.py -o az-cluster-ratings-5core.parquet 
       az-cluster-ratings.parquet
     deps:
-    - path: ../src/cli/kcore.rs
+    - path: ../scripts/kcore.py
       hash: md5
-      md5: 58dcccc90931b780ae4e2be73050b98a
-      size: 5178
+      md5: 3885126eed8aabff7da2f1a8541fd491
+      size: 3440
+      isexec: true
     - path: az-cluster-ratings.parquet
       hash: md5
-      md5: f051fade383281694e92590526ffe093
-      size: 476709599
+      md5: a5f20778e75b73fbd97d1fbef43c80fa
+      size: 1162649528
     outs:
     - path: az-cluster-ratings-5core.parquet
       hash: md5
-      md5: d25a5c0329c86b3742563a3871178b84
-      size: 272515751
+      md5: 349ca3fb04490209a415f37383391156
+      size: 426720330
   scan-reviews:
     cmd: duckscript az-scan-reviews.sql
     deps:
@@ -95,9 +94,9 @@ stages:
     outs:
     - path: ratings.parquet
       hash: md5
-      md5: ffe4b777dc33e98943e72f799ad14f99
-      size: 9539240045
+      md5: a2df171717613168bb20e5d6cf977cfb
+      size: 9539279943
     - path: reviews.parquet
       hash: md5
-      md5: aee500e89d3da646e84a181c928fdcc9
-      size: 587529713
+      md5: 1dde40f5ba0a050044e80027c0c6549e
+      size: 587556987

@@ -1,36 +1,22 @@
 {
-  "row_count": 51311159,
-  "file_size": 9394433775,
+  "row_count": 51311621,
+  "file_size": 587556987,
   "fields": [
     {
       "name": "user_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "asin",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "rating",
-      "data_type": "Float32",
-      "nullable": false
+      "data_type": "float"
     },
     {
       "name": "timestamp",
-      "data_type": "Int64",
-      "nullable": false
-    },
-    {
-      "name": "summary",
-      "data_type": "LargeUtf8",
-      "nullable": false
-    },
-    {
-      "name": "text",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "timestamp[us]"
     }
   ]
 }

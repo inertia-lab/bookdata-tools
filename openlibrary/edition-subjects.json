@@ -1,21 +1,18 @@
 {
   "row_count": 74666804,
-  "file_size": 730576431,
+  "file_size": 622535042,
   "fields": [
     {
       "name": "id",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "subj_type",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "subject",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "row_count": 102073395,
+  "file_size": 579728885,
+  "fields": [
+    {
+      "name": "src",
+      "data_type": "int32"
+    },
+    {
+      "name": "dst",
+      "data_type": "int32"
+    }
+  ]
+}

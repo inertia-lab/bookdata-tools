@@ -1,8 +1,8 @@
 -- Extract GoodReads book links.
 CREATE VIEW book_nodes AS
-SELECT gr_book_id(book_code) AS book_id,  cluster
-FROM '../book-links/cluster-graph-nodes.parquet'
-WHERE is_gr_book(book_code);
+SELECT gr_book_id(code) AS book_id,  cluster
+FROM '../book-links/book-graph-nodes.parquet'
+WHERE type = 'GR-B';
 
 COPY (
     SELECT book_id, work_id, item_id, cluster

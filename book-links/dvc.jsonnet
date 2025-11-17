@@ -117,7 +117,7 @@ bd.pipeline({
     wdir: '..',
     cmd: 'python book-links/integration-stats.py',
     deps: std.prune([
-      'src/cli/stats.rs',
+      'book-links/integration-stats.py',
       'book-links/cluster-genders.parquet',
       'book-links/isbn-clusters.parquet',
       'loc-mds/book-isbn-ids.parquet',

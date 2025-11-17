@@ -5,7 +5,7 @@ JOIN 'gr-book-link.parquet' grbl USING (book_id);
 
 COPY (
     SELECT user_id, item_id,
-        ARG_MAX(rating, timestamp) AS rating
+        ARG_MAX(rating, timestamp) AS rating,
         MIN(timestamp) AS first_time,
         MAX(timestamp) AS last_time,
         COUNT(item_id) AS nactions,

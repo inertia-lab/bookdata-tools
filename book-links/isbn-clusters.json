@@ -1,21 +1,18 @@
 {
   "row_count": 44471261,
-  "file_size": 506027178,
+  "file_size": 410037019,
   "fields": [
     {
-      "name": "isbn",
-      "data_type": "LargeUtf8",
-      "nullable": false
-    },
-    {
       "name": "isbn_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "cluster",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
+    },
+    {
+      "name": "isbn",
+      "data_type": "string"
     }
   ]
 }

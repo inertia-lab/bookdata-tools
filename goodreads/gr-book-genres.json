@@ -1,21 +1,18 @@
 {
   "row_count": 5042542,
-  "file_size": 22825384,
+  "file_size": 22777622,
   "fields": [
     {
       "name": "book_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "genre_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "count",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     }
   ]
 }

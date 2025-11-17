@@ -1,3 +1,5 @@
 outs:
 - md5: 38bd00a67dd98902741eebfaf64f08dc
   path: Books.json.gz
+  size: 11813848069
+frozen: true

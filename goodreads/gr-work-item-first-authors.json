@@ -1,21 +1,18 @@
 {
   "row_count": 1487489,
-  "file_size": 14188783,
+  "file_size": 14839142,
   "fields": [
     {
       "name": "item_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "author_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "author_name",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     }
   ]
 }

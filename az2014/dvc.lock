@@ -13,30 +13,28 @@ stages:
     outs:
     - path: ratings.parquet
       hash: md5
-      md5: d8bf46770918a132d52028712eacc94e
-      size: 257123243
+      md5: 50a23e4d4a9e8752141334dc5423db52
+      size: 257123250
   cluster-ratings:
-    cmd: cargo run --release -- amazon cluster-ratings -o 
-      az2014/az-cluster-ratings.parquet az2014/ratings.parquet
+    cmd: duckscript az-cluster-ratings.sql
     deps:
-    - path: az2014/ratings.parquet
+    - path: ../book-links/isbn-clusters.parquet
       hash: md5
-      md5: 078fd24cb9dfa9022925e4f42191d200
-      size: 153972395
-    - path: book-links/isbn-clusters.parquet
+      md5: 39635232fefd36f6de98f6e2d84ab7f5
+      size: 410037019
+    - path: az-cluster-ratings.sql
       hash: md5
-      md5: 9f7a33fc53459fc0307914c194e06972
-      size: 373089002
-    - path: src/cli/amazon
+      md5: d16c98a7cf0f5c3a5819242d22b6485e
+      size: 500
+    - path: ratings.parquet
       hash: md5
-      md5: 9f38ef337a5585687c8591594263a8c2.dir
-      size: 6197
-      nfiles: 4
+      md5: 50a23e4d4a9e8752141334dc5423db52
+      size: 257123250
     outs:
-    - path: az2014/az-cluster-ratings.parquet
+    - path: az-cluster-ratings.parquet
       hash: md5
-      md5: 22ea6fd3e7e4b0bcc6abfa908fd939b4
-      size: 233728878
+      md5: 107cf25d0444cdef61fbfde655828aec
+      size: 520831049
   schema@ratings:
     cmd: python ../run.py --rust pq-info -o ratings.json ratings.parquet
     deps:
@@ -64,15 +62,15 @@ stages:
     deps:
     - path: ../scripts/kcore.py
       hash: md5
-      md5: 720fc8b1ef0f1c42fe057850bd556880
-      size: 3354
+      md5: 3885126eed8aabff7da2f1a8541fd491
+      size: 3440
       isexec: true
     - path: az-cluster-ratings.parquet
       hash: md5
-      md5: 22ea6fd3e7e4b0bcc6abfa908fd939b4
-      size: 233728878
+      md5: 107cf25d0444cdef61fbfde655828aec
+      size: 520831049
     outs:
     - path: az-cluster-ratings-5core.parquet
       hash: md5
-      md5: f7d27596aeece00f5a3227478c7f4817
-      size: 65547784
+      md5: eb68910002f1a817281130d8f636f393
+      size: 140637810

@@ -1,16 +1,14 @@
 {
-  "row_count": 31363889,
-  "file_size": 407784154,
+  "row_count": 0,
+  "file_size": 116,
   "fields": [
     {
       "name": "cluster",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "author_name",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     }
   ]
 }

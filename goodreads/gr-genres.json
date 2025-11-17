@@ -1,16 +1,14 @@
 {
   "row_count": 10,
-  "file_size": 782,
+  "file_size": 841,
   "fields": [
     {
       "name": "genre_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "genre",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     }
   ]
 }

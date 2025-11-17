@@ -20,20 +20,20 @@ stages:
     outs:
     - path: book-authors.parquet
       hash: md5
-      md5: 88cceeb63e4207cc998c3c85ca15dff2
-      size: 66299081
+      md5: 4e15c60305ff1803bbd36f864adec3b7
+      size: 66268809
     - path: book-fields.parquet
       hash: md5
-      md5: 78e15977553361bddd3f02dfc16ec20e
-      size: 3030476564
+      md5: e1ca14940967b2376052d6155dfde3b8
+      size: 3027606217
     - path: book-ids.parquet
       hash: md5
-      md5: b528ce57899b70a565910992393633a0
-      size: 18794299
+      md5: b5a51f805c27dc7b8a2d7e1ddbd961fc
+      size: 18731910
     - path: book-isbns.parquet
       hash: md5
-      md5: a8a2cc6c587d66b4b5885f980080c644
-      size: 45450594
+      md5: 94ce9543181e83f70e72cd60487e2b01
+      size: 45420843
   book-authors:
     cmd: python ../run.py --rust fusion book-authors.tcl
     deps:
@@ -61,14 +61,14 @@ stages:
       size: 4095
     - path: ../src/marc
       hash: md5
-      md5: 3641d210003d76bb829c4f9b9c6085a2.dir
-      size: 23134
+      md5: 9100fbb7a104865d91de69fc07a31695.dir
+      size: 23137
       nfiles: 5
     outs:
     - path: name-fields.parquet
       hash: md5
-      md5: e7b027efd59bfb380e40b04eeeac6cba
-      size: 1397038948
+      md5: 6fc04aae65976e146522549ad443f66f
+      size: 1488298277
   author-names:
     cmd: python ../run.py --rust fusion author-names.tcl
     deps:
@@ -101,17 +101,17 @@ stages:
     deps:
     - path: book-links/isbns.db
       hash: md5
-      md5: 5763854e8f99c6fa75f97a9764411466
-      size: 3253219328
+      md5: cee62a3e05ef1151b46958eea0e6313d
+      size: 3251646464
     - path: loc-mds/book-isbns.parquet
       hash: md5
-      md5: a8a2cc6c587d66b4b5885f980080c644
-      size: 45450594
+      md5: 94ce9543181e83f70e72cd60487e2b01
+      size: 45420843
     outs:
     - path: loc-mds/book-isbn-ids.parquet
       hash: md5
-      md5: 70f97baac6f931815c6b36a630291f0c
-      size: 38708314
+      md5: 39e2116d5b44bb347d329f787d0cf054
+      size: 38708109
   loc-clusters:
     cmd: python ../run.py --rust fusion loc-clusters.tcl
     deps:

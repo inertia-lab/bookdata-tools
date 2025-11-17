@@ -1,16 +1,14 @@
 {
   "row_count": 44936389,
-  "file_size": 234390123,
+  "file_size": 150424191,
   "fields": [
     {
       "name": "edition",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "work",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     }
   ]
 }

@@ -1,26 +1,22 @@
 {
   "row_count": 2360655,
-  "file_size": 11243049,
+  "file_size": 11284869,
   "fields": [
     {
       "name": "book_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "title",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     },
     {
       "name": "pub_year",
-      "data_type": "UInt16",
-      "nullable": true
+      "data_type": "uint16"
     },
     {
       "name": "pub_month",
-      "data_type": "UInt8",
-      "nullable": true
+      "data_type": "uint8"
     }
   ]
 }

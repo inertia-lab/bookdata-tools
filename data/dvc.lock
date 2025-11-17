@@ -13,7 +13,8 @@ stages:
     - path: BX-Users.csv
       md5: 6ec3fe6463da9e149d474ed8226612a2
   loc-books:
-    cmd: curl -fsSL https://www.loc.gov/cds/downloads/MDSConnect/BooksAll.2016.part[01-43].xml.gz
+    cmd: curl -fsSL 
+      https://www.loc.gov/cds/downloads/MDSConnect/BooksAll.2016.part[01-43].xml.gz
       -o loc-books/BooksAll.2016.part#1.xml.gz --create-dirs
     outs:
     - path: loc-books
@@ -21,7 +22,8 @@ stages:
       size: 3129774145
       nfiles: 43
   loc-names:
-    cmd: curl -fsSL https://www.loc.gov/cds/downloads/MDSConnect/Names.2016.part[01-40].xml.gz
+    cmd: curl -fsSL 
+      https://www.loc.gov/cds/downloads/MDSConnect/Names.2016.part[01-40].xml.gz
       -o loc-names/Names.2016.part#1.xml.gz --create-dirs
     outs:
     - path: loc-names
@@ -29,28 +31,32 @@ stages:
       size: 1410755359
       nfiles: 40
   ol-authors:
-    cmd: aria2c --max-tries=100 -s 2 -o openlib/ol_dump_authors.txt.gz https://openlibrary.org/data/ol_dump_authors_2023-12-31.txt.gz
+    cmd: aria2c --max-tries=100 -s 2 -o openlib/ol_dump_authors.txt.gz 
+      https://openlibrary.org/data/ol_dump_authors_2023-12-31.txt.gz
     outs:
     - path: openlib/ol_dump_authors.txt.gz
       hash: md5
       md5: d174f253b528f74c0d6446f38feb6b63
       size: 598486891
   ol-editions:
-    cmd: aria2c --max-tries=100 -s 2 -o openlib/ol_dump_editions.txt.gz https://openlibrary.org/data/ol_dump_editions_2023-12-31.txt.gz
+    cmd: aria2c --max-tries=100 -s 2 -o openlib/ol_dump_editions.txt.gz 
+      https://openlibrary.org/data/ol_dump_editions_2023-12-31.txt.gz
     outs:
     - path: openlib/ol_dump_editions.txt.gz
       hash: md5
       md5: 6b13afe5a50fb1aeeb430bcd01164d13
       size: 10078352001
   ol-works:
-    cmd: aria2c --max-tries=100 -s 2 -o openlib/ol_dump_works.txt.gz https://openlibrary.org/data/ol_dump_works_2023-12-31.txt.gz
+    cmd: aria2c --max-tries=100 -s 2 -o openlib/ol_dump_works.txt.gz 
+      https://openlibrary.org/data/ol_dump_works_2023-12-31.txt.gz
     outs:
     - path: openlib/ol_dump_works.txt.gz
       hash: md5
       md5: 0d96507a98acf4dcc5416b10d85b1225
       size: 3200947685
   viaf-clusters:
-    cmd: aria2c --max-tries=100 -s 2 -o viaf-clusters-marc21.xml.gz https://viaf.org/viaf/data/viaf-20240804-clusters-marc21.xml.gz
+    cmd: aria2c --max-tries=100 -s 2 -o viaf-clusters-marc21.xml.gz 
+      https://viaf.org/viaf/data/viaf-20240804-clusters-marc21.xml.gz
     outs:
     - path: viaf-clusters-marc21.xml.gz
       hash: md5

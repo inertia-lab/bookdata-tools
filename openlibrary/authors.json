@@ -4,18 +4,15 @@
   "fields": [
     {
       "name": "id",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "key",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "name",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     }
   ]
 }

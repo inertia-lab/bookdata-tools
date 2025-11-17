@@ -1,21 +1,18 @@
 {
   "row_count": 7762791,
-  "file_size": 53538416,
+  "file_size": 45420843,
   "fields": [
     {
       "name": "rec_id",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "isbn",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "tag",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     }
   ]
 }

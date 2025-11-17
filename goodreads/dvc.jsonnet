@@ -22,7 +22,7 @@ local links = {
     deps: [
       'gr-book-link.sql',
       'gr-book-ids.parquet',
-      '../book-links/cluster-graph-nodes.parquet',
+      '../book-links/book-graph-nodes.parquet',
     ],
     outs: [
       'gr-book-link.parquet',

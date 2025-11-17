@@ -1,21 +1,18 @@
 {
   "row_count": 46535315,
-  "file_size": 248752621,
+  "file_size": 160277101,
   "fields": [
     {
       "name": "edition",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "pos",
-      "data_type": "Int16",
-      "nullable": false
+      "data_type": "int16"
     },
     {
       "name": "author",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     }
   ]
 }

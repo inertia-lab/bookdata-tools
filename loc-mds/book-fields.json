@@ -1,41 +1,34 @@
 {
-  "row_count": 335536732,
-  "file_size": 2660912478,
+  "row_count": 335536700,
+  "file_size": 3027606217,
   "fields": [
     {
       "name": "rec_id",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "fld_no",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "tag",
-      "data_type": "Int16",
-      "nullable": false
+      "data_type": "int16"
     },
     {
       "name": "ind1",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "ind2",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "sf_code",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "contents",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     }
   ]
 }

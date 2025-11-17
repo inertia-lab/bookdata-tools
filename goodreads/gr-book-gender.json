@@ -1,31 +1,30 @@
 {
   "row_count": 2360655,
-  "file_size": 47235674,
+  "file_size": 47229176,
   "fields": [
     {
-      "name": "cluster",
-      "data_type": "Int32",
-      "nullable": true
-    },
-    {
-      "name": "gender",
-      "data_type": "LargeUtf8",
-      "nullable": true
-    },
-    {
       "name": "book_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "work_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "item_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
+    },
+    {
+      "name": "cluster",
+      "data_type": "int32"
+    },
+    {
+      "name": "gender",
+      "data_type": "string"
+    },
+    {
+      "name": "item_id_1",
+      "data_type": "int32"
     }
   ]
 }

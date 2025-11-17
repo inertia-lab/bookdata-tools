@@ -44,24 +44,24 @@ stages:
     outs:
     - path: edition-authors.parquet
       hash: md5
-      md5: 6f367eb7f717a515e10a6b6d0ab9c6f3
-      size: 248752621
+      md5: d6c31d0eb70ac7c075952e7e745e7977
+      size: 160277101
     - path: edition-isbns.parquet
       hash: md5
-      md5: 849038d2fe02ee78adff149ca944eb11
-      size: 299551490
+      md5: e6fa84233beba78fed961e426dfdc8b3
+      size: 229352232
     - path: edition-subjects.parquet
       hash: md5
-      md5: a41671bb2660586bea2dadb5d76e84e0
-      size: 730576431
+      md5: 4222a1182bce7c59578db7b773d7ee47
+      size: 622535042
     - path: edition-works.parquet
       hash: md5
-      md5: 73f61617f4f5c360f10b42bfb55b39b9
-      size: 234390123
+      md5: 130d974eba263db7ba9d6f669063de1d
+      size: 150424191
     - path: editions.parquet
       hash: md5
-      md5: c147c71130e5d4df16d7ae18a976ae95
-      size: 1034231692
+      md5: 085a47d1e6ae685236407562a7027f71
+      size: 979321925
   scan-works:
     cmd: cargo run --release -- openlib scan-works 
       ../data/openlib/ol_dump_works.txt.gz
@@ -81,33 +81,33 @@ stages:
     outs:
     - path: work-authors.parquet
       hash: md5
-      md5: c90e629ea017cce2561930af20fb7147
-      size: 274678770
+      md5: 2e0e260cfe86bf7743d72a16e1250551
+      size: 228527123
     - path: work-subjects.parquet
       hash: md5
-      md5: ac215aa4dd425e1d9f3789931bb4829c
-      size: 627958290
+      md5: 5589ddd670b1529c4ecc4e9fccbc7b19
+      size: 623790826
     - path: works.parquet
       hash: md5
-      md5: 0468fc87dfbf51626285aa24e4b77ee0
-      size: 880028181
+      md5: 7c146336bed68e12d20663af05848ace
+      size: 860804573
   edition-isbn-ids:
     cmd: python scripts/link-isbns.py -R edition -o 
       openlibrary/edition-isbn-ids.parquet openlibrary/edition-isbns.parquet
     deps:
     - path: book-links/isbns.db
       hash: md5
-      md5: 5763854e8f99c6fa75f97a9764411466
-      size: 3253219328
+      md5: cee62a3e05ef1151b46958eea0e6313d
+      size: 3251646464
     - path: openlibrary/edition-isbns.parquet
       hash: md5
-      md5: 849038d2fe02ee78adff149ca944eb11
-      size: 299551490
+      md5: e6fa84233beba78fed961e426dfdc8b3
+      size: 229352232
     outs:
     - path: openlibrary/edition-isbn-ids.parquet
       hash: md5
-      md5: f1d01fabf3ab7bdbc0b6c9806c1066ca
-      size: 225822867
+      md5: 11c98bdf40f4c2658da95a67437da918
+      size: 225822866
   schema@edition-isbn-ids:
     cmd: python ../run.py --rust pq-info -o edition-isbn-ids.json 
       edition-isbn-ids.parquet

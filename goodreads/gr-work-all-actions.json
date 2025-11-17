@@ -1,46 +1,38 @@
 {
   "row_count": 229154523,
-  "file_size": 3356741337,
+  "file_size": 3103525788,
   "fields": [
     {
       "name": "user_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "item_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "book_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "work_id",
-      "data_type": "Int32",
-      "nullable": true
+      "data_type": "int32"
     },
     {
       "name": "rating",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "float"
     },
     {
       "name": "is_read",
-      "data_type": "UInt8",
-      "nullable": true
+      "data_type": "uint8"
     },
     {
       "name": "timestamp",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "float"
     },
     {
       "name": "updated",
-      "data_type": "Float32",
-      "nullable": true
+      "data_type": "float"
     }
   ]
 }

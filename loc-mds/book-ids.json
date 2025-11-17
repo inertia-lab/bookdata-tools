@@ -1,36 +1,30 @@
 {
-  "row_count": 9670582,
-  "file_size": 33386492,
+  "row_count": 9670581,
+  "file_size": 18731910,
   "fields": [
     {
       "name": "rec_id",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "marc_cn",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "lccn",
-      "data_type": "LargeUtf8",
-      "nullable": true
+      "data_type": "string"
     },
     {
       "name": "status",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "rec_type",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     },
     {
       "name": "bib_level",
-      "data_type": "UInt8",
-      "nullable": false
+      "data_type": "uint8"
     }
   ]
 }

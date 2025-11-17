@@ -1,26 +1,22 @@
 {
   "row_count": 22507155,
-  "file_size": 153972395,
+  "file_size": 257123250,
   "fields": [
     {
       "name": "user_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "asin",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     },
     {
       "name": "rating",
-      "data_type": "Float32",
-      "nullable": false
+      "data_type": "float"
     },
     {
       "name": "timestamp",
-      "data_type": "Int64",
-      "nullable": false
+      "data_type": "timestamp[us]"
     }
   ]
 }

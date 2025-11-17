@@ -1,16 +1,14 @@
 {
   "row_count": 44162531,
-  "file_size": 299551490,
+  "file_size": 229352232,
   "fields": [
     {
       "name": "edition",
-      "data_type": "UInt32",
-      "nullable": false
+      "data_type": "uint32"
     },
     {
       "name": "isbn",
-      "data_type": "LargeUtf8",
-      "nullable": false
+      "data_type": "string"
     }
   ]
 }

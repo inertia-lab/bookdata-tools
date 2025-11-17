@@ -2,3 +2,4 @@ outs:
 - md5: bcdcbbf336eb0d410e7a7894efa904ab
   size: 2140933459
   path: Books.csv
+frozen: true
