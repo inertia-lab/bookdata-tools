@@ -291,10 +291,11 @@ fn test_index_save() -> Result<()> {
         let key = String::arbitrary(&mut gen);
         let prev = index.lookup(&key);
         let id = index.intern(&key).expect("intern failure");
-        match prev {
-            Some(i) => assert_eq!(id, i),
-            None => assert_eq!(id as usize, index.len()),
-        };
+        if let Some(i) = prev {
+            assert_eq!(id, i)
+        } else {
+            assert_eq!(id as usize, index.len())
+        }
     }
 
     let dir = tempdir()?;
