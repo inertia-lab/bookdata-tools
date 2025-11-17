@@ -147,6 +147,7 @@ impl IdIndex<String> {
     ///
     /// - `key`, of type `String`, storing the keys
     /// - `id`, of type `i32`, storing the IDs
+    #[cfg(test)]
     pub fn load_standard<P: AsRef<Path>>(path: P) -> Result<IdIndex<String>> {
         IdIndex::load(path, "id", "key")
     }
@@ -204,6 +205,7 @@ impl IdIndex<String> {
     }
 
     /// Save to a Parquet file with the standard configuration.
+    #[cfg(test)]
     pub fn save_standard<P: AsRef<Path>>(&self, path: P) -> Result<()> {
         self.save(path, "id", "key")
     }
