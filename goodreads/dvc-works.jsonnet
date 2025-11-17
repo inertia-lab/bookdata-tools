@@ -109,7 +109,7 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'works-5core-dataset': {
-    cmd: 'python gr-dataset.py --works --core gr-works-5core-dataset',
+    cmd: 'python gr-dataset.py --works -a gr-work-actions-5core.parquet gr-works-5core-dataset',
     deps: [
       'gr-dataset.py',
       'gr-work-actions-5core.parquet',
@@ -119,6 +119,20 @@ local bd = import '../bookdata.libsonnet';
     ],
     outs: [
       'gr-works-5core-dataset',
+    ],
+  },
+
+  'works-small-dataset': {
+    cmd: 'python gr-dataset.py --works -a gr-work-actions-2015-100-10core.parquet gr-works-2015-100-10core-dataset',
+    deps: [
+      'gr-dataset.py',
+      'gr-work-actions-2015-100-10core.parquet',
+      'gr-genres.parquet',
+      'gr-work-item-genres.parquet',
+      'gr-work-item-titles.parquet',
+    ],
+    outs: [
+      'gr-works-2015-100-10core-dataset',
     ],
   },
 

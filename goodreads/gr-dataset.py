@@ -2,13 +2,16 @@
 Create a LensKit dataset for GoodReads recommendation data.
 
 Usage:
-    gr-dataset.py [options] --works DIR
+    gr-dataset.py [-v] --works [-a ACTIONS] DIR
 
 Options:
-    -v, --verbose   enable verbose log output
-    --works         create a summarized work-level dataset
-    --core          use the 5-core data instead of full
-    DIR             write dataset to DIR
+    -v, --verbose
+            enable verbose log output
+    --works
+            create a summarized work-level dataset
+    -a ACTIONS, --actions=ACTIONS
+            use actions from ACTIONS [default: gr-work-actions.parquet]
+    DIR     write dataset to DIR
 """
 
 import sys
@@ -47,12 +50,10 @@ def work_dataset(opts) -> DatasetBuilder:
     log = _log.bind(items="works")
     bld = DatasetBuilder("gr-works")
 
-    log.debug("loading actions")
-    if opts["--core"]:
-        actions = pd.read_parquet("gr-work-actions-5core.parquet")
-    else:
-        actions = pd.read_parquet("gr-work-actions.parquet")
-    log.info("loaded actions", action_count=len(actions))
+    act_f = opts["--actions"]
+    log.debug("loading actions from %s", act_f)
+    actions = pd.read_parquet(act_f)
+    log.info("loaded actions", action_count=len(actions), file=act_f)
     actions = actions.rename(
         columns={
             "first_time": "timestamp",
