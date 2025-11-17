@@ -1,6 +1,6 @@
 {
   "row_count": 229154523,
-  "file_size": 3788954310,
+  "file_size": 5016598160,
   "fields": [
     {
       "name": "rec_id",
@@ -28,19 +28,19 @@
     },
     {
       "name": "added",
-      "data_type": "float"
+      "data_type": "timestamp[ms, tz=UTC]"
     },
     {
       "name": "updated",
-      "data_type": "float"
+      "data_type": "timestamp[ms, tz=UTC]"
     },
     {
       "name": "read_started",
-      "data_type": "float"
+      "data_type": "timestamp[ms, tz=UTC]"
     },
     {
       "name": "read_finished",
-      "data_type": "float"
+      "data_type": "timestamp[ms, tz=UTC]"
     }
   ]
 }

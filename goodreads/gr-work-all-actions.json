@@ -1,6 +1,6 @@
 {
   "row_count": 229154523,
-  "file_size": 3103525788,
+  "file_size": 4534428628,
   "fields": [
     {
       "name": "user_id",
@@ -28,11 +28,11 @@
     },
     {
       "name": "timestamp",
-      "data_type": "float"
+      "data_type": "timestamp[us]"
     },
     {
       "name": "updated",
-      "data_type": "float"
+      "data_type": "timestamp[us]"
     }
   ]
 }

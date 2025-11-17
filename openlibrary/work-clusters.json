@@ -1,16 +1,14 @@
 {
   "row_count": 34230827,
-  "file_size": 239671031,
+  "file_size": 188437056,
   "fields": [
     {
       "name": "work_id",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     },
     {
       "name": "cluster",
-      "data_type": "Int32",
-      "nullable": false
+      "data_type": "int32"
     }
   ]
 }

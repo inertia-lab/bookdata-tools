@@ -247,12 +247,12 @@ stages:
       size: 409776085
     - path: goodreads/gr-cluster-actions.parquet
       hash: md5
-      md5: e6ce1a8c1d10b85d3fcbf91f96170c8e
-      size: 1372901034
+      md5: 96d2c82ebdb84a6988175c68302f6af1
+      size: 2161949430
     - path: goodreads/gr-cluster-ratings.parquet
       hash: md5
-      md5: 7d6c50935f74dfa415549662709bb910
-      size: 639303080
+      md5: 7557b71f24dd3012f453107498a64a64
+      size: 1090242869
     - path: loc-mds/book-isbn-ids.parquet
       hash: md5
       md5: 39e2116d5b44bb347d329f787d0cf054
@@ -260,7 +260,7 @@ stages:
     outs:
     - path: book-links/gender-stats.csv
       hash: md5
-      md5: 3e0d143606c60ac5c246fc8d64237d07
+      md5: e6a484b5d8d256324e2b54fb99e12d99
       size: 966
   cluster-hashes:
     cmd: duckscript cluster-hashes.sql

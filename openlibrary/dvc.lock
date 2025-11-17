@@ -247,18 +247,17 @@ stages:
       md5: 04631619a35917b9dd4a850541190b8d
       size: 245
   work-clusters:
-    cmd: cargo run --release -- cluster extract-books -n work_id -o 
-      openlibrary/work-clusters.parquet OL-W
+    cmd: duckscript work-clusters.sql
     deps:
-    - path: book-links/cluster-graph-nodes.parquet
+    - path: ../book-links/book-graph-nodes.parquet
       hash: md5
-      md5: 9e30b7e857742c3fcdb95fe7e0dc5b01
-      size: 1303216110
+      md5: 06c4e4355fab8624bfd9c5b5c2fd5835
+      size: 1194086030
     outs:
-    - path: openlibrary/work-clusters.parquet
+    - path: work-clusters.parquet
       hash: md5
-      md5: a3008813bfba135fa668a7ccc50c9f2a
-      size: 239671031
+      md5: 221e361dceae1b3528094e08d08672cd
+      size: 188437056
   schema@work-clusters:
     cmd: python ../run.py --rust pq-info -o work-clusters.json 
       work-clusters.parquet

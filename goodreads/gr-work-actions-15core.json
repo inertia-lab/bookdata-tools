@@ -1,6 +1,6 @@
 {
   "row_count": 222307736,
-  "file_size": 1362368680,
+  "file_size": 2147693246,
   "fields": [
     {
       "name": "user_id",
@@ -16,11 +16,11 @@
     },
     {
       "name": "first_time",
-      "data_type": "float"
+      "data_type": "timestamp[us]"
     },
     {
       "name": "last_time",
-      "data_type": "float"
+      "data_type": "timestamp[us]"
     },
     {
       "name": "nactions",

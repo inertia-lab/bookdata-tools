@@ -1,6 +1,6 @@
 {
   "row_count": 15739967,
-  "file_size": 4473155184,
+  "file_size": 4526338283,
   "fields": [
     {
       "name": "rec_id",
@@ -44,11 +44,11 @@
     },
     {
       "name": "added",
-      "data_type": "float"
+      "data_type": "timestamp[ms, tz=UTC]"
     },
     {
       "name": "updated",
-      "data_type": "float"
+      "data_type": "timestamp[ms, tz=UTC]"
     }
   ]
 }
