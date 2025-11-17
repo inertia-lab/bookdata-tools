@@ -1,4 +1,5 @@
 //! GoodReads interaction record schemas and processing.
+use chrono::NaiveDateTime;
 use hashbrown::HashSet;
 use parquet_derive::ParquetRecordWriter;
 use serde::Deserialize;
@@ -46,10 +47,10 @@ pub struct IntRecord {
     pub book_id: i32,
     pub is_read: u8,
     pub rating: Option<f32>,
-    pub added: f32,
-    pub updated: f32,
-    pub read_started: Option<f32>,
-    pub read_finished: Option<f32>,
+    pub added: Option<NaiveDateTime>,
+    pub updated: Option<NaiveDateTime>,
+    pub read_started: Option<NaiveDateTime>,
+    pub read_finished: Option<NaiveDateTime>,
 }
 
 /// Object writer to transform and write GoodReads interactions
@@ -108,11 +109,11 @@ impl ObjectWriter<RawInteraction> for IntWriter {
             read_started: trim_opt(&row.started_at)
                 .map(parse_gr_date)
                 .transpose()?
-                .map(check_ts("started", 1900)),
+                .and_then(check_ts("started", 1900)),
             read_finished: trim_opt(&row.read_at)
                 .map(parse_gr_date)
                 .transpose()?
-                .map(check_ts("finished", 1900)),
+                .and_then(check_ts("finished", 1900)),
         })?;
 
         Ok(())

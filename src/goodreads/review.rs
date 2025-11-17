@@ -1,4 +1,5 @@
 //! GoodReads review data model.
+use chrono::NaiveDateTime;
 use parquet_derive::ParquetRecordWriter;
 pub use serde::Deserialize;
 
@@ -57,9 +58,9 @@ pub struct ReviewRecord {
     /// Number of votes this review has received.
     pub n_votes: i32,
     /// Date review was added.
-    pub added: f32,
+    pub added: Option<NaiveDateTime>,
     /// Date review was updated.
-    pub updated: f32,
+    pub updated: Option<NaiveDateTime>,
 }
 
 // Object writer to transform and write GoodReads reviews

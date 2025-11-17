@@ -14,11 +14,16 @@ pub fn parse_gr_date(s: &str) -> ParseResult<NaiveDateTime> {
 }
 
 /// Check a date and convert to a timestamp.
-pub fn check_ts(context: &'static str, cutoff: i32) -> impl Fn(NaiveDateTime) -> f32 {
+pub fn check_ts(
+    context: &'static str,
+    cutoff: i32,
+) -> impl Fn(NaiveDateTime) -> Option<NaiveDateTime> {
     move |date| {
         if date.year() < cutoff {
             warn!("{} is ancient: {}", context, date);
+            None
+        } else {
+            Some(date)
         }
-        date.and_utc().timestamp() as f32
     }
 }
