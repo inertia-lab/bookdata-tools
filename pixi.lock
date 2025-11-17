@@ -2,7 +2,6 @@ version: 6
 environments:
   data:
     channels:
-    - url: https://prefix.dev/lenskit-dev/
     - url: https://conda.anaconda.org/conda-forge/
     packages:
       linux-64:
@@ -439,7 +438,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.7-h6491c7d_2.conda
   default:
     channels:
-    - url: https://prefix.dev/lenskit-dev/
     - url: https://conda.anaconda.org/conda-forge/
     indexes:
     - https://pypi.org/simple
@@ -648,7 +646,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/lazy-loader-0.4-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/lcms2-2.17-h717163a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.45-h1aa0949_0.conda
-      - conda: https://prefix.dev/lenskit-dev/linux-64/lenskit-2025.6.1.dev7+gffd17301-hb0f4dca_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/lenskit-2025.6.0-he2f4440_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/lerc-4.0.0-h0aef613_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libabseil-20250512.1-cxx17_hba17884_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libarrow-21.0.0-h56a6dad_8_cpu.conda
@@ -1138,7 +1136,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lcms2-2.17-h7eeda09_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ld64-955.13-he86490a_9.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ld64_osx-arm64-955.13-llvm19_1_h6922315_9.conda
-      - conda: https://prefix.dev/lenskit-dev/osx-arm64/lenskit-2025.6.1.dev7+gffd17301-h60d57d3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lenskit-2025.6.0-hb420510_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lerc-4.0.0-hd64df32_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libabseil-20250512.1-cxx17_hd41c47c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libarrow-21.0.0-hd43feaf_8_cpu.conda
@@ -1398,7 +1396,6 @@ environments:
       - pypi: ./
   dev:
     channels:
-    - url: https://prefix.dev/lenskit-dev/
     - url: https://conda.anaconda.org/conda-forge/
     indexes:
     - https://pypi.org/simple
@@ -1617,7 +1614,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/lazy-loader-0.4-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/lcms2-2.17-h717163a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.45-h1aa0949_0.conda
-      - conda: https://prefix.dev/lenskit-dev/linux-64/lenskit-2025.6.1.dev7+gffd17301-hb0f4dca_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/lenskit-2025.6.0-he2f4440_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/lerc-4.0.0-h0aef613_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libabseil-20250512.1-cxx17_hba17884_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libarrow-21.0.0-h56a6dad_8_cpu.conda
@@ -2135,7 +2132,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lcms2-2.17-h7eeda09_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ld64-955.13-he86490a_9.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ld64_osx-arm64-955.13-llvm19_1_h6922315_9.conda
-      - conda: https://prefix.dev/lenskit-dev/osx-arm64/lenskit-2025.6.1.dev7+gffd17301-h60d57d3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lenskit-2025.6.0-hb420510_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/lerc-4.0.0-hd64df32_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libabseil-20250512.1-cxx17_hd41c47c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libarrow-21.0.0-hd43feaf_8_cpu.conda
@@ -2413,7 +2410,6 @@ environments:
       - pypi: ./
   site:
     channels:
-    - url: https://prefix.dev/lenskit-dev/
     - url: https://conda.anaconda.org/conda-forge/
     - url: https://conda.anaconda.org/conda-forge/label/rust_dev/
     options:
@@ -6733,11 +6729,13 @@ packages:
   purls: []
   size: 753744
   timestamp: 1763060439129
-- conda: https://prefix.dev/lenskit-dev/linux-64/lenskit-2025.6.1.dev7+gffd17301-hb0f4dca_0.conda
+- conda: https://conda.anaconda.org/conda-forge/linux-64/lenskit-2025.6.0-he2f4440_0.conda
   noarch: python
-  sha256: d2570a97afd7456df556f2827e3cf1849d1c057745aaf4651fd8234e6cba1a7f
+  sha256: b52979fcc695ed3c126b332a280e5113bc092b02b9edd96c1dfa308154d7a783
+  md5: 188ad83d4fbd94bbaaeb944c23311cdb
   depends:
   - python >=3.11
+  - gxx_linux-64 14.*
   - typing-extensions >=4.12,<5
   - pyarrow >=20
   - pandas >=2.0,<3
@@ -6760,16 +6758,21 @@ packages:
   - xopen >=2.0,<3
   - lazy-loader >=0.4
   - deepmerge >=2.0,<3
+  - __glibc >=2.17,<3.0.a0
   constrains:
   - __glibc >=2.17
   license: MIT
-  size: 7898175
-  timestamp: 1763390752481
-- conda: https://prefix.dev/lenskit-dev/osx-arm64/lenskit-2025.6.1.dev7+gffd17301-h60d57d3_0.conda
+  purls:
+  - pkg:pypi/lenskit?source=hash-mapping
+  size: 7898196
+  timestamp: 1763338552512
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/lenskit-2025.6.0-hb420510_0.conda
   noarch: python
-  sha256: 25e553bf647d789c8c6e2f27181def0bca36c699be532ea29248aed958331b15
+  sha256: 0e21c61fc0d440e05db62d809b2ff3fcf085bf55db5c9432cb3bf20b2c534a16
+  md5: a63953f811fcf12c27b6b95001922781
   depends:
   - python >=3.11
+  - clangxx_osx-arm64 19.*
   - typing-extensions >=4.12,<5
   - pyarrow >=20
   - pandas >=2.0,<3
@@ -6792,11 +6795,14 @@ packages:
   - xopen >=2.0,<3
   - lazy-loader >=0.4
   - deepmerge >=2.0,<3
+  - __osx >=11.0
   constrains:
   - __osx >=11.0
   license: MIT
-  size: 3962632
-  timestamp: 1763390211935
+  purls:
+  - pkg:pypi/lenskit?source=hash-mapping
+  size: 3967158
+  timestamp: 1763338748735
 - conda: https://conda.anaconda.org/conda-forge/linux-64/lerc-4.0.0-h0aef613_1.conda
   sha256: 412381a43d5ff9bbed82cd52a0bbca5b90623f62e41007c9c42d3870c60945ff
   md5: 9344155d33912347b37f0ae6c410a835

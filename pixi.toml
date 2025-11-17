@@ -1,6 +1,6 @@
 [workspace]
 authors = ["Michael Ekstrand <mdekstrand@drexel.edu>"]
-channels = ["https://prefix.dev/lenskit-dev", "conda-forge"]
+channels = ["conda-forge"]
 description = "Add a short description here"
 name = "bookdata"
 platforms = ["linux-64", "osx-arm64"]
