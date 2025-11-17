@@ -94,12 +94,12 @@ impl ObjectWriter<Row<OLWorkRecord>> for WorkProcessor {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        let nr = self.rec_writer.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        let nr = self.rec_writer.finish_objects()?;
         info!("wrote {} work records", scalar(nr));
-        let na = self.author_writer.finish()?;
+        let na = self.author_writer.finish_objects()?;
         info!("wrote {} work-author records", scalar(na));
-        let ns = self.subject_writer.finish()?;
+        let ns = self.subject_writer.finish_objects()?;
         info!("wrote {} work-subject records", scalar(ns));
         Ok(nr)
     }

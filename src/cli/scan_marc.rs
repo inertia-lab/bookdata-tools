@@ -7,7 +7,7 @@ use log::*;
 use clap::Args;
 use glob::glob;
 
-use crate::io::{log_file_info, open_gzin_progress};
+use crate::io::open_gzin_progress;
 use crate::prelude::*;
 
 use crate::marc::book_fields::BookOutput;
@@ -89,7 +89,7 @@ impl ScanMARC {
         }
     }
 
-    fn process_records<W: ObjectWriter<MARCRecord> + DataSink + Send + Sync + 'static>(
+    fn process_records<W: ObjectWriter<MARCRecord> + Send + Sync + 'static>(
         &self,
         mut output: W,
     ) -> Result<()> {
@@ -123,8 +123,7 @@ impl ScanMARC {
         }
         fpb.finish_and_clear();
 
-        let outs = output.output_files();
-        let written = output.finish()?;
+        let written = output.finish_objects()?;
 
         info!(
             "imported {} fields from {} records from {} files in {:.2}s",
@@ -133,7 +132,6 @@ impl ScanMARC {
             nfiles,
             all_start.elapsed().as_secs_f32()
         );
-        log_file_info(&outs)?;
 
         Ok(())
     }

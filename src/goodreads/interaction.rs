@@ -74,12 +74,6 @@ impl IntWriter {
     }
 }
 
-impl DataSink for IntWriter {
-    fn output_files(&self) -> Vec<PathBuf> {
-        path_list(&[])
-    }
-}
-
 impl ObjectWriter<RawInteraction> for IntWriter {
     /// Write a single interaction to the output
     fn write_object(&mut self, row: RawInteraction) -> Result<()> {
@@ -120,13 +114,13 @@ impl ObjectWriter<RawInteraction> for IntWriter {
     }
 
     // Clean up and finalize output
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         info!(
             "wrote {} records for {} users, closing output",
             self.n_recs,
             self.users.len()
         );
-        let res = self.writer.finish()?;
+        let res = self.writer.finish_objects()?;
         save_user_index(&self.users)?;
         Ok(res)
     }

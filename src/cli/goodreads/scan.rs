@@ -29,11 +29,9 @@ pub struct ScanInput {
 
 fn scan_gr<R, W>(path: &Path, proc: W) -> Result<()>
 where
-    W: ObjectWriter<R> + DataSink + Send + Sync + 'static,
+    W: ObjectWriter<R> + Send + Sync + 'static,
     R: DeserializeOwned + Send + Sync + 'static,
 {
-    let outs: Vec<_> = proc.output_files();
-
     info!("reading data from {}", path.display());
     let pb = data_progress(0);
     let read = LineProcessor::open_gzip(path, pb.clone())?;
@@ -43,16 +41,7 @@ where
     read.process_json(&mut writer)?;
     pb.finish_and_clear();
 
-    writer.finish()?;
-
-    for out in outs {
-        let outf = out.as_path();
-        info!(
-            "output {} is {}",
-            outf.display(),
-            friendly::bytes(file_size(outf)?)
-        );
-    }
+    writer.finish_objects()?;
 
     Ok(())
 }

@@ -75,16 +75,6 @@ impl BookOutput {
     }
 }
 
-impl DataSink for BookOutput {
-    fn output_files(&self) -> Vec<PathBuf> {
-        vec![
-            format!("{}-fields.parquet", &self.prefix).into(),
-            format!("{}-ids.parquet", &self.prefix).into(),
-            format!("{}-isbns.parquet", &self.prefix).into(),
-        ]
-    }
-}
-
 impl ObjectWriter<MARCRecord> for BookOutput {
     fn write_object(&mut self, record: MARCRecord) -> Result<()> {
         if !record.is_book() {
@@ -161,11 +151,11 @@ impl ObjectWriter<MARCRecord> for BookOutput {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        self.fields.finish()?;
-        self.ids.finish()?;
-        self.isbns.finish()?;
-        self.authors.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        self.fields.finish_objects()?;
+        self.ids.finish_objects()?;
+        self.isbns.finish_objects()?;
+        self.authors.finish_objects()?;
         Ok(self.n_books as usize)
     }
 }

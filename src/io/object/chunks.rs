@@ -34,8 +34,8 @@ where
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        self.delegate.finish()
+    fn finish_objects(self) -> Result<usize> {
+        self.delegate.finish_objects()
     }
 }
 
@@ -80,10 +80,10 @@ where
         Ok(())
     }
 
-    fn finish(mut self) -> Result<usize> {
+    fn finish_objects(mut self) -> Result<usize> {
         if self.chunk.len() > 0 {
             self.delegate.write_object(self.chunk)?;
         }
-        self.delegate.finish()
+        self.delegate.finish_objects()
     }
 }

@@ -28,7 +28,7 @@ where
     }
 
     pb.finish_and_clear();
-    writer.finish()
+    writer.finish_objects()
 }
 
 pub struct ThreadObjectWriterBuilder<W, F: Send + FnOnce() -> Result<W>> {
@@ -170,7 +170,7 @@ impl<'scope, T: Send + Sync + 'static> ObjectWriter<T> for ThreadObjectWriter<'s
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         // dropping the sender will cause the consumer to hang up.
         drop(self.sender);
         // wait for the consumer to finish before we consider the writer closed.
@@ -221,7 +221,7 @@ where
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         // do nothing, dropping the writer will close the sender
         Ok(0)
     }

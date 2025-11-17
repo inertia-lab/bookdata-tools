@@ -61,7 +61,7 @@ where
         proc.write_object(row)?;
     }
 
-    proc.finish()?;
+    proc.finish_objects()?;
 
     Ok(())
 }

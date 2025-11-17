@@ -107,12 +107,6 @@ impl BookWriter {
     }
 }
 
-impl DataSink for BookWriter {
-    fn output_files<'a>(&'a self) -> Vec<PathBuf> {
-        path_list(&[ID_FILE, INFO_FILE, AUTHOR_FILE, SERIES_FILE])
-    }
-}
-
 impl ObjectWriter<RawBook> for BookWriter {
     fn write_object(&mut self, row: RawBook) -> Result<()> {
         let book_id = row.book_id.parse()?;
@@ -165,11 +159,11 @@ impl ObjectWriter<RawBook> for BookWriter {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        self.id_out.finish()?;
-        self.info_out.finish()?;
-        self.author_out.finish()?;
-        self.series_out.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        self.id_out.finish_objects()?;
+        self.info_out.finish_objects()?;
+        self.author_out.finish_objects()?;
+        self.series_out.finish_objects()?;
         Ok(0)
     }
 }

@@ -30,7 +30,7 @@ pub trait ObjectWriter<T>: Sized {
     }
 
     /// Finish and close the target.
-    fn finish(self) -> Result<usize>;
+    fn finish_objects(self) -> Result<usize>;
 }
 
 /// References can be used as object writers; however, [ObjectWriter::finish] must
@@ -44,7 +44,7 @@ where
         (**self).write_object(object)
     }
 
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         // closing a reference does *not* close the write
         Ok(0)
     }
@@ -56,7 +56,7 @@ impl<T: Serialize, W: Write> ObjectWriter<T> for csv::Writer<W> {
         Ok(())
     }
 
-    fn finish(mut self) -> Result<usize> {
+    fn finish_objects(mut self) -> Result<usize> {
         self.flush()?;
         drop(self);
         Ok(0)

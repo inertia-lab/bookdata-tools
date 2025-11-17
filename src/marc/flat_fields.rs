@@ -41,12 +41,6 @@ impl FieldOutput {
     }
 }
 
-impl DataSink for FieldOutput {
-    fn output_files(&self) -> Vec<std::path::PathBuf> {
-        self.writer.output_files()
-    }
-}
-
 impl ObjectWriter<MARCRecord> for FieldOutput {
     fn write_object(&mut self, rec: MARCRecord) -> Result<()> {
         self.rec_count += 1;
@@ -97,7 +91,7 @@ impl ObjectWriter<MARCRecord> for FieldOutput {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        self.writer.finish()
+    fn finish_objects(self) -> Result<usize> {
+        self.writer.finish_objects()
     }
 }

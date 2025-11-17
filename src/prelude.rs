@@ -1,8 +1,5 @@
 pub use crate::cli::Command;
 pub use crate::io::ext::LengthRead;
-pub use crate::io::file_size;
-pub use crate::io::path_list;
-pub use crate::io::DataSink;
 pub use crate::io::LineProcessor;
 pub use crate::io::ObjectWriter;
 pub use crate::layout::*;

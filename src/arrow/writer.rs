@@ -16,7 +16,6 @@ use parquet::record::RecordWriter;
 use parquet::schema::types::TypePtr;
 
 use crate::io::object::{ObjectWriter, ThreadObjectWriter, UnchunkWriter};
-use crate::io::DataSink;
 
 const BATCH_SIZE: usize = 1024 * 1024;
 const ZSTD_LEVEL: i32 = 3;
@@ -106,19 +105,6 @@ where
     }
 }
 
-impl<R> DataSink for TableWriter<R>
-where
-    R: Send + Sync + 'static,
-    for<'a> &'a [R]: RecordWriter<R>,
-{
-    fn output_files(&self) -> Vec<PathBuf> {
-        match &self.out_path {
-            None => Vec::new(),
-            Some(p) => vec![p.clone()],
-        }
-    }
-}
-
 impl<R> ObjectWriter<R> for TableWriter<R>
 where
     R: Send + Sync + 'static,
@@ -135,10 +121,10 @@ where
         Ok(())
     }
 
-    fn finish(mut self) -> Result<usize> {
+    fn finish_objects(mut self) -> Result<usize> {
         if let Some(writer) = self.writer.take() {
             info!("closing Parquet writer for {}", self.display_path());
-            writer.finish()?;
+            writer.finish_objects()?;
         } else {
             warn!("{}: writer already closed", self.display_path());
         }
@@ -168,7 +154,7 @@ where
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         let meta = self.close()?;
         Ok(meta.file_metadata().num_rows() as usize)
     }
@@ -187,7 +173,7 @@ where
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         self.close()?;
         Ok(0)
     }

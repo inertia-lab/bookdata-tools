@@ -143,7 +143,7 @@ where
                             nrecs += 1;
                         }
                     }
-                    out.finish()?;
+                    out.finish_objects()?;
                     Ok(nrecs)
                 }));
             }
@@ -157,7 +157,7 @@ where
         let nrecs = nrecs?;
 
         bg_read.join().map_err(std::panic::resume_unwind)??;
-        output.finish()?;
+        output.finish_objects()?;
         Ok(nrecs)
     });
     let nrecs = nrecs?;

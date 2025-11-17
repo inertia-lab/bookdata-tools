@@ -68,7 +68,7 @@ fn save_genders(clusters: Vec<i32>, genders: clusters::ClusterTable, outf: &Path
         out.write_object(ClusterGenderInfo { cluster, gender })?;
     }
 
-    out.finish()?;
+    out.finish_objects()?;
 
     Ok(())
 }

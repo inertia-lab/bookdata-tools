@@ -86,12 +86,6 @@ impl ReviewWriter {
     }
 }
 
-impl DataSink for ReviewWriter {
-    fn output_files(&self) -> Vec<PathBuf> {
-        path_list(&[OUT_FILE])
-    }
-}
-
 impl ObjectWriter<RawReview> for ReviewWriter {
     // Write a single interaction to the output
     fn write_object(&mut self, row: RawReview) -> Result<()> {
@@ -130,12 +124,12 @@ impl ObjectWriter<RawReview> for ReviewWriter {
     }
 
     // Clean up and finalize output
-    fn finish(self) -> Result<usize> {
+    fn finish_objects(self) -> Result<usize> {
         info!(
             "wrote {} records for {} users, closing output",
             self.n_recs,
             self.users.len()
         );
-        self.writer.finish()
+        self.writer.finish_objects()
     }
 }

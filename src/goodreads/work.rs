@@ -46,12 +46,6 @@ impl WorkWriter {
     }
 }
 
-impl DataSink for WorkWriter {
-    fn output_files(&self) -> Vec<PathBuf> {
-        path_list(&[OUT_FILE])
-    }
-}
-
 impl ObjectWriter<RawWork> for WorkWriter {
     fn write_object(&mut self, row: RawWork) -> Result<()> {
         let work_id: i32 = row.work_id.parse()?;
@@ -69,8 +63,8 @@ impl ObjectWriter<RawWork> for WorkWriter {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        self.writer.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        self.writer.finish_objects()?;
         Ok(self.n_recs)
     }
 }

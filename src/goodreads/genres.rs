@@ -46,12 +46,6 @@ impl BookGenreWriter {
     }
 }
 
-impl DataSink for BookGenreWriter {
-    fn output_files(&self) -> Vec<PathBuf> {
-        path_list(&[OUT_FILE, GENRE_FILE])
-    }
-}
-
 impl ObjectWriter<RawBookGenre> for BookGenreWriter {
     fn write_object(&mut self, row: RawBookGenre) -> Result<()> {
         let book_id: i32 = row.book_id.parse()?;
@@ -70,8 +64,8 @@ impl ObjectWriter<RawBookGenre> for BookGenreWriter {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        self.writer.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        self.writer.finish_objects()?;
         self.genres.save(GENRE_FILE, "genre_id", "genre")?;
         Ok(self.n_recs)
     }

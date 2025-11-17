@@ -144,16 +144,16 @@ impl ObjectWriter<Row<OLEditionRecord>> for EditionProcessor {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        let n = self.rec_writer.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        let n = self.rec_writer.finish_objects()?;
         info!("wrote {} edition records", scalar(n));
-        let n = self.author_writer.finish()?;
+        let n = self.author_writer.finish_objects()?;
         info!("wrote {} edition-author records", scalar(n));
-        let n = self.link_writer.finish()?;
+        let n = self.link_writer.finish_objects()?;
         info!("wrote {} edition-work records", scalar(n));
-        let n = self.isbn_writer.finish()?;
+        let n = self.isbn_writer.finish_objects()?;
         info!("wrote {} edition-isbn records", scalar(n));
-        let n = self.subject_writer.finish()?;
+        let n = self.subject_writer.finish_objects()?;
         info!("wrote {} edition-subject records", scalar(n));
         Ok(self.last_id as usize)
     }

@@ -119,8 +119,8 @@ fn write_index(index: NameIndex, path: &Path) -> Result<()> {
         }
     }
 
-    writer.finish()?;
-    csvout.finish()?;
+    writer.finish_objects()?;
+    csvout.finish_objects()?;
     Ok(())
 }
 

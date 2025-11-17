@@ -93,9 +93,9 @@ impl ObjectWriter<Row<OLAuthorSource>> for AuthorProcessor {
         Ok(())
     }
 
-    fn finish(self) -> Result<usize> {
-        let nr = self.rec_writer.finish()?;
-        self.name_writer.finish()?;
+    fn finish_objects(self) -> Result<usize> {
+        let nr = self.rec_writer.finish_objects()?;
+        self.name_writer.finish_objects()?;
         Ok(nr)
     }
 }
