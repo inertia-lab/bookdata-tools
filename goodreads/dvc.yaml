@@ -25,9 +25,9 @@ stages:
     outs:
       - gr-cluster-actions.parquet
   cluster-actions-5core:
-    cmd: cargo run --release -- kcore -o gr-cluster-actions-5core.parquet gr-cluster-actions.parquet
+    cmd: python ../scripts/kcore.py -o gr-cluster-actions-5core.parquet gr-cluster-actions.parquet
     deps:
-      - ../src/cli/kcore.rs
+      - ../scripts/kcore.py
       - gr-cluster-actions.parquet
     outs:
       - gr-cluster-actions-5core.parquet
@@ -40,9 +40,9 @@ stages:
     outs:
       - gr-cluster-ratings.parquet
   cluster-ratings-5core:
-    cmd: cargo run --release -- kcore -o gr-cluster-ratings-5core.parquet gr-cluster-ratings.parquet
+    cmd: python ../scripts/kcore.py -o gr-cluster-ratings-5core.parquet gr-cluster-ratings.parquet
     deps:
-      - ../src/cli/kcore.rs
+      - ../scripts/kcore.py
       - gr-cluster-ratings.parquet
     outs:
       - gr-cluster-ratings-5core.parquet

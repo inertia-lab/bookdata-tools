@@ -26,9 +26,9 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'cluster-ratings-5core': {
-    cmd: bd.cmd('kcore -o gr-cluster-ratings-5core.parquet gr-cluster-ratings.parquet'),
+    cmd: 'python ../scripts/kcore.py -o gr-cluster-ratings-5core.parquet gr-cluster-ratings.parquet',
     deps: [
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
       'gr-cluster-ratings.parquet',
     ],
     outs: [
@@ -37,9 +37,9 @@ local bd = import '../bookdata.libsonnet';
   },
 
   'cluster-actions-5core': {
-    cmd: bd.cmd('kcore -o gr-cluster-actions-5core.parquet gr-cluster-actions.parquet'),
+    cmd: 'python ../scripts/kcore.py -o gr-cluster-actions-5core.parquet gr-cluster-actions.parquet',
     deps: [
-      '../src/cli/kcore.rs',
+      '../scripts/kcore.py',
       'gr-cluster-actions.parquet',
     ],
     outs: [
