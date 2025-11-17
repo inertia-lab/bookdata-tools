@@ -55,7 +55,7 @@ bd.pipeline({
   'work-clusters': {
     cmd: 'duckscript work-clusters.sql',
     deps: [
-      '../book-links/cluster-graph-nodes.parquet',
+      '../book-links/book-graph-nodes.parquet',
     ],
     outs: [
       'work-clusters.parquet',

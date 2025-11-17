@@ -69,24 +69,21 @@ data sources to be mapped to clusters, since everything resolves to ISBN IDs.
 
 We also export the book identifier graph used for clustering to support further analysis.
 
-::: {.parquet file="book-links/cluster-graph-nodes.parquet"}
+::: {.parquet file="book-links/book-graph-nodes.parquet"}
 The table of nodes (with attributes) from the graph used for book clustering.
 :::
 
-    {{< schema book-links/cluster-graph-nodes.parquet >}}
+    {{< schema book-links/book-graph-nodes.parquet >}}
 
 
 ::: {.parquet file="book-links/cluster-graph-edges.parquet"}
 The table of edges rom the book clustering graph.
 :::
 
-    {{< schema book-links/cluster-graph-edges.parquet >}}
+    {{< schema book-links/book-graph-edges.parquet >}}
 
-`book-links/book-graph.mp.zst`{#file:book-graph.mp-zst}
-:   This is a serialization of the actual graph itself, using `rmp-serde` to serialize the
-Petgraph structure with MsgPack and compressing ith with ZStandard.  This is unlikely to
-be usable outside of the Rust codebase, whereas the node and edge tables could be loaded
-into something like `igraph` for further analysis.
+`book-links/book-graph.db`{#file:book-graph.db}
+:   This is a the actual graph itself as a DuckDB database.
 
 
 ## Cluster Information Tables
