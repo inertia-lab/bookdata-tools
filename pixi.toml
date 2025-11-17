@@ -5,6 +5,7 @@ description = "Add a short description here"
 name = "bookdata"
 platforms = ["linux-64", "osx-arm64"]
 version = "0.1.0"
+requires-pixi = ">=0.57"
 
 [tasks]
 repro-all = "dvc repro -P"
