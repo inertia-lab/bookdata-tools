@@ -7,7 +7,7 @@ COPY (
 COPY bg_edges TO 'book-graph-edges.parquet' (COMPRESSION zstd);
 
 COPY (
-    SELECT isbn_code(code) AS isbn_id, cluster, label AS isbn
+    SELECT isbn_id(code) AS isbn_id, cluster, label AS isbn
     FROM bg_nodes
     JOIN node_clusters USING (code)
     WHERE type = 'ISBN'
