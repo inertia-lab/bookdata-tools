@@ -329,7 +329,7 @@ def cluster_metrics(db: duckdb.DuckDBPyConnection):
             COUNT(code) FILTER (type = 'LOC') AS n_loc_recs,
             COUNT(code) FILTER (type = 'OL-E') AS n_ol_editions,
             COUNT(code) FILTER (type = 'OL-W') AS n_ol_works,
-            COUNT(code) FILTER (type = 'GR-B') AS n_gr_editions,
+            COUNT(code) FILTER (type = 'GR-B') AS n_gr_books,
             COUNT(code) FILTER (type = 'GR-W') AS n_gr_works,
         FROM bg_nodes
         JOIN node_clusters USING (code)
