@@ -68,6 +68,8 @@ def scan_loc(db: duckdb.DuckDBPyConnection):
         GROUP BY gender
     """
     db.execute(query)
+    (nr,) = db.fetchone() or []
+    _log.info("loaded %d LOC statistics", nr)
 
 
 def scan_actions(db: duckdb.DuckDBPyConnection, name: str, file: str):
@@ -80,6 +82,8 @@ def scan_actions(db: duckdb.DuckDBPyConnection, name: str, file: str):
         GROUP BY gender
     """
     db.execute(query)
+    (nr,) = db.fetchone() or []
+    _log.info("loaded %d action statistics", nr)
 
 
 if __name__ == "__main__":
