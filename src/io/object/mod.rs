@@ -1,5 +1,4 @@
 use std::io::prelude::*;
-use std::marker::PhantomData;
 use std::mem::drop;
 
 use anyhow::Result;
@@ -28,16 +27,6 @@ pub trait ObjectWriter<T>: Sized {
             count += 1;
         }
         Ok(count)
-    }
-
-    /// Write an iterator of objects and finish the writer.
-    fn write_and_finish<I>(mut self, objects: I) -> Result<usize>
-    where
-        I: Iterator<Item = T>,
-    {
-        let n = self.write_all_objects(objects)?;
-        self.finish()?;
-        Ok(n)
     }
 
     /// Finish and close the target.

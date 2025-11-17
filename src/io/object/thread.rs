@@ -61,18 +61,6 @@ where
             capacity: 100,
         }
     }
-
-    pub fn bg_open<W, F>(thunk: F) -> ThreadObjectWriterBuilder<W, F>
-    where
-        W: ObjectWriter<T> + 'scope,
-        F: Send + FnOnce() -> Result<W>,
-    {
-        ThreadObjectWriterBuilder {
-            thunk,
-            name: "unnamed".into(),
-            capacity: 100,
-        }
-    }
 }
 
 impl<W, F: Send + FnOnce() -> Result<W>> ThreadObjectWriterBuilder<W, F> {
