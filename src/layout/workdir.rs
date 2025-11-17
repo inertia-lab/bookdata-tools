@@ -61,27 +61,3 @@ pub fn resolve_path<P: AsRef<RelativePath>>(path: P) -> Result<PathBuf> {
     debug!("rrp: {}", rrp);
     Ok(resolved)
 }
-
-/// Require that we are in the root directory.
-pub fn require_working_root() -> Result<()> {
-    let cwd = current_dir()?;
-    if is_bookdata_root(&cwd)? {
-        Ok(())
-    } else {
-        error!("working directory is not bookdata root");
-        Err(anyhow!("incorrect working directory"))
-    }
-}
-
-/// Expect that we are in a particular subdirectory.
-pub fn require_working_dir<P: AsRef<Path>>(path: P) -> Result<()> {
-    let path = path.as_ref();
-    let cwd = current_dir()?;
-
-    if !cwd.ends_with(path) {
-        error!("expected to be run in {:?}", path);
-        Err(anyhow!("incorrect working directory"))
-    } else {
-        Ok(())
-    }
-}
