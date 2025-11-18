@@ -1823,6 +1823,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruamel.yaml.clib-0.2.14-py312h4c3975b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.14.5-h813ae00_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/rust-1.91.1-h53717f1_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/rust-src-1.91.1-unix_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/rust-std-x86_64-unknown-linux-gnu-1.91.1-h2c6d0dc_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/s2n-1.5.26-h5ac9029_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/s3fs-2025.10.0-pyhd8ed1ab_0.conda
@@ -2327,6 +2328,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ruamel.yaml.clib-0.2.14-py312h4409184_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ruff-0.14.5-h382de68_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/rust-1.91.1-h4ff7c5d_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/rust-src-1.91.1-unix_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/rust-std-aarch64-apple-darwin-1.91.1-hf6ec828_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/s3fs-2025.10.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/s3transfer-0.14.0-pyhd8ed1ab_0.conda
@@ -11648,6 +11650,18 @@ packages:
   purls: []
   size: 238675951
   timestamp: 1762816232623
+- conda: https://conda.anaconda.org/conda-forge/noarch/rust-src-1.91.1-unix_0.conda
+  sha256: ef494bf8bf8ed31367389b5b64930b33ffd7c68aa80458883e6903eb775545b6
+  md5: 2e6287a3f027f3e66e4b1ee14becf94d
+  depends:
+  - __unix
+  constrains:
+  - rust >=1.91.1,<1.91.2.0a0
+  license: MIT
+  license_family: MIT
+  purls: []
+  size: 4128715
+  timestamp: 1762815756675
 - conda: https://conda.anaconda.org/conda-forge/label/rust_dev/noarch/rust-std-aarch64-apple-darwin-1.93.0.dev20251106-h3cdc040_0.conda
   sha256: 5cd30a9f0217f75ce87872a5da5a50bd4f25e63edf133725d29546043e267f9d
   md5: c7fb67674c2590454b4b64a253711a7e

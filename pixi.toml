@@ -60,6 +60,7 @@ duckdb-cli = "~=1.1"
 visidata = "*"
 jupyter_console = ">=6.6.3,<7"
 pyarrow-stubs = ">=20.0.0.20251107,<21"
+rust-src = ">=1.91.1,<2"
 
 [feature.dev.tasks]
 rerender-pipeline = "invoke render-pipeline"
