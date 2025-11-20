@@ -10,13 +10,13 @@ stages:
       size: 9388113365
     - path: ../src/cli/goodreads
       hash: md5
-      md5: d0990613e2a239701d14d8758e376f38.dir
-      size: 3231
+      md5: 578afcf90065c65419b7dae702b4ae2e.dir
+      size: 2989
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
-      md5: acc021ec96f5e2a2a6e1882812e7ca4f.dir
-      size: 22414
+      md5: d83b205c80c8706bcf0a13d7f01ab0f6.dir
+      size: 21783
       nfiles: 9
     outs:
     - path: gr-interactions.parquet
@@ -36,13 +36,13 @@ stages:
       size: 2043729443
     - path: ../src/cli/goodreads
       hash: md5
-      md5: d0990613e2a239701d14d8758e376f38.dir
-      size: 3231
+      md5: 578afcf90065c65419b7dae702b4ae2e.dir
+      size: 2989
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
-      md5: acc021ec96f5e2a2a6e1882812e7ca4f.dir
-      size: 22414
+      md5: d83b205c80c8706bcf0a13d7f01ab0f6.dir
+      size: 21783
       nfiles: 9
     outs:
     - path: gr-book-authors.parquet
@@ -70,13 +70,13 @@ stages:
       size: 81412944
     - path: ../src/cli/goodreads
       hash: md5
-      md5: d0990613e2a239701d14d8758e376f38.dir
-      size: 3231
+      md5: 578afcf90065c65419b7dae702b4ae2e.dir
+      size: 2989
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
-      md5: acc021ec96f5e2a2a6e1882812e7ca4f.dir
-      size: 22414
+      md5: d83b205c80c8706bcf0a13d7f01ab0f6.dir
+      size: 21783
       nfiles: 9
     outs:
     - path: gr-work-info.parquet
@@ -225,8 +225,8 @@ stages:
     deps:
     - path: ../book-links/cluster-genders.parquet
       hash: md5
-      md5: fff214a371284f099c59e485534e9b7a
-      size: 207992345
+      md5: 2fa4fea10a37b706ece4e39dcc4b6449
+      size: 207987212
     - path: gr-book-link.parquet
       hash: md5
       md5: 2f7e93647c5107cfbde560e6da3676a7
@@ -238,12 +238,12 @@ stages:
     outs:
     - path: gr-book-gender.parquet
       hash: md5
-      md5: 084ace2926a2af00bfb0dfeaab65518a
-      size: 48094024
+      md5: 3604739118ef0598b7ff8429d4b1d4df
+      size: 48085892
     - path: gr-work-item-gender.parquet
       hash: md5
-      md5: a57413f0b834233d4eef8c24d55515d5
-      size: 6561062
+      md5: 4af60c7d84808e43204aa49613cd4e1f
+      size: 6559819
   schema@gr-work-gender:
     cmd: python ../run.py --rust pq-info -o gr-work-gender.json 
       gr-work-gender.parquet
@@ -383,23 +383,23 @@ stages:
       size: 24253992
     - path: ../src/cli/goodreads
       hash: md5
-      md5: d0990613e2a239701d14d8758e376f38.dir
-      size: 3231
+      md5: 578afcf90065c65419b7dae702b4ae2e.dir
+      size: 2989
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
-      md5: acc021ec96f5e2a2a6e1882812e7ca4f.dir
-      size: 22414
+      md5: d83b205c80c8706bcf0a13d7f01ab0f6.dir
+      size: 21783
       nfiles: 9
     outs:
     - path: gr-book-genres.parquet
       hash: md5
-      md5: 0888770e6ebd672e5078a560cb55dfba
-      size: 22787834
+      md5: 099a3629b1af8d452c1706f060a74ada
+      size: 22773233
     - path: gr-genres.parquet
       hash: md5
-      md5: 2fb05aa293029102c4101fa07a28338a
-      size: 848
+      md5: 73670c312fdc07680f1abd14005e131a
+      size: 851
   schema@gr-genres:
     cmd: python ../run.py --rust pq-info -o gr-genres.json gr-genres.parquet
     deps:
@@ -480,13 +480,13 @@ stages:
       size: 17877585
     - path: ../src/cli/goodreads
       hash: md5
-      md5: d0990613e2a239701d14d8758e376f38.dir
-      size: 3231
+      md5: 578afcf90065c65419b7dae702b4ae2e.dir
+      size: 2989
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
-      md5: acc021ec96f5e2a2a6e1882812e7ca4f.dir
-      size: 22414
+      md5: d83b205c80c8706bcf0a13d7f01ab0f6.dir
+      size: 21783
       nfiles: 9
     outs:
     - path: gr-author-info.parquet
@@ -622,13 +622,13 @@ stages:
       size: 5343299228
     - path: ../src/cli/goodreads
       hash: md5
-      md5: d0990613e2a239701d14d8758e376f38.dir
-      size: 3231
+      md5: 578afcf90065c65419b7dae702b4ae2e.dir
+      size: 2989
       nfiles: 2
     - path: ../src/goodreads
       hash: md5
-      md5: acc021ec96f5e2a2a6e1882812e7ca4f.dir
-      size: 22414
+      md5: d83b205c80c8706bcf0a13d7f01ab0f6.dir
+      size: 21783
       nfiles: 9
     - path: gr-book-link.parquet
       hash: md5
@@ -696,8 +696,8 @@ stages:
     deps:
     - path: gr-book-genres.parquet
       hash: md5
-      md5: 0888770e6ebd672e5078a560cb55dfba
-      size: 22787834
+      md5: 099a3629b1af8d452c1706f060a74ada
+      size: 22773233
     - path: gr-book-ids.parquet
       hash: md5
       md5: 8670399970fe7a510a679c3066c3a7ea
@@ -709,8 +709,8 @@ stages:
     outs:
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 283c5546bed08b635b88f528f7d16405
-      size: 12588187
+      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
+      size: 12606628
   work-all-actions:
     cmd: duckscript gr-work-all-actions.sql
     deps:
@@ -756,62 +756,63 @@ stages:
       md5: 5694f19b01d412d3db6d2fcc1a379f61
       size: 34120973
   works-5core-dataset:
-    cmd: python gr-dataset.py --works --core gr-works-5core-dataset
+    cmd: python gr-dataset.py --works -a gr-work-actions-5core.parquet 
+      gr-works-5core-dataset
     deps:
     - path: gr-dataset.py
       hash: md5
-      md5: 9388dfa5d394f852bc57fc9a07bd143c
-      size: 2879
+      md5: 4c01bef01a46ba1eef0f846210c1fb6c
+      size: 2818
     - path: gr-genres.parquet
       hash: md5
-      md5: 850e190dabdeacdb91aaa541d709d8c0
-      size: 782
+      md5: 73670c312fdc07680f1abd14005e131a
+      size: 851
     - path: gr-work-actions-5core.parquet
       hash: md5
-      md5: a781c1187ee36e5f95c3315ddec01b75
-      size: 1473323208
+      md5: bd3efe584d265149397e66d9edc2fb36
+      size: 2178177685
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 7291e00a014f21ad8e0e30b4dd270bbc
-      size: 12582866
+      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
+      size: 12606628
     - path: gr-work-item-titles.parquet
       hash: md5
-      md5: 1676bf394da17a534d0ee678114c4dac
-      size: 23922157
+      md5: bbde65fb7cafaebc6ba1977d6108ee58
+      size: 22786959
     outs:
     - path: gr-works-5core-dataset
       hash: md5
-      md5: 22cfc3e67a4e6d227bc98abb5a1bbdb1.dir
-      size: 1321864263
+      md5: deb487e060b10c94e1acbf01d6db2ee5.dir
+      size: 2458098191
       nfiles: 5
   works-dataset:
     cmd: python gr-dataset.py --works gr-works-dataset
     deps:
     - path: gr-dataset.py
       hash: md5
-      md5: 9388dfa5d394f852bc57fc9a07bd143c
-      size: 2879
+      md5: 4c01bef01a46ba1eef0f846210c1fb6c
+      size: 2818
     - path: gr-genres.parquet
       hash: md5
-      md5: 850e190dabdeacdb91aaa541d709d8c0
-      size: 782
+      md5: 73670c312fdc07680f1abd14005e131a
+      size: 851
     - path: gr-work-actions.parquet
       hash: md5
-      md5: d32c29f8f377894f8ddb672581e65db1
-      size: 1485141703
+      md5: ef5a5dfa0ebaa66acec78dd29284401e
+      size: 2188300908
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 7291e00a014f21ad8e0e30b4dd270bbc
-      size: 12582866
+      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
+      size: 12606628
     - path: gr-work-item-titles.parquet
       hash: md5
-      md5: 1676bf394da17a534d0ee678114c4dac
-      size: 23922157
+      md5: bbde65fb7cafaebc6ba1977d6108ee58
+      size: 22786959
     outs:
     - path: gr-works-dataset
       hash: md5
-      md5: c93bcc1c6e61cb64e43c35b077dabe47.dir
-      size: 1341403602
+      md5: 5e3540535cef326212b525da90a44e45.dir
+      size: 2481073571
       nfiles: 5
   work-first-author:
     cmd: python gr-work-item-authors.py --first
@@ -872,3 +873,33 @@ stages:
       hash: md5
       md5: a304c6070b8508fe945416af41cc5e7e
       size: 2147693246
+  works-small-dataset:
+    cmd: python gr-dataset.py --works -a gr-work-actions-2015-100-10core.parquet
+      gr-works-2015-100-10core-dataset
+    deps:
+    - path: gr-dataset.py
+      hash: md5
+      md5: 4c01bef01a46ba1eef0f846210c1fb6c
+      size: 2818
+    - path: gr-genres.parquet
+      hash: md5
+      md5: 73670c312fdc07680f1abd14005e131a
+      size: 851
+    - path: gr-work-actions-2015-100-10core.parquet
+      hash: md5
+      md5: 18ab0e20737bc7701da67b27b1a648d4
+      size: 255075795
+    - path: gr-work-item-genres.parquet
+      hash: md5
+      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
+      size: 12606628
+    - path: gr-work-item-titles.parquet
+      hash: md5
+      md5: bbde65fb7cafaebc6ba1977d6108ee58
+      size: 22786959
+    outs:
+    - path: gr-works-2015-100-10core-dataset
+      hash: md5
+      md5: 122731304ad009c8309d3762bbbf5329.dir
+      size: 272017354
+      nfiles: 5

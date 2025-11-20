@@ -9,22 +9,23 @@ stages:
       md5: d174f253b528f74c0d6446f38feb6b63
       size: 598486891
     - path: ../src/cli/openlib.rs
-      md5: dbe8caca3345f0f9ca7f730c2df79f29
-      size: 1938
+      hash: md5
+      md5: f3a1da176e54e997625b2d68e345337b
+      size: 1946
     - path: ../src/openlib/
       hash: md5
-      md5: db9f5813d096f6fe92e8ce8a1b8b5ab2.dir
-      size: 18393
+      md5: 702e1796182dc224c63b680bff19025f.dir
+      size: 18497
       nfiles: 7
     outs:
     - path: author-names.parquet
       hash: md5
-      md5: 84514f2a3c00b94d636c40795a18488b
-      size: 226083734
+      md5: 3e487f990b1c8bad403f0c8e08c3ddee
+      size: 218631521
     - path: authors.parquet
       hash: md5
-      md5: e0c699b25a68f096d1022acd949abc98
-      size: 225730435
+      md5: d5e65eff794f8cd4d592d2bcb6a554d6
+      size: 220620486
   scan-editions:
     cmd: cargo run --release -- openlib scan-editions 
       ../data/openlib/ol_dump_editions.txt.gz
@@ -34,12 +35,13 @@ stages:
       md5: 6b13afe5a50fb1aeeb430bcd01164d13
       size: 10078352001
     - path: ../src/cli/openlib.rs
-      md5: dbe8caca3345f0f9ca7f730c2df79f29
-      size: 1938
+      hash: md5
+      md5: f3a1da176e54e997625b2d68e345337b
+      size: 1946
     - path: ../src/openlib/
       hash: md5
-      md5: db9f5813d096f6fe92e8ce8a1b8b5ab2.dir
-      size: 18393
+      md5: 702e1796182dc224c63b680bff19025f.dir
+      size: 18497
       nfiles: 7
     outs:
     - path: edition-authors.parquet
@@ -71,12 +73,13 @@ stages:
       md5: 0d96507a98acf4dcc5416b10d85b1225
       size: 3200947685
     - path: ../src/cli/openlib.rs
-      md5: dbe8caca3345f0f9ca7f730c2df79f29
-      size: 1938
+      hash: md5
+      md5: f3a1da176e54e997625b2d68e345337b
+      size: 1946
     - path: ../src/openlib/
       hash: md5
-      md5: db9f5813d096f6fe92e8ce8a1b8b5ab2.dir
-      size: 18393
+      md5: 702e1796182dc224c63b680bff19025f.dir
+      size: 18497
       nfiles: 7
     outs:
     - path: work-authors.parquet

@@ -37,13 +37,13 @@ stages:
       size: 4155
     - path: book-links/gender-stats.csv
       hash: md5
-      md5: e6a484b5d8d256324e2b54fb99e12d99
+      md5: 7153bf155a23b4f833649b42d5e35959
       size: 966
     outs:
     - path: LinkageStats.ipynb
       hash: md5
-      md5: 2152b4472dd62daee804d4b85ac6fad0
-      size: 271556
+      md5: 208fbc449dfe673fa3e4f5311729142d
+      size: 251700
   html-report@LinkageStats:
     cmd: jupyter nbconvert --to html "LinkageStats.ipynb"
     deps:
@@ -189,12 +189,12 @@ stages:
     deps:
     - path: openlibrary/authors.parquet
       hash: md5
-      md5: e0c699b25a68f096d1022acd949abc98
-      size: 225730435
+      md5: d5e65eff794f8cd4d592d2bcb6a554d6
+      size: 220620486
     outs:
     - path: openlibrary/authors.json
       hash: md5
-      md5: ea3ef9ff6c40e8c125d174d0cbf62faa
+      md5: c4f47a38cb7564b8093f680f13897afd
       size: 258
   schema@loc-mds/book-ids:
     cmd: pq-info -o loc-mds/book-ids.json loc-mds/book-ids.parquet
@@ -214,12 +214,12 @@ stages:
     deps:
     - path: openlibrary/author-names.parquet
       hash: md5
-      md5: 84514f2a3c00b94d636c40795a18488b
-      size: 226083734
+      md5: 3e487f990b1c8bad403f0c8e08c3ddee
+      size: 218631521
     outs:
     - path: openlibrary/author-names.json
       hash: md5
-      md5: 65f2b965e26238681af6cde810addf7c
+      md5: 24a4e3d932ef800ed8da51a8c83eff23
       size: 260
   schema@openlibrary/edition-isbns:
     cmd: pq-info -o openlibrary/edition-isbns.json 
@@ -352,36 +352,36 @@ stages:
     deps:
     - path: viaf/author-genders.parquet
       hash: md5
-      md5: 497d9dcbbd5f0545e3c129d240fe7e43
-      size: 113243219
+      md5: 68db8239a5a6b9ce88c88c64af46214c
+      size: 113227058
     outs:
     - path: viaf/author-genders.json
       hash: md5
-      md5: 7c98f418f2e11e3c0f201d8d36c86e4e
+      md5: b8c16dc114c5614a6fb059e9ddc5aa40
       size: 202
   schema@viaf/viaf:
     cmd: pq-info -o viaf/viaf.json viaf/viaf.parquet
     deps:
     - path: viaf/viaf.parquet
       hash: md5
-      md5: 15da0b8c32266ed1582deb9ea4db5630
-      size: 14080001350
+      md5: 1fe01df2a60689ff5a5b73bb076d77d1
+      size: 15303970116
     outs:
     - path: viaf/viaf.json
       hash: md5
-      md5: ed6d9dbddd525b971d1aad39b95d8b52
+      md5: d84f819bced4de0cf681ea732810e749
       size: 523
   schema@viaf/author-name-index:
     cmd: pq-info -o viaf/author-name-index.json viaf/author-name-index.parquet
     deps:
     - path: viaf/author-name-index.parquet
       hash: md5
-      md5: 44182df743312f313143894e6c8941d8
-      size: 714009649
+      md5: c517ca8c8f7f887df62b534ba10d32dc
+      size: 709744128
     outs:
     - path: viaf/author-name-index.json
       hash: md5
-      md5: a69d47b37ad51398d390d32656ad95db
+      md5: 0858cc9f00a0e514ad99477333ce3f79
       size: 269
   schema@az2018/az-cluster-ratings:
     cmd: pq-info -o az2018/az-cluster-ratings.json 
@@ -489,12 +489,12 @@ stages:
     deps:
     - path: goodreads/gr-genres.parquet
       hash: md5
-      md5: 2fb05aa293029102c4101fa07a28338a
-      size: 848
+      md5: 73670c312fdc07680f1abd14005e131a
+      size: 851
     outs:
     - path: goodreads/gr-genres.json
       hash: md5
-      md5: 427b7730a33765ad0909ce74b7f71db5
+      md5: b15db50c879456e7f12f80e8828b9fce
       size: 190
   schema@goodreads/gr-book-authors:
     cmd: pq-info -o goodreads/gr-book-authors.json 
@@ -576,12 +576,12 @@ stages:
     deps:
     - path: goodreads/gr-book-genres.parquet
       hash: md5
-      md5: 0888770e6ebd672e5078a560cb55dfba
-      size: 22787834
+      md5: 099a3629b1af8d452c1706f060a74ada
+      size: 22773233
     outs:
     - path: goodreads/gr-book-genres.json
       hash: md5
-      md5: 47337437c2a1a72a395a8b1f62346537
+      md5: e8cada66cac64a87c69b08d392ac28b2
       size: 264
   schema@goodreads/gr-work-gender:
     cmd: cargo run --release -- pq-info -o goodreads/gr-work-gender.json 
@@ -615,12 +615,12 @@ stages:
     deps:
     - path: book-links/cluster-ol-first-authors.parquet
       hash: md5
-      md5: 520f241036ef0775e91faa6a9b3b98f5
-      size: 371411571
+      md5: a68644775a7fab5650bf20c3bac49e9b
+      size: 370906480
     outs:
     - path: book-links/cluster-ol-first-authors.json
       hash: md5
-      md5: e1774f7564ffddd60e70ea35ac3626d6
+      md5: 752a6b3b42b30520292f7cb8c3a17e3d
       size: 207
   schema@book-links/isbn-clusters:
     cmd: pq-info -o book-links/isbn-clusters.json 
@@ -641,12 +641,12 @@ stages:
     deps:
     - path: book-links/cluster-genders.parquet
       hash: md5
-      md5: fff214a371284f099c59e485534e9b7a
-      size: 207992345
+      md5: 2fa4fea10a37b706ece4e39dcc4b6449
+      size: 207987212
     outs:
     - path: book-links/cluster-genders.json
       hash: md5
-      md5: 0ddd079dcda5ca7490a12988cf5e632b
+      md5: 382003c2a199036ec34f5035d2e4b411
       size: 202
   schema@goodreads/gr-cluster-actions-5core:
     cmd: pq-info -o goodreads/gr-cluster-actions-5core.json 
@@ -744,12 +744,12 @@ stages:
     deps:
     - path: book-links/cluster-first-authors.parquet
       hash: md5
-      md5: af48cfca06dffe0edf0f9328d07b59a0
-      size: 431086237
+      md5: 8c7b27cb644b159400a5ed1ca33255f5
+      size: 432575885
     outs:
     - path: book-links/cluster-first-authors.json
       hash: md5
-      md5: 79479dd5214badc056f766ffdd942552
+      md5: 2c09ef20fc98c509d5ce7587fd43fcc5
       size: 207
   schema@book-links/cluster-hashes:
     cmd: pq-info -o book-links/cluster-hashes.json 
@@ -1257,12 +1257,12 @@ stages:
     deps:
     - path: goodreads/gr-work-item-genres.parquet
       hash: md5
-      md5: 283c5546bed08b635b88f528f7d16405
-      size: 12588187
+      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
+      size: 12606628
     outs:
     - path: goodreads/gr-work-item-genres.json
       hash: md5
-      md5: 6237999f01e6ac5c37906c5a6957a437
+      md5: 3ad28dbe3bc5e3e3e934925c5cb91991
       size: 265
   schema@goodreads/gr-book-gender:
     cmd: pq-info -o goodreads/gr-book-gender.json 
@@ -1270,12 +1270,12 @@ stages:
     deps:
     - path: goodreads/gr-book-gender.parquet
       hash: md5
-      md5: 084ace2926a2af00bfb0dfeaab65518a
-      size: 48094024
+      md5: 3604739118ef0598b7ff8429d4b1d4df
+      size: 48085892
     outs:
     - path: goodreads/gr-book-gender.json
       hash: md5
-      md5: 4b57defd7013e8bf8d9362281726adc0
+      md5: 26d5dd406928053f15ddfc0a6dd2c592
       size: 462
   schema@goodreads/gr-work-item-gender:
     cmd: pq-info -o goodreads/gr-work-item-gender.json 
@@ -1283,12 +1283,12 @@ stages:
     deps:
     - path: goodreads/gr-work-item-gender.parquet
       hash: md5
-      md5: a57413f0b834233d4eef8c24d55515d5
-      size: 6561062
+      md5: 4af60c7d84808e43204aa49613cd4e1f
+      size: 6559819
     outs:
     - path: goodreads/gr-work-item-gender.json
       hash: md5
-      md5: 91cd5ff8dffe2f7e102bdbfe8da4a910
+      md5: 3d90d4ccbdc007bc43864f9889a98439
       size: 199
   schema@goodreads/gr-work-all-actions:
     cmd: pq-info -o goodreads/gr-work-all-actions.json 

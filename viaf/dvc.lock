@@ -10,18 +10,18 @@ stages:
       size: 14711114553
     - path: ../src/cli/scan_marc.rs
       hash: md5
-      md5: 97a9f0dd00a39eb3fb35e8e0ceb2f618
-      size: 4095
+      md5: 6d1b11d5fad1f0bba0a3ad407dd6f064
+      size: 4002
     - path: ../src/marc
       hash: md5
-      md5: 9100fbb7a104865d91de69fc07a31695.dir
-      size: 23137
+      md5: fb71cf1f8cb0e294d0f39b81447d1e60.dir
+      size: 22783
       nfiles: 5
     outs:
     - path: viaf.parquet
       hash: md5
-      md5: 15da0b8c32266ed1582deb9ea4db5630
-      size: 14080001350
+      md5: 1fe01df2a60689ff5a5b73bb076d77d1
+      size: 15303970116
   author-names:
     cmd: python ../run.py --rust fusion author-names.tcl
     deps:
@@ -44,13 +44,13 @@ stages:
       size: 254
     - path: viaf.parquet
       hash: md5
-      md5: 15da0b8c32266ed1582deb9ea4db5630
-      size: 14080001350
+      md5: 1fe01df2a60689ff5a5b73bb076d77d1
+      size: 15303970116
     outs:
     - path: author-genders.parquet
       hash: md5
-      md5: 497d9dcbbd5f0545e3c129d240fe7e43
-      size: 113243219
+      md5: 68db8239a5a6b9ce88c88c64af46214c
+      size: 113227058
   index-names:
     cmd: cargo run --release -- index-names --marc-authorities viaf.parquet 
       author-name-index.parquet
@@ -61,21 +61,21 @@ stages:
       nfiles: 5
     - path: ../src/cli/index_names.rs
       hash: md5
-      md5: e667de71b26f1798eeaa16ab6b62f43a
-      size: 4190
+      md5: 6fdbce0325e86bba7accab14597dd840
+      size: 4206
     - path: viaf.parquet
       hash: md5
-      md5: 15da0b8c32266ed1582deb9ea4db5630
-      size: 14080001350
+      md5: 1fe01df2a60689ff5a5b73bb076d77d1
+      size: 15303970116
     outs:
     - path: author-name-index.csv.gz
       hash: md5
-      md5: c7e5a1126d5abfba643c189c8adc6d27
-      size: 1092709115
+      md5: 1aad20105ddcf447dc9db58298fbd9da
+      size: 1085056630
     - path: author-name-index.parquet
       hash: md5
-      md5: 44182df743312f313143894e6c8941d8
-      size: 714009649
+      md5: c517ca8c8f7f887df62b534ba10d32dc
+      size: 709744128
   schema@author-name-index:
     cmd: python ../run.py --rust pq-info -o author-name-index.json 
       author-name-index.parquet

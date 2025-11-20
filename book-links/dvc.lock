@@ -95,8 +95,8 @@ stages:
     deps:
     - path: ../openlibrary/author-names.parquet
       hash: md5
-      md5: 84514f2a3c00b94d636c40795a18488b
-      size: 226083734
+      md5: 3e487f990b1c8bad403f0c8e08c3ddee
+      size: 218631521
     - path: ../openlibrary/edition-authors.parquet
       hash: md5
       md5: d6c31d0eb70ac7c075952e7e745e7977
@@ -116,8 +116,8 @@ stages:
     outs:
     - path: ../book-links/cluster-ol-first-authors.parquet
       hash: md5
-      md5: 520f241036ef0775e91faa6a9b3b98f5
-      size: 371411571
+      md5: a68644775a7fab5650bf20c3bac49e9b
+      size: 370906480
   cluster-loc-first-authors:
     cmd: duckscript cluster-loc-first-authors.sql
     deps:
@@ -184,13 +184,13 @@ stages:
       size: 50844750
     - path: cluster-ol-first-authors.parquet
       hash: md5
-      md5: 520f241036ef0775e91faa6a9b3b98f5
-      size: 371411571
+      md5: a68644775a7fab5650bf20c3bac49e9b
+      size: 370906480
     outs:
     - path: cluster-first-authors.parquet
       hash: md5
-      md5: af48cfca06dffe0edf0f9328d07b59a0
-      size: 431086237
+      md5: 8c7b27cb644b159400a5ed1ca33255f5
+      size: 432575885
   cluster-genders:
     cmd: cargo run --release -- cluster-gender -o 
       book-links/cluster-genders.parquet -A 
@@ -198,30 +198,30 @@ stages:
     deps:
     - path: book-links/cluster-first-authors.parquet
       hash: md5
-      md5: af48cfca06dffe0edf0f9328d07b59a0
-      size: 431086237
+      md5: 8c7b27cb644b159400a5ed1ca33255f5
+      size: 432575885
     - path: book-links/cluster-stats.parquet
       hash: md5
       md5: 20b94014f6963ad37951a494deaae929
       size: 196794193
     - path: src/cli/cluster_gender
       hash: md5
-      md5: a1dfe5607551eb04c87dc83e0df4d3c0.dir
-      size: 8400
+      md5: ac314266cea9c7e7a1b15fc57de5628a.dir
+      size: 8408
       nfiles: 3
     - path: viaf/author-genders.parquet
       hash: md5
-      md5: 497d9dcbbd5f0545e3c129d240fe7e43
-      size: 113243219
+      md5: 68db8239a5a6b9ce88c88c64af46214c
+      size: 113227058
     - path: viaf/author-name-index.parquet
       hash: md5
-      md5: 44182df743312f313143894e6c8941d8
-      size: 714009649
+      md5: c517ca8c8f7f887df62b534ba10d32dc
+      size: 709744128
     outs:
     - path: book-links/cluster-genders.parquet
       hash: md5
-      md5: fff214a371284f099c59e485534e9b7a
-      size: 207992345
+      md5: 2fa4fea10a37b706ece4e39dcc4b6449
+      size: 207987212
   gender-stats:
     cmd: python book-links/integration-stats.py
     deps:
@@ -235,8 +235,8 @@ stages:
       size: 1161641499
     - path: book-links/cluster-genders.parquet
       hash: md5
-      md5: fff214a371284f099c59e485534e9b7a
-      size: 207992345
+      md5: 2fa4fea10a37b706ece4e39dcc4b6449
+      size: 207987212
     - path: book-links/integration-stats.py
       hash: md5
       md5: dd328e46a37b941e3885d5c06a867902
@@ -260,7 +260,7 @@ stages:
     outs:
     - path: book-links/gender-stats.csv
       hash: md5
-      md5: e6a484b5d8d256324e2b54fb99e12d99
+      md5: 7153bf155a23b4f833649b42d5e35959
       size: 966
   cluster-hashes:
     cmd: duckscript cluster-hashes.sql

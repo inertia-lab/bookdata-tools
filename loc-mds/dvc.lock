@@ -10,12 +10,12 @@ stages:
       nfiles: 43
     - path: ../src/cli/scan_marc.rs
       hash: md5
-      md5: 97a9f0dd00a39eb3fb35e8e0ceb2f618
-      size: 4095
+      md5: 6d1b11d5fad1f0bba0a3ad407dd6f064
+      size: 4002
     - path: ../src/marc
       hash: md5
-      md5: 9100fbb7a104865d91de69fc07a31695.dir
-      size: 23137
+      md5: fb71cf1f8cb0e294d0f39b81447d1e60.dir
+      size: 22783
       nfiles: 5
     outs:
     - path: book-authors.parquet
@@ -57,12 +57,12 @@ stages:
       nfiles: 40
     - path: ../src/cli/scan_marc.rs
       hash: md5
-      md5: 97a9f0dd00a39eb3fb35e8e0ceb2f618
-      size: 4095
+      md5: 6d1b11d5fad1f0bba0a3ad407dd6f064
+      size: 4002
     - path: ../src/marc
       hash: md5
-      md5: 9100fbb7a104865d91de69fc07a31695.dir
-      size: 23137
+      md5: fb71cf1f8cb0e294d0f39b81447d1e60.dir
+      size: 22783
       nfiles: 5
     outs:
     - path: name-fields.parquet
