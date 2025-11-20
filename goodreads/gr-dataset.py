@@ -47,13 +47,12 @@ def main():
 
 
 def work_dataset(opts) -> DatasetBuilder:
-    log = _log.bind(items="works")
     bld = DatasetBuilder("gr-works")
 
     act_f = opts["--actions"]
-    log.debug("loading actions from %s", act_f)
+    _log.debug("loading actions from %s", act_f)
     actions = pd.read_parquet(act_f)
-    log.info("loaded actions", action_count=len(actions), file=act_f)
+    _log.info("loaded %d actions from %s ", len(actions), act_f)
     actions = actions.rename(
         columns={
             "first_time": "timestamp",
@@ -62,13 +61,13 @@ def work_dataset(opts) -> DatasetBuilder:
     )
     actions["timestamp"] = pd.to_datetime(actions["timestamp"], unit="s")
     actions["last_time"] = pd.to_datetime(actions["last_time"], unit="s")
-    log.info("adding actions to builder")
+    _log.info("adding actions to builder")
     bld.add_interactions(
         "shelve", actions, entities=["user", "item"], missing="insert", default=True
     )
     action_items = pd.Index(actions["item_id"].unique())
 
-    log.info("adding genres")
+    _log.info("adding genres")
     genres = pd.read_parquet("gr-genres.parquet")
     genres = genres.sort_values("genre_id")
     work_genres = pd.read_parquet("gr-work-item-genres.parquet")
@@ -82,7 +81,7 @@ def work_dataset(opts) -> DatasetBuilder:
         "item", "genres", row_idx.values, genre_mat.toarray(), dim_names=genres["genre"].tolist()
     )
 
-    log.info("adding titles")
+    _log.info("adding titles")
     titles = pd.read_parquet("gr-work-item-titles.parquet")
     titles = titles[["item_id", "title"]].drop_duplicates("item_id")
     titles = titles[titles["item_id"].isin(action_items)]
