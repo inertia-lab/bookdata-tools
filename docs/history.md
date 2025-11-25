@@ -13,6 +13,13 @@ following:
 3.  Clearly state the version of the data tools you are using in your paper.
 4.  [Let us know](papers.md) about your work so we can add you to the list.
 
+## Book Data 4.0 (in progress)
+
+-   Further simplification of the integration code, replacing Polars and a lot
+    of custom Rust code with DuckDB.  Rust is now primarily used for initial
+    data ingest, along with some integration computations that we have not yet
+    figured out how to write efficiently in DuckDB SQL.
+
 ## Book Data 3.0
 
 -   Make the pipeline configurable so individual rating datasets can be disabled.
