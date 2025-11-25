@@ -1,6 +1,6 @@
 [package]
 name = "bookdata"
-version = "3.0.0"
+version = "4.0.0"
 authors = ["Michael Ekstrand <michaelekstrand@boisestate.edu>"]
 default-run = "bookdata"
 edition = "2021"
