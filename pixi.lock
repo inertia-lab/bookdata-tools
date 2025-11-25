@@ -3553,8 +3553,8 @@ packages:
   timestamp: 1737382993425
 - pypi: ./
   name: bookdata
-  version: '4.0'
-  sha256: f7a0252ab947877a62354c68149da48a78da130973bfe17dc467949b13243850
+  version: 4.0.0
+  sha256: 0024be17baf97ec25e60dc822a6fdfa9ef31f14ca89b3c0f91b21663dee918a9
   requires_python: ~=3.12
   editable: true
 - conda: https://conda.anaconda.org/conda-forge/noarch/boto3-1.40.70-pyhd8ed1ab_0.conda
