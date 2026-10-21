@@ -704,13 +704,13 @@ stages:
       size: 44262793
     - path: gr-work-item-genres.sql
       hash: md5
-      md5: d412921a639cbf5ea8283066a48b228d
-      size: 297
+      md5: 6bc1119cab0d5435b99d248074e7d558
+      size: 325
     outs:
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
-      size: 12606628
+      md5: 683daf76d3fdc3e5f47dfcbe4434e958
+      size: 12523716
   work-all-actions:
     cmd: duckscript gr-work-all-actions.sql
     deps:
@@ -761,7 +761,7 @@ stages:
     deps:
     - path: gr-dataset.py
       hash: md5
-      md5: 4c01bef01a46ba1eef0f846210c1fb6c
+      md5: 87e404e7b4af243bce58356262355bc9
       size: 2818
     - path: gr-genres.parquet
       hash: md5
@@ -773,8 +773,8 @@ stages:
       size: 2178177685
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
-      size: 12606628
+      md5: 683daf76d3fdc3e5f47dfcbe4434e958
+      size: 12523716
     - path: gr-work-item-titles.parquet
       hash: md5
       md5: bbde65fb7cafaebc6ba1977d6108ee58
@@ -782,15 +782,15 @@ stages:
     outs:
     - path: gr-works-5core-dataset
       hash: md5
-      md5: deb487e060b10c94e1acbf01d6db2ee5.dir
-      size: 2458098191
+      md5: 1257a5f54073610eb8b30b37afa13c37.dir
+      size: 2458134709
       nfiles: 5
   works-dataset:
     cmd: python gr-dataset.py --works gr-works-dataset
     deps:
     - path: gr-dataset.py
       hash: md5
-      md5: 4c01bef01a46ba1eef0f846210c1fb6c
+      md5: 87e404e7b4af243bce58356262355bc9
       size: 2818
     - path: gr-genres.parquet
       hash: md5
@@ -802,8 +802,8 @@ stages:
       size: 2188300908
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
-      size: 12606628
+      md5: 683daf76d3fdc3e5f47dfcbe4434e958
+      size: 12523716
     - path: gr-work-item-titles.parquet
       hash: md5
       md5: bbde65fb7cafaebc6ba1977d6108ee58
@@ -811,8 +811,8 @@ stages:
     outs:
     - path: gr-works-dataset
       hash: md5
-      md5: 5e3540535cef326212b525da90a44e45.dir
-      size: 2481073571
+      md5: ab9d020d2ffedb108816a7211aecc467.dir
+      size: 2481047367
       nfiles: 5
   work-first-author:
     cmd: python gr-work-item-authors.py --first
@@ -879,7 +879,7 @@ stages:
     deps:
     - path: gr-dataset.py
       hash: md5
-      md5: 4c01bef01a46ba1eef0f846210c1fb6c
+      md5: 87e404e7b4af243bce58356262355bc9
       size: 2818
     - path: gr-genres.parquet
       hash: md5
@@ -891,8 +891,8 @@ stages:
       size: 255075795
     - path: gr-work-item-genres.parquet
       hash: md5
-      md5: 1fa3dbfb6ea4450b1fe5d910bce47941
-      size: 12606628
+      md5: 683daf76d3fdc3e5f47dfcbe4434e958
+      size: 12523716
     - path: gr-work-item-titles.parquet
       hash: md5
       md5: bbde65fb7cafaebc6ba1977d6108ee58
@@ -900,6 +900,6 @@ stages:
     outs:
     - path: gr-works-2015-100-10core-dataset
       hash: md5
-      md5: 122731304ad009c8309d3762bbbf5329.dir
-      size: 272017354
+      md5: c0597101ef6b643b1afa9285d20d1cf1.dir
+      size: 272044928
       nfiles: 5

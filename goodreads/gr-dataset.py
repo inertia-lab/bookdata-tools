@@ -75,7 +75,7 @@ def work_dataset(opts) -> DatasetBuilder:
     row_idx = pd.Index(work_genres["item_id"].unique())
     rows = row_idx.get_indexer_for(work_genres["item_id"]).astype("int32")
     genre_mat = csr_array(
-        (work_genres["count"].astype("int16"), (rows, work_genres["genre_id"].values - 1))
+        (work_genres["count"].astype("int32"), (rows, work_genres["genre_id"].values - 1))
     )
     bld.add_vector_attribute(
         "item", "genres", row_idx.values, genre_mat.toarray(), dim_names=genres["genre"].tolist()
