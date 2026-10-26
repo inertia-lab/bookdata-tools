@@ -117,7 +117,10 @@ Cluster-level implicit-feedback records, suitable for use in LensKit. The `item`
 Cluster-level explicit-feedback records, suitable for use in LensKit. The `item` column contains cluster IDs.  This version of the table is processed from the JSON version of the full interaction log, which is only available by request.
 :::
 
-## Work-Level Tables
+## Work-Level Tables {#sec-gr-work-data}
+
+These tables use *work-level* item IDs.  Their `item_id` code is a [book code](./ids.qmd#sec-book-codes) using only the “GR Work” and “GR Book” numspaces.
+The item ID is derived from the work ID for any book with an associated work ID, and from the book ID otherwise.
 
 ::: {.parquet file="goodreads/gr-work-actions.parquet"}
 Work-level implicit-feedback records, suitable for use in LensKit. The `item_id` column contains work IDs.
@@ -135,3 +138,13 @@ Author gender for GoodReads work-level items.  This is computed by connecting wo
 ::: {.parquet file="goodreads/gr-book-gender.parquet"}
 Author gender for GoodReads _books_ (not just works).  This is computed by connecting works to clusters and obtaining the cluster gender information from {{< file book-links/cluster-genders.parquet >}}.
 :::
+
+::: {file="goodreads/gr-works-dataset"}
+The GoodReads work-level data, as a [LensKit dataset][].
+:::
+
+::: {file="goodreads/gr-works-5core-dataset"}
+The same as {{< file goodreads/gr-works-dataset >}}, with interactions filtered to a 5-core.
+:::
+
+[LensKit dataset]: https://lenskit.org/stable/guide/data/index.html

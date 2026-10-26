@@ -51,3 +51,8 @@ identifiers into and out of them.
 The LOC Work and Instance sources are not currently used; they are intended for
 future use when we are able to import BIBFRAME data from the Library of
 Congress.
+
+Some tables, in particular the [GoodReads work tables][], use book code that only
+uses a subset of the number space.  See those data descriptions for details.
+
+[GoodReads work tables]: ./goodreads.qmd#sec-gr-work-data

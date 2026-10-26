@@ -3,3 +3,5 @@
 /build/
 
 /.quarto/
+
+**/*.quarto_ipynb
