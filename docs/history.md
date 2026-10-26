@@ -15,6 +15,8 @@ following:
 
 ## Book Data 4.0 (in progress)
 
+-   🐞 Fixed a bug in processing GoodReads genre counts into a LensKit dataset
+    that allowed some counts to be negative.
 -   Further simplification of the integration code, replacing Polars and a lot
     of custom Rust code with DuckDB.  Rust is now primarily used for initial
     data ingest, along with some integration computations that we have not yet
